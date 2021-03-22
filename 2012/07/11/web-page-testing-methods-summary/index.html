@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="大爱 | 眼前一切都很美丽">
+  <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
+  
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+  
+  <title>
+    
+      Web页面测试方案总结 | 大爱
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>大爱</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Web页面测试方案总结</h2>
+  <p class="post-date">2012-07-11</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>最近对于进行了较多的Web页面测试，故将这几次Web页面测试的心得和方法总结了一下，希望对阅读本文档的朋友有所帮助(<a href="http://lovesoo.org原创，转自请注明)。" target="_blank" rel="noopener">http://lovesoo.org原创，转自请注明)。</a></p>
+<h2 id="2-Web页面组成元素"><a href="#2-Web页面组成元素" class="headerlink" title="2. Web页面组成元素"></a>2. Web页面组成元素</h2><h3 id="2-1-标题"><a href="#2-1-标题" class="headerlink" title="2.1 标题"></a>2.1 标题</h3><p>标题一般在网页的左上方，用户可以通过标题迅速定位网页的功能和用途。</p>
+<h3 id="2-2-导航列"><a href="#2-2-导航列" class="headerlink" title="2.2 导航列"></a>2.2 导航列</h3><p>导航列其实就是一组超链接，用户可以通过导航列快速定位到页面的主要或常用功能页面。</p>
+<p>导航列可以是图片或按钮，甚至仅仅是文字超链接。导航列对于用户迅速了解页面主题，增强用户使用体验有至关重要的作用。</p>
+<h3 id="2-3-文字"><a href="#2-3-文字" class="headerlink" title="2.3 文字"></a>2.3 文字</h3><p>文字是页面组成的最基本元素之一。文字一般包括字体、字型、颜色等元素。其实最重要的是文字是否能正确表达出设计想要传递的意思。</p>
+<h3 id="2-4-图片"><a href="#2-4-图片" class="headerlink" title="2.4 图片"></a>2.4 图片</h3><p>图片是页面制作的重要组成部分。图片可以瞬间留住用户，让用户明白你要表达的内容。在页面中的作用往往比文字更加重要。</p>
+<h3 id="2-5-按钮"><a href="#2-5-按钮" class="headerlink" title="2.5 按钮"></a>2.5 按钮</h3><p>按钮在页面中用户交互时的重要手段之一。按钮可以完成用户的指令，达到用户的目的。所以按钮功能的正确与否十分重要。</p>
+<h3 id="2-6-超链接"><a href="#2-6-超链接" class="headerlink" title="2.6 超链接"></a>2.6 超链接</h3><p>超链接是页面最常见的组成元素之一。超链接是网页之间链接，也可以连接图片，文字，对话框，邮件，文件档案。灵活的运用超链接，可以使网页的功能更加丰富</p>
+<h2 id="3-Web页面测试"><a href="#3-Web页面测试" class="headerlink" title="3. Web页面测试"></a>3. Web页面测试</h2><h3 id="3-1-功能测试"><a href="#3-1-功能测试" class="headerlink" title="3.1 功能测试"></a>3.1 功能测试</h3><h4 id="3-1-1-页面标题"><a href="#3-1-1-页面标题" class="headerlink" title="3.1.1 页面标题"></a>3.1.1 页面标题</h4><p>页面标题往往会被测试人员所忽略，但事实告诉我们开发人员经常把标题弄错，所以在你的测试用例中加上页面标题的用例吧。</p>
+<h4 id="3-1-2-页面组成内容"><a href="#3-1-2-页面组成内容" class="headerlink" title="3.1.2 页面组成内容"></a>3.1.2 页面组成内容</h4><p>页面的组成内容由原型设计文档所决定，与设计不符的地方都是BUG。</p>
+<h4 id="3-1-3-页面主要功能"><a href="#3-1-3-页面主要功能" class="headerlink" title="3.1.3 页面主要功能"></a>3.1.3 页面主要功能</h4><p>页面的主要功能可以作为BVT测试用例，做BVT测试时一般就是验证页面的主要功能。</p>
+<p>一般页面重要功能包括：</p>
+<ul>
+<li>添加：添加功能验证，数据库数据验证，添加后页面显示验证</li>
+<li>修改：修改功能验证，数据库数据验证，修改成已存在数据验证，修改后页面显示验证。</li>
+<li>删除：删除功能验证，数据库数据验证，删除后重新添加验证，删除后页面显示验证。</li>
+<li>查询：不同查询条件组合（可以编写sql语句来验证查询结果），数据库存储过程验证。</li>
+</ul>
+<h4 id="3-1-4-页面其他功能"><a href="#3-1-4-页面其他功能" class="headerlink" title="3.1.4 页面其他功能"></a>3.1.4 页面其他功能</h4><ul>
+<li>列表显示：查询和表报常见的数据列表。测试列表时要注意：每页显示的记录数，页面跳转控件的功能，列表记录数和页数的提示，列表内容（默认数据显示，默认排序规则）</li>
+<li>导入、导出功能：常见于报表和查询统计。测试导入和导出功能时要注意：导入、导出路径（路径选择，默认路径），导入、导出文件（文件格式，文件内容，文件大小、文件名称），导入、导出功能的实现（导出数据到数据库，需检查数据库数据）</li>
+<li>弹出窗口：测试弹出页面或窗口时要注意：窗口位置、标题、大小、内容、是否可移动、是否可以改变大小。窗口是否有关闭或返回按钮。</li>
+<li>页面刷新：这里往往是测试人员忽略的地方，适时的自动刷新和功能提交后的页面刷新能提高用户对于页面的使用体验</li>
+<li>文本框：文本框测试包括：字段长度的限制，字段格式的限制，超长字符串的输入，有关联的文本框的内容判断（例如：开始时间应该小于或等于结束时间）</li>
+</ul>
+<h4 id="3-1-5-页面跳转"><a href="#3-1-5-页面跳转" class="headerlink" title="3.1.5 页面跳转"></a>3.1.5 页面跳转</h4><p>页面跳转是否正确，前进、后退是否跳转到预期的页面，页面跳转后一些字段内容的传递都是测试的重点</p>
+<h3 id="3-2-兼容性测试"><a href="#3-2-兼容性测试" class="headerlink" title="3.2 兼容性测试"></a>3.2 兼容性测试</h3><p>兼容性测试对于页面测试也是十分重要，有时甚至超过功能的测试。比如页面在FireFox浏览器中通过测试，但是在IE6浏览器中不能使用，使用IE6的用户会认为页面根本就无法使用，导致用户的不满。</p>
+<h4 id="3-2-1-浏览器兼容性测试"><a href="#3-2-1-浏览器兼容性测试" class="headerlink" title="3.2.1 浏览器兼容性测试"></a>3.2.1 浏览器兼容性测试</h4><p>目前使用的主流浏览器的主要版本，在条件允许的情况都应该进行测试。</p>
+<p>比如：IE系列（IE6,IE7,IE8）,火狐系列，遨游，360安全浏览器等。尤其是IE系列的浏览器应该重点测试。</p>
+<p>这里推荐两个浏览器兼容性测试工具：</p>
+<ul>
+<li>页面显示效果测试工具：Microsoft Expression SuperPreview 4 Trial</li>
+<li>页面功能测试工具：Selenium</li>
+</ul>
+<h4 id="3-2-2-分辨率兼容性测试"><a href="#3-2-2-分辨率兼容性测试" class="headerlink" title="3.2.2 分辨率兼容性测试"></a>3.2.2 分辨率兼容性测试</h4><p>分辨率测试，就是在常用的屏幕分辨率下，页面显示效果是否一致。一般常用的分辨率有：</p>
+<p>800<em>600；1024</em>768；1280*600。具体数值根据显示器来定</p>
+<h4 id="3-2-3-操作系统兼容性测试"><a href="#3-2-3-操作系统兼容性测试" class="headerlink" title="3.2.3 操作系统兼容性测试"></a>3.2.3 操作系统兼容性测试</h4><p>一般常用的操作系统有：WindowsXP,Windows2003,Windows7,unix等</p>
+<h4 id="3-2-4-软件兼容性测试"><a href="#3-2-4-软件兼容性测试" class="headerlink" title="3.2.4 软件兼容性测试"></a>3.2.4 软件兼容性测试</h4><p>软件兼容性的测试一般较少，只有在用户需要使用特定软件时，才会测试页面和软件的兼容性</p>
+<h3 id="3-3-易用性测试"><a href="#3-3-易用性测试" class="headerlink" title="3.3 易用性测试"></a>3.3 易用性测试</h3><h4 id="3-3-1-界面易用性"><a href="#3-3-1-界面易用性" class="headerlink" title="3.3.1 界面易用性"></a>3.3.1 界面易用性</h4><p>一般来说易用性没有确定的期望结果，只要能给用户带来更好的用户体验，就可以尽量去做。</p>
+<h5 id="3-3-1-1-界面风格"><a href="#3-3-1-1-界面风格" class="headerlink" title="3.3.1.1 界面风格"></a>3.3.1.1 界面风格</h5><ul>
+<li>界面排版风格一致</li>
+<li>界面文字风格一致</li>
+<li>界面图片风格一致</li>
+<li>界面按钮风格一致</li>
+<li>界面图表风格一致</li>
+</ul>
+<h5 id="3-3-1-2-界面提示"><a href="#3-3-1-2-界面提示" class="headerlink" title="3.3.1.2 界面提示"></a>3.3.1.2 界面提示</h5><p>界面提示对于用户体验很重要，好的界面提示能够引导用户正确使用界面。</p>
+<p>一般常见的界面提示有：</p>
+<ul>
+<li>必填项提示</li>
+<li>非法值提示</li>
+<li>页面流程提示</li>
+<li>页面操作提示（进行什么样的操作会产生什么样的后果）</li>
+<li>错误提示（操作结果错误，以及错误原因或解决方法）</li>
+</ul>
+<h4 id="3-3-2-功能易用性"><a href="#3-3-2-功能易用性" class="headerlink" title="3.3.2 功能易用性"></a>3.3.2 功能易用性</h4><p>功能易用性包括：</p>
+<ul>
+<li>页面流程是否合理；</li>
+<li>页面模块集成度；</li>
+<li>页面表格设计是否合理；</li>
+<li>虚线框的运用（使键盘导航更加轻松）；</li>
+<li>导航列设置是否合理；</li>
+<li>各种控件的运用（日期控件，下拉菜单等）。</li>
+</ul>
+<h3 id="3-4-安全性测试"><a href="#3-4-安全性测试" class="headerlink" title="3.4 安全性测试"></a>3.4 安全性测试</h3><h4 id="3-4-1-用户登陆"><a href="#3-4-1-用户登陆" class="headerlink" title="3.4.1 用户登陆"></a>3.4.1 用户登陆</h4><h5 id="3-4-1-1-用户密码加密"><a href="#3-4-1-1-用户密码加密" class="headerlink" title="3.4.1.1 用户密码加密"></a>3.4.1.1 用户密码加密</h5><ul>
+<li>密码加密显示</li>
+<li>密码加密保存</li>
+<li>密码修改</li>
+<li>密码找回</li>
+</ul>
+<h5 id="3-4-1-2-验证码"><a href="#3-4-1-2-验证码" class="headerlink" title="3.4.1.2 验证码"></a>3.4.1.2 验证码</h5><ul>
+<li>验证码功能</li>
+<li>验证码重置</li>
+</ul>
+<h4 id="3-4-2-页面安全性"><a href="#3-4-2-页面安全性" class="headerlink" title="3.4.2 页面安全性"></a>3.4.2 页面安全性</h4><ul>
+<li>页面超时设置</li>
+<li>页面地址复用</li>
+<li>相同用户重复登陆</li>
+</ul>
+<h4 id="3-4-3-防注入式攻击"><a href="#3-4-3-防注入式攻击" class="headerlink" title="3.4.3 防注入式攻击"></a>3.4.3 防注入式攻击</h4><ul>
+<li>URL传递参数攻击（Http://localhost/index.asp?ID=10）</li>
+<li>URL Sql语句攻击(Http://localhost/index.asp?username=admin’or1=1’password=123)</li>
+<li>目录遍历攻击(Http://localhost/index.asp/../)</li>
+<li>错误信息提示（错误的页面是否进行页面提示，而非直接显示页面代码）</li>
+</ul>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#WEB" >
+    <span class="tag-code">WEB</span>
+  </a>
+
+  <a href="/tags#页面测试" >
+    <span class="tag-code">页面测试</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+    
+      <a class="nav-right" href="/2013/04/24/use-case-structure-optimization-experience/">
+        
+          用例结构优化心得
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-引言"><span class="toc-nav-text">1. 引言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Web页面组成元素"><span class="toc-nav-text">2. Web页面组成元素</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-1-标题"><span class="toc-nav-text">2.1 标题</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-2-导航列"><span class="toc-nav-text">2.2 导航列</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-3-文字"><span class="toc-nav-text">2.3 文字</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-4-图片"><span class="toc-nav-text">2.4 图片</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-5-按钮"><span class="toc-nav-text">2.5 按钮</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-6-超链接"><span class="toc-nav-text">2.6 超链接</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-Web页面测试"><span class="toc-nav-text">3. Web页面测试</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-1-功能测试"><span class="toc-nav-text">3.1 功能测试</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-1-1-页面标题"><span class="toc-nav-text">3.1.1 页面标题</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-1-2-页面组成内容"><span class="toc-nav-text">3.1.2 页面组成内容</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-1-3-页面主要功能"><span class="toc-nav-text">3.1.3 页面主要功能</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-1-4-页面其他功能"><span class="toc-nav-text">3.1.4 页面其他功能</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-1-5-页面跳转"><span class="toc-nav-text">3.1.5 页面跳转</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-2-兼容性测试"><span class="toc-nav-text">3.2 兼容性测试</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2-1-浏览器兼容性测试"><span class="toc-nav-text">3.2.1 浏览器兼容性测试</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2-2-分辨率兼容性测试"><span class="toc-nav-text">3.2.2 分辨率兼容性测试</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2-3-操作系统兼容性测试"><span class="toc-nav-text">3.2.3 操作系统兼容性测试</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2-4-软件兼容性测试"><span class="toc-nav-text">3.2.4 软件兼容性测试</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-3-易用性测试"><span class="toc-nav-text">3.3 易用性测试</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-3-1-界面易用性"><span class="toc-nav-text">3.3.1 界面易用性</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-3-1-1-界面风格"><span class="toc-nav-text">3.3.1.1 界面风格</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-3-1-2-界面提示"><span class="toc-nav-text">3.3.1.2 界面提示</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-3-2-功能易用性"><span class="toc-nav-text">3.3.2 功能易用性</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-4-安全性测试"><span class="toc-nav-text">3.4 安全性测试</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-1-用户登陆"><span class="toc-nav-text">3.4.1 用户登陆</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-4-1-1-用户密码加密"><span class="toc-nav-text">3.4.1.1 用户密码加密</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-4-1-2-验证码"><span class="toc-nav-text">3.4.1.2 验证码</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-2-页面安全性"><span class="toc-nav-text">3.4.2 页面安全性</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-3-防注入式攻击"><span class="toc-nav-text">3.4.3 防注入式攻击</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://lovesoo.org/2012/07/11/web-page-testing-methods-summary/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    | All Rights Reserved.
+    <br>
+    <a href="https://beian.miit.gov.cn/">皖ICP备16005546号-1</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

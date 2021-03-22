@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="大爱 | 眼前一切都很美丽">
+  <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
+  
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+  
+  <title>
+    
+      符合语言习惯的Python优雅编程技巧 | 大爱
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>大爱</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>符合语言习惯的Python优雅编程技巧</h2>
+  <p class="post-date">2017-06-28</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>Python最大的优点之一就是语法简洁，好的代码就像伪代码一样，干净、整洁、一目了然。</p>
+<p>要写出 Pythonic（优雅的、地道的、整洁的）代码，需要多看多学大牛们写的代码。</p>
+<p>Github 上有很多非常优秀的源代码值得阅读，比如：requests、flask、tornado，下面列举一些常见的Pythonic写法。</p>
+<ol start="0">
+<li>程序必须先让人读懂，然后才能让计算机执行。</li>
+</ol>
+<p>“Programs must be written for people to read, and only incidentally for machines to execute.”</p>
+<ol>
+<li>交换赋值</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">temp = a</span><br><span class="line">a = b</span><br><span class="line">b = a  </span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">a, b = b, a  #  先生成一个元组(tuple)对象，然后unpack</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Unpacking</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">l = [&apos;David&apos;, &apos;Pythonista&apos;, &apos;+1-514-555-1234&apos;]</span><br><span class="line">first_name = l[0]</span><br><span class="line">last_name = l[1]</span><br><span class="line">phone_number = l[2]  </span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">l = [&apos;David&apos;, &apos;Pythonista&apos;, &apos;+1-514-555-1234&apos;]</span><br><span class="line">first_name, last_name, phone_number = l</span><br><span class="line"># Python 3 Only</span><br><span class="line">first, *middle, last = another_list</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>使用操作符in</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">if fruit == &quot;apple&quot; or fruit == &quot;orange&quot; or fruit == &quot;berry&quot;:</span><br><span class="line">    # 多次判断  </span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">if fruit in [&quot;apple&quot;, &quot;orange&quot;, &quot;berry&quot;]:</span><br><span class="line">    # 使用 in 更加简洁</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>字符串操作</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">colors = [&apos;red&apos;, &apos;blue&apos;, &apos;green&apos;, &apos;yellow&apos;]</span><br><span class="line"> </span><br><span class="line">result = &apos;&apos;</span><br><span class="line">for s in colors:</span><br><span class="line">    result += s  #  每次赋值都丢弃以前的字符串对象, 生成一个新对象  </span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">colors = [&apos;red&apos;, &apos;blue&apos;, &apos;green&apos;, &apos;yellow&apos;]</span><br><span class="line">result = &apos;&apos;.join(colors)  #  没有额外的内存分配</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>字典键值列表</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">for key in my_dict.keys():</span><br><span class="line">    #  my_dict[key] ...  </span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">for key in my_dict:</span><br><span class="line">    #  my_dict[key] ...</span><br><span class="line"> </span><br><span class="line"># 只有当循环中需要更改key值的情况下，我们需要使用 my_dict.keys()</span><br><span class="line"># 生成静态的键值列表。</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>字典键值判断</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">if my_dict.has_key(key):</span><br><span class="line">    # ...do something with d[key]  </span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">if key in my_dict:</span><br><span class="line">    # ...do something with d[key]</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>字典 get 和 setdefault 方法</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">navs = &#123;&#125;</span><br><span class="line">for (portfolio, equity, position) in data:</span><br><span class="line">    if portfolio not in navs:</span><br><span class="line">            navs[portfolio] = 0</span><br><span class="line">    navs[portfolio] += position * prices[equity]</span><br><span class="line">##推荐</span><br><span class="line">navs = &#123;&#125;</span><br><span class="line">for (portfolio, equity, position) in data:</span><br><span class="line">    # 使用 get 方法</span><br><span class="line">    navs[portfolio] = navs.get(portfolio, 0) + position * prices[equity]</span><br><span class="line">    # 或者使用 setdefault 方法</span><br><span class="line">    navs.setdefault(portfolio, 0)</span><br><span class="line">    navs[portfolio] += position * prices[equity]</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>判断真伪</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">if x == True:</span><br><span class="line">    # ....</span><br><span class="line">if len(items) != 0:</span><br><span class="line">    # ...</span><br><span class="line">if items != []:</span><br><span class="line">    # ...  </span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">if x:</span><br><span class="line">    # ....</span><br><span class="line">if items:</span><br><span class="line">    # ...</span><br></pre></td></tr></table></figure>
+
+<ol start="9">
+<li>遍历列表以及索引</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">items = &apos;zero one two three&apos;.split()</span><br><span class="line"># method 1</span><br><span class="line">i = 0</span><br><span class="line">for item in items:</span><br><span class="line">    print i, item</span><br><span class="line">    i += 1</span><br><span class="line"># method 2</span><br><span class="line">for i in range(len(items)):</span><br><span class="line">    print i, items[i]</span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">items = &apos;zero one two three&apos;.split()</span><br><span class="line">for i, item in enumerate(items):</span><br><span class="line">    print i, item</span><br></pre></td></tr></table></figure>
+
+<ol start="10">
+<li>列表推导</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">new_list = []</span><br><span class="line">for item in a_list:</span><br><span class="line">    if condition(item):</span><br><span class="line">        new_list.append(fn(item))  </span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">new_list = [fn(item) for item in a_list if condition(item)]</span><br></pre></td></tr></table></figure>
+
+<ol start="11">
+<li>列表推导-嵌套</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">for sub_list in nested_list:</span><br><span class="line">    if list_condition(sub_list):</span><br><span class="line">        for item in sub_list:</span><br><span class="line">            if item_condition(item):</span><br><span class="line">                # do something...  </span><br><span class="line">##推荐</span><br><span class="line">gen = (item for sl in nested_list if list_condition(sl) \</span><br><span class="line">            for item in sl if item_condition(item))</span><br><span class="line">for item in gen:</span><br><span class="line">    # do something...</span><br></pre></td></tr></table></figure>
+
+<ol start="12">
+<li>循环嵌套</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">for x in x_list:</span><br><span class="line">    for y in y_list:</span><br><span class="line">        for z in z_list:</span><br><span class="line">            # do something for x &amp;amp;amp; y  </span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">from itertools import product</span><br><span class="line">for x, y, z in product(x_list, y_list, z_list):</span><br><span class="line">    # do something for x, y, z</span><br></pre></td></tr></table></figure>
+
+<ol start="13">
+<li>尽量使用生成器代替列表</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">def my_range(n):</span><br><span class="line">    i = 0</span><br><span class="line">    result = []</span><br><span class="line">    while i &amp;amp;lt; n:</span><br><span class="line">        result.append(fn(i))</span><br><span class="line">        i += 1</span><br><span class="line">    return result  #  返回列表</span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">def my_range(n):</span><br><span class="line">    i = 0</span><br><span class="line">    result = []</span><br><span class="line">    while i &amp;amp;lt; n:</span><br><span class="line">        yield fn(i)  #  使用生成器代替列表</span><br><span class="line">        i += 1</span><br><span class="line">*尽量用生成器代替列表，除非必须用到列表特有的函数。</span><br></pre></td></tr></table></figure>
+
+<ol start="14">
+<li>中间结果尽量使用imap/ifilter代替map/filter</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">reduce(rf, filter(ff, map(mf, a_list)))</span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">from itertools import ifilter, imap</span><br><span class="line">reduce(rf, ifilter(ff, imap(mf, a_list)))</span><br><span class="line">*lazy evaluation 会带来更高的内存使用效率，特别是当处理大数据操作的时候。</span><br></pre></td></tr></table></figure>
+
+<ol start="15">
+<li>使用any/all函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">found = False</span><br><span class="line">for item in a_list:</span><br><span class="line">    if condition(item):</span><br><span class="line">        found = True</span><br><span class="line">        break</span><br><span class="line">if found:</span><br><span class="line">    # do something if found...  </span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">if any(condition(item) for item in a_list):</span><br><span class="line">    # do something if found...</span><br></pre></td></tr></table></figure>
+
+<ol start="16">
+<li>属性(property)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">class Clock(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.__hour = 1</span><br><span class="line">    def setHour(self, hour):</span><br><span class="line">        if 25 &amp;amp;gt; hour &amp;amp;gt; 0: self.__hour = hour</span><br><span class="line">        else: raise BadHourException</span><br><span class="line">    def getHour(self):</span><br><span class="line">        return self.__hour</span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">class Clock(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.__hour = 1</span><br><span class="line">    def __setHour(self, hour):</span><br><span class="line">        if 25 &amp;amp;gt; hour &amp;amp;gt; 0: self.__hour = hour</span><br><span class="line">        else: raise BadHourException</span><br><span class="line">    def __getHour(self):</span><br><span class="line">        return self.__hour</span><br><span class="line">    hour = property(__getHour, __setHour)</span><br></pre></td></tr></table></figure>
+
+<ol start="17">
+<li>使用 with 处理文件打开</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">f = open(&quot;some_file.txt&quot;)</span><br><span class="line">try:</span><br><span class="line">    data = f.read()</span><br><span class="line">    # 其他文件操作..</span><br><span class="line">finally:</span><br><span class="line">    f.close()</span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">with open(&quot;some_file.txt&quot;) as f:</span><br><span class="line">    data = f.read()</span><br><span class="line">    # 其他文件操作...</span><br></pre></td></tr></table></figure>
+
+<ol start="18">
+<li>使用 with 忽视异常(仅限Python 3)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">try:</span><br><span class="line">    os.remove(&quot;somefile.txt&quot;)</span><br><span class="line">except OSError:</span><br><span class="line">    pass</span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">from contextlib import ignored  # Python 3 only</span><br><span class="line"> </span><br><span class="line">with ignored(OSError):</span><br><span class="line">    os.remove(&quot;somefile.txt&quot;)</span><br></pre></td></tr></table></figure>
+
+<ol start="19">
+<li>使用 with 处理加锁</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">##不推荐</span><br><span class="line">import threading</span><br><span class="line">lock = threading.Lock()</span><br><span class="line"> </span><br><span class="line">lock.acquire()</span><br><span class="line">try:</span><br><span class="line">    # 互斥操作...</span><br><span class="line">finally:</span><br><span class="line">    lock.release()</span><br><span class="line"> </span><br><span class="line">##推荐</span><br><span class="line">import threading</span><br><span class="line">lock = threading.Lock()</span><br><span class="line"> </span><br><span class="line">with lock:</span><br><span class="line">    # 互斥操作...</span><br></pre></td></tr></table></figure>
+
+<ol start="20">
+<li>参考</li>
+</ol>
+<p>1) Idiomatic Python: <a href="http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html" target="_blank" rel="noopener">http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html</a></p>
+<p>2) PEP 8: Style Guide for Python Code: <a href="http://www.python.org/dev/peps/pep-0008/" target="_blank" rel="noopener">http://www.python.org/dev/peps/pep-0008/</a></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#Pythonic" >
+    <span class="tag-code">Pythonic</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2017/06/07/python-list-sort-sorted-detail/">
+        <span class="nav-arrow">← </span>
+        
+          Python列表排序sort,sorted详解
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2017/07/17/python-orthogonal-array-test/">
+        
+          Python实现正交实验法自动设计测试用例
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="nav">none</ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://lovesoo.org/2017/06/28/pythonic-python-programming/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    | All Rights Reserved.
+    <br>
+    <a href="https://beian.miit.gov.cn/">皖ICP备16005546号-1</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

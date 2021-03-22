@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="大爱 | 眼前一切都很美丽">
+  <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
+  
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+  
+  <title>
+    
+      自动化测试框架Taffy | 大爱
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>大爱</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>自动化测试框架Taffy</h2>
+  <p class="post-date">2017-09-20</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>Taffy是基于nosetests的自动化测试框架。</p>
+<p>Taffy主要用来测试后台服务接口(包括且不限于Http, Dubbo/hessian, Webservice, Socket等类型)，也可以集成Selinum, Appium进行Web或APP的自动化测试。</p>
+<p>Taffy封装实现了结果对比，配置读取，DB/Redis操作，数据加解密等接口。</p>
+<p>基本用法可以参考：test_demo.py</p>
+<p>Github地址：<a href="https://github.com/lovesoo/Taffy" target="_blank" rel="noopener">https://github.com/lovesoo/Taffy</a></p>
+<h2 id="1-运行环境"><a href="#1-运行环境" class="headerlink" title="1. 运行环境"></a>1. 运行环境</h2><ul>
+<li>macOS，linux，windows</li>
+<li>nose 1.3.7</li>
+<li>python 2.7 - 3.7</li>
+</ul>
+<h2 id="2-项目结构"><a href="#2-项目结构" class="headerlink" title="2. 项目结构"></a>2. 项目结构</h2><p>1) config 配置文件</p>
+<p>2) Tests 测试用例</p>
+<p>3) Util 工具类<br>    - checkTool 数据比较<br>    - commonTool    配置文件读取<br>    - DBTool    数据库操作<br>    - hessianTool   hessian接口<br>    - httpTool  http接口<br>    - locustTool    locust集成<br>    - OATool    正交表设计测试用例<br>    - redisTool redis/redis cluster操作<br>    - securityTool  数据加解密<br>    - seleniumTool  selenium集成<br>    - webserviceTool    webservice接口</p>
+<h2 id="3-环境部署"><a href="#3-环境部署" class="headerlink" title="3. 环境部署"></a>3. 环境部署</h2><h3 id="3-1-Python"><a href="#3-1-Python" class="headerlink" title="3.1 Python"></a>3.1 Python</h3><p>请根据需要下载Python 2.7或3.7版本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.python.org/downloads/</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-IDE"><a href="#3-2-IDE" class="headerlink" title="3.2 IDE"></a>3.2 IDE</h3><p>推荐使用PyCharm：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">官网地址：http://www.jetbrains.com/pycharm/</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-Lib"><a href="#3-3-Lib" class="headerlink" title="3.3 Lib"></a>3.3 Lib</h3><p><a href="https://github.com/lovesoo/Taffy/blob/master/requirements.txt" target="_blank" rel="noopener">requirements.txt </a>中存放了Taffy用到的第三方lib库，可以运行<a href="https://github.com/lovesoo/Taffy/blob/master/setup.py" target="_blank" rel="noopener"><code>python setup.py</code></a>进行模块安装配置，命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 默认安装全部模块</span><br><span class="line">$ python setup.py</span><br><span class="line"></span><br><span class="line"># -h或--help，查看帮助</span><br><span class="line">$ python setup.py -h</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-PyCharm配置"><a href="#3-4-PyCharm配置" class="headerlink" title="3.4 PyCharm配置"></a>3.4 PyCharm配置</h3><p>1) 运行PyCharm，打开下载的项目：taffy</p>
+<p>2) 「File」–&gt;「Settings 」–&gt;「Project:Taffy」-&gt;「Project Interpreter」，配置Python interpreter为当前python版本安装目录</p>
+<p>3) 「File」–&gt;「Settings 」–&gt;「Tools」-&gt;「Python Integrated Tools」–&gt;「Nosetests」，配置Default test runner为Nosetests</p>
+<p>4) 「Run」–&gt;「Edit Configurations」–&gt;「Defaults」-&gt;「Python」，配置Python interpreter为当前python版本安装目录</p>
+<p>5)  「Run」–&gt;「Edit Configurations」–&gt;「Defaults」-&gt;「Python tests」–&gt;「Nosetests」，配置Python interpreter为当前python版本安装目录，并在Interpreter options中填入-s用以显示nose运行及调试信息</p>
+<h2 id="4-测试执行"><a href="#4-测试执行" class="headerlink" title="4. 测试执行"></a>4. 测试执行</h2><p>可以使用两种方式执行功能自动化测试脚本：</p>
+<p>1) 图形用户界面GUI</p>
+<pre><code>在PyCharm中，选中测试文件，如Tests/test_demo.py
+
+鼠标右键选择Run &apos;Nosetests in test_demo.py&apos;即可执行测试
+
+注1：也可使用快捷键：Ctrl+Shift+F10
+
+注2：在脚本里使用快捷键Ctrl+Shift+F10，会单独执行选中的test class或test func</code></pre><p>2) 命令行界面CLI</p>
+<p>在PyCharm下方Terminal终端中，输入命令执行测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 执行测试文件test_demo.py</span><br><span class="line">$ nosetests -v Tests/test_demo.py</span><br><span class="line"></span><br><span class="line"># 单独执行测试文件test_demo.py中测试类test_demo下的test_http测试方法</span><br><span class="line">$ nosetests -v Tests/test_demo.py:test_demo.test_http</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-参考资料"><a href="#5-参考资料" class="headerlink" title="5.参考资料"></a>5.参考资料</h2><ol>
+<li><p><a href="http://nose.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">http://nose.readthedocs.io/en/latest/index.html</a></p>
+</li>
+<li><p><a href="https://docs.python.org/dev/library/unittest.html" target="_blank" rel="noopener">https://docs.python.org/dev/library/unittest.html</a></p>
+</li>
+</ol>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#测试框架" >
+    <span class="tag-code">测试框架</span>
+  </a>
+
+  <a href="/tags#nose" >
+    <span class="tag-code">nose</span>
+  </a>
+
+  <a href="/tags#Taffy" >
+    <span class="tag-code">Taffy</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2017/07/17/python-orthogonal-array-test/">
+        <span class="nav-arrow">← </span>
+        
+          Python实现正交实验法自动设计测试用例
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2017/09/22/nose-writing-tests/">
+        
+          Nose框架编写测试用例方法
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-运行环境"><span class="toc-nav-text">1. 运行环境</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-项目结构"><span class="toc-nav-text">2. 项目结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-环境部署"><span class="toc-nav-text">3. 环境部署</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-1-Python"><span class="toc-nav-text">3.1 Python</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-2-IDE"><span class="toc-nav-text">3.2 IDE</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-3-Lib"><span class="toc-nav-text">3.3 Lib</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-4-PyCharm配置"><span class="toc-nav-text">3.4 PyCharm配置</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-测试执行"><span class="toc-nav-text">4. 测试执行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#5-参考资料"><span class="toc-nav-text">5.参考资料</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://lovesoo.org/2017/09/20/test-automation-framework-taffy/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    | All Rights Reserved.
+    <br>
+    <a href="https://beian.miit.gov.cn/">皖ICP备16005546号-1</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

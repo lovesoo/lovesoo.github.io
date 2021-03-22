@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="大爱 | 眼前一切都很美丽">
+  <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
+  
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+  
+  <title>
+    
+      Pythonic释义及示例 | 大爱
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>大爱</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Pythonic释义及示例</h2>
+  <p class="post-date">2014-09-16</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="1-什么是Pythonic"><a href="#1-什么是Pythonic" class="headerlink" title="1.什么是Pythonic"></a>1.什么是Pythonic</h2><p>简单说来，Pythonic就是简单、优美、清晰，不要过分强调技巧，尽量使用 Python 已经提供的功能以及符合Python的思维方式。</p>
+<p>执行 import this 可以看到: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$import this</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The Zen of Python, by Tim Peters</span><br><span class="line"></span><br><span class="line">Beautiful is better than ugly.</span><br><span class="line">Explicit is better than implicit.</span><br><span class="line">Simple is better than complex.</span><br><span class="line">Complex is better than complicated.</span><br><span class="line">Flat is better than nested.</span><br><span class="line">Sparse is better than dense.</span><br><span class="line">Readability counts.</span><br><span class="line">Special cases aren&apos;t special enough to break the rules.</span><br><span class="line">Although practicality beats purity.</span><br><span class="line">Errors should never pass silently.</span><br><span class="line">Unless explicitly silenced.</span><br><span class="line">In the face of ambiguity, refuse the temptation to guess.</span><br><span class="line">There should be one-- and preferably only one --obvious way to do it.</span><br><span class="line">Although that way may not be obvious at first unless you&apos;re Dutch.</span><br><span class="line">Now is better than never.</span><br><span class="line">Although never is often better than *right* now.</span><br><span class="line">If the implementation is hard to explain, it&apos;s a bad idea.</span><br><span class="line">If the implementation is easy to explain, it may be a good idea.</span><br><span class="line">Namespaces are one honking great idea -- let&apos;s do more of those!</span><br></pre></td></tr></table></figure>
+
+<p>总结而言：</p>
+<p>美胜丑，显胜隐，简胜杂，杂胜乱，平胜陡，疏胜密。</p>
+<p>找到简单问题的一个方法，最好是唯一的方法（正确的解决之道）。</p>
+<p>难以解释的实现，源自不好的主意；如有非常棒的主意，它的实现肯定易于解释。</p>
+<h2 id="2-pythonic示例："><a href="#2-pythonic示例：" class="headerlink" title="2. pythonic示例："></a>2. pythonic示例：</h2><h3 id="2-1-列表解析-List-Comprehension"><a href="#2-1-列表解析-List-Comprehension" class="headerlink" title="2.1 列表解析(List Comprehension)"></a>2.1 列表解析(List Comprehension)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[expr for iter_var in iterable]</span><br><span class="line">[expr for iter_var in iterable if cond_expr]</span><br></pre></td></tr></table></figure>
+
+<p>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">N=[x*2 for x in range(10) if x&gt;5]</span><br><span class="line">print N</span><br><span class="line"> </span><br><span class="line">&gt;&gt;&gt;[12, 14, 16, 18]</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-生成器表达式-Generator-Expression"><a href="#2-2-生成器表达式-Generator-Expression" class="headerlink" title="2.2 生成器表达式(Generator Expression)"></a>2.2 生成器表达式(Generator Expression)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(expr for iter_var in iterable)</span><br><span class="line">(expr for iter_var in iterable if cond_expr)</span><br></pre></td></tr></table></figure>
+
+<p>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">N=(x*2 for x in range(10) if x&gt;5)</span><br><span class="line">print N</span><br><span class="line">print list(N)</span><br><span class="line"> </span><br><span class="line">&gt;&gt;&gt; &lt;generator object &lt;genexpr&gt; at 0x024DD300&gt;</span><br><span class="line">[12, 14, 16, 18]</span><br></pre></td></tr></table></figure>
+
+<p>Generator类似于List Comprehension，但Generator避免了生成整个列表，它返回的是一个generator object（生成器表达式），并使用了按需调用的“惰性计算”(lazy evaluation)，只有在检索时才被赋值（evaluated），所以在列表比较长的情况下改善了性能及内存占用。</p>
+<h3 id="2-3-使用-format代替"><a href="#2-3-使用-format代替" class="headerlink" title="2.3 使用.format代替%"></a>2.3 使用.format代替%</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name = &apos;Joo&apos;</span><br><span class="line">age = 25</span><br><span class="line">print(&apos;%s is %s years old. &apos;%(name, age))</span><br><span class="line">print(&apos;&#123;0&#125; is &#123;1&#125; years old. &apos;.format(name, age))</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-字符串拼接"><a href="#2-4-字符串拼接" class="headerlink" title="2.4 字符串拼接"></a>2.4 字符串拼接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list1=(&apos;how&apos;,&apos;are&apos;,&apos;you&apos;)</span><br><span class="line">print &apos; &apos;.join(list1)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-None判断"><a href="#2-5-None判断" class="headerlink" title="2.5 None判断"></a>2.5 None判断</h3><p>判断一个变量是否为空的时候，应该总是用is或者is not，而不要使用=</p>
+<h3 id="2-6-对象类型判断"><a href="#2-6-对象类型判断" class="headerlink" title="2.6 对象类型判断"></a>2.6 对象类型判断</h3><p>对象类型的比较应该始终用isinstance()代替直接比较类型，如使用if isinstance(obj, int)代替if type(obj) is type(1)</p>
+<h3 id="2-7-字符串前后缀判断"><a href="#2-7-字符串前后缀判断" class="headerlink" title="2.7 字符串前后缀判断"></a>2.7 字符串前后缀判断</h3><p>在检查前缀或后缀时，用startswith()和endswith()代替对字符串进行切片，如使用if foo.startswith(‘bar’)替代 if foo[:3] == ‘bar’</p>
+<h3 id="2-8-变量值交换"><a href="#2-8-变量值交换" class="headerlink" title="2.8 变量值交换"></a>2.8 变量值交换</h3><p>使用a,b = b, a代替t=a; a=b; b=t</p>
+<h3 id="2-9-判断dict中是否有key"><a href="#2-9-判断dict中是否有key" class="headerlink" title="2.9 判断dict中是否有key"></a>2.9 判断dict中是否有key</h3><p>使用dict.has_key(key)代替key in dict</p>
+<h3 id="2-10-zip"><a href="#2-10-zip" class="headerlink" title="2.10 zip"></a>2.10 zip</h3><p>使用zip将2个有对应关系的list构造一个dict</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name=[&apos;Tom&apos;,&apos;Jim&apos;]</span><br><span class="line">age=[23,40]</span><br><span class="line">print dict(zip(name,age))</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-11-使用set去掉list中重复数据"><a href="#2-11-使用set去掉list中重复数据" class="headerlink" title="2.11 使用set去掉list中重复数据"></a>2.11 使用set去掉list中重复数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list(set(oldlist))</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-12-读文件操作，使用with"><a href="#2-12-读文件操作，使用with" class="headerlink" title="2.12 读文件操作，使用with"></a>2.12 读文件操作，使用with</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">with open(&apos;a.txt&apos;,&apos;r&apos;) as f:</span><br><span class="line">    for line in f:</span><br><span class="line">    print line</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-13-输出数组的index和值"><a href="#2-13-输出数组的index和值" class="headerlink" title="2.13 输出数组的index和值"></a>2.13 输出数组的index和值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list = [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;]</span><br><span class="line">for index, value in enumerate(list):</span><br><span class="line">    print index,value</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-14-实现a-b-c"><a href="#2-14-实现a-b-c" class="headerlink" title="2.14 实现a?b:c"></a>2.14 实现a?b:c</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return_value = True if a else False</span><br></pre></td></tr></table></figure></section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#Pythonic" >
+    <span class="tag-code">Pythonic</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2014/09/03/python-fastdfs-simple-sample/">
+        <span class="nav-arrow">← </span>
+        
+          Python操作fastdfs简单示例
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2015/04/14/python-codec-details-encode-and-decode/">
+        
+          Python编解码详解encode与decode
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-什么是Pythonic"><span class="toc-nav-text">1.什么是Pythonic</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-pythonic示例："><span class="toc-nav-text">2. pythonic示例：</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-1-列表解析-List-Comprehension"><span class="toc-nav-text">2.1 列表解析(List Comprehension)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-2-生成器表达式-Generator-Expression"><span class="toc-nav-text">2.2 生成器表达式(Generator Expression)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-3-使用-format代替"><span class="toc-nav-text">2.3 使用.format代替%</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-4-字符串拼接"><span class="toc-nav-text">2.4 字符串拼接</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-5-None判断"><span class="toc-nav-text">2.5 None判断</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-6-对象类型判断"><span class="toc-nav-text">2.6 对象类型判断</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-7-字符串前后缀判断"><span class="toc-nav-text">2.7 字符串前后缀判断</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-8-变量值交换"><span class="toc-nav-text">2.8 变量值交换</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-9-判断dict中是否有key"><span class="toc-nav-text">2.9 判断dict中是否有key</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-10-zip"><span class="toc-nav-text">2.10 zip</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-11-使用set去掉list中重复数据"><span class="toc-nav-text">2.11 使用set去掉list中重复数据</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-12-读文件操作，使用with"><span class="toc-nav-text">2.12 读文件操作，使用with</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-13-输出数组的index和值"><span class="toc-nav-text">2.13 输出数组的index和值</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-14-实现a-b-c"><span class="toc-nav-text">2.14 实现a?b:c</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://lovesoo.org/2014/09/16/pythonic-interpretation-and-example/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    | All Rights Reserved.
+    <br>
+    <a href="https://beian.miit.gov.cn/">皖ICP备16005546号-1</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

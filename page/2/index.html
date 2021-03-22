@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="大爱 | 眼前一切都很美丽">
+  <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
+  
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+  
+  <title>
+    
+      大爱
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>大爱</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/09/20/test-automation-framework-taffy/">自动化测试框架Taffy</a>
+      </h2>
+      <p class="article-date">September 20, 2017</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#测试框架" >
+    <span class="tag-code">测试框架</span>
+  </a>
+
+  <a href="/tags#nose" >
+    <span class="tag-code">nose</span>
+  </a>
+
+  <a href="/tags#Taffy" >
+    <span class="tag-code">Taffy</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Taffy是基于nosetests的自动化测试框架。
+Taffy主要用来测试后台服务接口(包括且不限于Http, Dubbo/hessian, Webservice, Socket等类型)，也可以集成Selinum, Appium进行Web或APP的自动化测试。
+Taffy封装实现了结果对比 ...
+        
+      </div>
+      <a class="more" href="/2017/09/20/test-automation-framework-taffy/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/07/17/python-orthogonal-array-test/">Python实现正交实验法自动设计测试用例</a>
+      </h2>
+      <p class="article-date">July 17, 2017</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#正交表" >
+    <span class="tag-code">正交表</span>
+  </a>
+
+  <a href="/tags#测试用例" >
+    <span class="tag-code">测试用例</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          1. 简介正交试验法是研究多因素、多水平的一种试验法，它是利用正交表来对试验进行设计，通过少数的试验替代全面试验，根据正交表的正交性从全面试验中挑选适量的、有代表性的点进行试验，这些有代表性的点具备了“均匀分散，整齐可比”的特点。
+正交实验法设计测试用例，基本步骤如下：
+
+提取测试需求功能说 ...
+        
+      </div>
+      <a class="more" href="/2017/07/17/python-orthogonal-array-test/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/06/28/pythonic-python-programming/">符合语言习惯的Python优雅编程技巧</a>
+      </h2>
+      <p class="article-date">June 28, 2017</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#Pythonic" >
+    <span class="tag-code">Pythonic</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Python最大的优点之一就是语法简洁，好的代码就像伪代码一样，干净、整洁、一目了然。
+要写出 Pythonic（优雅的、地道的、整洁的）代码，需要多看多学大牛们写的代码。
+Github 上有很多非常优秀的源代码值得阅读，比如：requests、flask、tornado，下面列举一些常见的 ...
+        
+      </div>
+      <a class="more" href="/2017/06/28/pythonic-python-programming/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/06/07/python-list-sort-sorted-detail/">Python列表排序sort,sorted详解</a>
+      </h2>
+      <p class="article-date">June 7, 2017</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#sort" >
+    <span class="tag-code">sort</span>
+  </a>
+
+  <a href="/tags#sorted" >
+    <span class="tag-code">sorted</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          python2.7中提供了两种方法对list进行排序，分别是list成员函数sort及built-in函数sorted.
+函数原型分别如下：
+1) sort(…)
+12L.sort(cmp=None, key=None, reverse=False) -- stable sort *IN P ...
+        
+      </div>
+      <a class="more" href="/2017/06/07/python-list-sort-sorted-detail/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/01/19/tomcat-process-fails-to-stop-problem-solving/">Tomcat进程无法正常stop问题解决</a>
+      </h2>
+      <p class="article-date">January 19, 2017</p>
+      
+        
+  <a href="/tags#Linux" >
+    <span class="tag-code">Linux</span>
+  </a>
+
+  <a href="/tags#tomcat" >
+    <span class="tag-code">tomcat</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          最近在CentOS上经常遇到Tomcat进程无法正常停止的问题（使用catalina.sh stop），后来查看帮助发现可以使用catalina.sh stop -force命令来强制停止Tomcat进程。
+而想要正常的使用stop -force命令，需要配置一个参数 “&amp;CATAL ...
+        
+      </div>
+      <a class="more" href="/2017/01/19/tomcat-process-fails-to-stop-problem-solving/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/01/17/analysis-of-asynchronous-concurrent-python-module-concurrent-futures/">Python异步并发模块concurrent.futures简析</a>
+      </h2>
+      <p class="article-date">January 17, 2017</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#concurrent" >
+    <span class="tag-code">concurrent</span>
+  </a>
+
+  <a href="/tags#futures" >
+    <span class="tag-code">futures</span>
+  </a>
+
+  <a href="/tags#异步并发" >
+    <span class="tag-code">异步并发</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          本文主要介绍python异步并发模块concurrent.futures。它非常简单易用，主要用来实现多线程和多进程的异步并发。
+1. 模块安装1) python 3.x中自带了concurrent.futures模块
+2) python 2.7需要安装futures模块，使用命令pip i ...
+        
+      </div>
+      <a class="more" href="/2017/01/17/analysis-of-asynchronous-concurrent-python-module-concurrent-futures/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2017/01/05/requests-post-multiple-part-encoding-multipart-encoded-file-format/">Requests POST多部分编码(Multipart-Encoded)的文件方法</a>
+      </h2>
+      <p class="article-date">January 5, 2017</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#Requests" >
+    <span class="tag-code">Requests</span>
+  </a>
+
+  <a href="/tags#Multipart-Encoded" >
+    <span class="tag-code">Multipart-Encoded</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Requests本身虽然提供了简单的方法POST多部分编码(Multipart-Encoded)的文件，但是Requests是先读取文件到内存中，然后再构造请求发送出去。
+如果需要发送一个非常大的文件作为 multipart/form-data 请求时，为了避免把大文件读取到内存中，我们就希 ...
+        
+      </div>
+      <a class="more" href="/2017/01/05/requests-post-multiple-part-encoding-multipart-encoded-file-format/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2016/07/28/python-redis-example-add-modified-reduction-deleted/">Python操作redis示例(新增修改增加减少删除)</a>
+      </h2>
+      <p class="article-date">July 28, 2016</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#redis" >
+    <span class="tag-code">redis</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          本文主要介绍通过python对redis数据进行操作的方法示例(包括新增、修改、增加、减少、删除等操作)。
+下面的示例代码包括2个demo：
+1) 对string类型数据进行新增、修改、增加、减少及删除的操作示例；
+2) 对sorted set类型数据进行新增、修改、增加及删除的操作示例。
+ ...
+        
+      </div>
+      <a class="more" href="/2016/07/28/python-redis-example-add-modified-reduction-deleted/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2016/07/20/discussion-on-robot-framework-test-automation-framework/">Robot Framework自动化测试框架初探</a>
+      </h2>
+      <p class="article-date">July 20, 2016</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#Robot Framework" >
+    <span class="tag-code">Robot Framework</span>
+  </a>
+
+  <a href="/tags#测试框架" >
+    <span class="tag-code">测试框架</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Robot Framework是一款python语言编写，通用的功能自动化测试框架。它使用了比较易用的表格数据语法，基于关键字驱动测试，主要用来验收测试和验收测试驱动开发（ATDD）。
+本文主要介绍Robot Framework在python2.7环境下的安装及一个http接口自动化测试de ...
+        
+      </div>
+      <a class="more" href="/2016/07/20/discussion-on-robot-framework-test-automation-framework/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2016/04/21/python-called-dubbo-hessian-protocol-interface-example/">Python调用基于Dubbo的Hessian协议接口示例</a>
+      </h2>
+      <p class="article-date">April 21, 2016</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#hessian" >
+    <span class="tag-code">hessian</span>
+  </a>
+
+  <a href="/tags#dubbo" >
+    <span class="tag-code">dubbo</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          本文主要介绍使用Python调用Hession协议dubbo接口示例。
+关于Dubbo Hession协议：
+Dubbo本身支持多种远程调用方式，例如Dubbo RPC（二进制序列化 + tcp协议）、http invoker（二进制序列化 + http协议）、hessian（二进制序列化  ...
+        
+      </div>
+      <a class="more" href="/2016/04/21/python-called-dubbo-hessian-protocol-interface-example/">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/"><span class="page-arrow">← </span>Prev</a>
+  
+  
+    <a href="/page/3/">Next<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    | All Rights Reserved.
+    <br>
+    <a href="https://beian.miit.gov.cn/">皖ICP备16005546号-1</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

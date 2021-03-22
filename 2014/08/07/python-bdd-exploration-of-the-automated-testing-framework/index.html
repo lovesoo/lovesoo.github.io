@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="大爱 | 眼前一切都很美丽">
+  <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
+  
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+  
+  <title>
+    
+      Python BDD自动化测试框架初探 | 大爱
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>大爱</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Python BDD自动化测试框架初探</h2>
+  <p class="post-date">2014-08-07</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="1-什么是BDD"><a href="#1-什么是BDD" class="headerlink" title="1. 什么是BDD"></a>1. 什么是BDD</h2><p>BDD全称Behavior Driven Development，译作”行为驱动开发”，是基于TDD (Test Driven Development 测试驱动开发)的软件开发过程和方法。 </p>
+<p>BDD可以让项目成员（甚至是不懂编程的）使用自然语言来描述系统功能和场景，从而根据这些描述步骤进行系统自动化的测试。（详见附录4.1）</p>
+<h2 id="2-常用BDD框架介绍"><a href="#2-常用BDD框架介绍" class="headerlink" title="2. 常用BDD框架介绍"></a>2. 常用BDD框架介绍</h2><p>目前常用的BDD测试框架有Ruby中的Cucumber，Python中的Behave、Lettuce及Freshen等。</p>
+<p>基本的流程如下图所示(Lettuce官方图)：</p>
+<p><img src="/images/lettuce.png" alt="lettuce"></p>
+<p>简单来说就是”写用例-&gt;跑测试-&gt;看结果-&gt;写实现-&gt;看结果”这样的一个循环。</p>
+<p>Behave网站列出了上面提到的几个自动化测试框架的对比（详见附录4.2），基于此原因，本文选择behave来介绍Python BDD自动化测试框架。</p>
+<h2 id="3-Behave示例"><a href="#3-Behave示例" class="headerlink" title="3. Behave示例"></a>3. Behave示例</h2><h3 id="3-1-Behave安装"><a href="#3-1-Behave安装" class="headerlink" title="3.1 Behave安装"></a>3.1 Behave安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install behave # 全新安装</span><br><span class="line">pip install -U behave # 更新</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-基础知识"><a href="#3-2-基础知识" class="headerlink" title="3.2 基础知识"></a>3.2 基础知识</h3><h4 id="3-2-1-Gherkin语法"><a href="#3-2-1-Gherkin语法" class="headerlink" title="3.2.1 Gherkin语法"></a>3.2.1 Gherkin语法</h4><p>上文提到的几种BDD框架均使用Gherkin 语法，这是一种简单易懂的语言，使用关键字来定义系统特征和测试。</p>
+<p>使用Gherkin语法编写的feature文件基本结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Title (one line describing the story/feature)</span><br><span class="line"> </span><br><span class="line">    As a     [role]</span><br><span class="line">    I want   [feature]</span><br><span class="line">    So that  [benefit]</span><br><span class="line"> </span><br><span class="line">    Scenario: Title1 (for Behaviour 1)</span><br><span class="line"> </span><br><span class="line">        Given  [context or setup]</span><br><span class="line">        And   [some more context]...</span><br><span class="line">        When  [event occurs]</span><br><span class="line">        Then  [expected outcome]</span><br><span class="line">        And   [another outcome]...</span><br><span class="line"> </span><br><span class="line">    Scenario: Title2 (for Behaviour 2)</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-2-断言模块"><a href="#3-2-2-断言模块" class="headerlink" title="3.2.2 断言模块"></a>3.2.2 断言模块</h4><p>使用BDD测试框架前，需要选择一个好用的断言模块。Python有很多可用的断言模块（下表），本文我们选择hamcrest模块为例。</p>
+<table>
+<thead>
+<tr>
+<th>Matcher Library</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Native assert</td>
+<td>Starting point, but not enough information when assert fails.</td>
+</tr>
+<tr>
+<td>hamcrest</td>
+<td>First assertion matcher library, now part of JUnit4. Supports several programming languages: <a href="http://code.google.com/p/hamcrest/" target="_blank" rel="noopener">http://code.google.com/p/hamcrest/</a></td>
+</tr>
+<tr>
+<td>nose.tools</td>
+<td>Part of the nose test framework</td>
+</tr>
+<tr>
+<td>should-dsl</td>
+<td>An interesting small matcher library, <a href="http://www.should-dsl.info/" target="_blank" rel="noopener">http://www.should-dsl.info/</a></td>
+</tr>
+<tr>
+<td>sure</td>
+<td>Provided by the maker of lettuce, github:/gabrielfalcao/sure</td>
+</tr>
+<tr>
+<td>compare</td>
+<td><a href="http://pypi.python.org/pypi/compare" target="_blank" rel="noopener">http://pypi.python.org/pypi/compare</a></td>
+</tr>
+<tr>
+<td>describe</td>
+<td><a href="http://pypi.python.org/pypi/describe" target="_blank" rel="noopener">http://pypi.python.org/pypi/describe</a></td>
+</tr>
+</tbody></table>
+<h3 id="3-2-3-目录结构"><a href="#3-2-3-目录结构" class="headerlink" title="3.2.3 目录结构"></a>3.2.3 目录结构</h3><p>Behave项目的目录格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$PROJECT/</span><br><span class="line">+-- features/                   -- Contains all feature files.</span><br><span class="line">|       +-- steps/</span><br><span class="line">|       |     +-- step_*.py     -- Step definitions for features.</span><br><span class="line">|       +-- environment.py      -- Environment for global setup...</span><br><span class="line">|       +-- tutorial*.feature   -- Feature files.</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-Behave示例"><a href="#3-3-Behave示例" class="headerlink" title="3.3 Behave示例"></a>3.3 Behave示例</h3><p>我们以fibnacci数列计算为例，来了解下behave框架结构及如何使用（网上基本都是以阶乘或WEB页面为例，为显示本文的原创性，我们以fib数列为例）</p>
+<p>首先，比较pythonic的实现fib数列的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">def fibs(num):</span><br><span class="line">    a=b=1</span><br><span class="line">    for i in range(num):</span><br><span class="line">        yield a</span><br><span class="line">        a,b=b,a+b</span><br><span class="line">print list(fibs(10))</span><br></pre></td></tr></table></figure>
+
+<p>使用behave的详细步骤如下：</p>
+<p>1) 新建目录fib，在此目录下新建文件fib.feature，内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Feature:Calc Fib</span><br><span class="line">    In order to introduce Behave</span><br><span class="line">    We calc fib as example</span><br><span class="line"> </span><br><span class="line">  Scenario: Calc fib number</span><br><span class="line">     Given we have the number 10</span><br><span class="line">      when we calc the fib</span><br><span class="line">      then we get the fib number 55</span><br></pre></td></tr></table></figure>
+
+<p>2) 新建目录fib/steps，在此目录下新建文件fib.py，内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">from behave import *</span><br><span class="line">from hamcrest import *</span><br><span class="line"> </span><br><span class="line">def fibs(num):</span><br><span class="line">    a=b=1</span><br><span class="line">    for i in range(num):</span><br><span class="line">        yield a</span><br><span class="line">        a,b=b,a+b</span><br><span class="line"> </span><br><span class="line">@given(&apos;we have the number &#123;number&#125;&apos;)</span><br><span class="line">def have_number(context,number):</span><br><span class="line">    context.fib_number = int(number)</span><br><span class="line"> </span><br><span class="line">@when(&apos;we calc the fib&apos;)</span><br><span class="line">def calc_fib(context):</span><br><span class="line">    context.fib_number=list(fibs(context.fib_number))[-1]</span><br><span class="line"> </span><br><span class="line">@then(&apos;we get the fib number &#123;number&#125;&apos;)</span><br><span class="line">def get_number(context,number):</span><br><span class="line">    context.expected_number = int(number)</span><br><span class="line">    assert_that(context.fib_number, equal_to(context.expected_number),&quot;Calc fib number: %d&quot; %context.fib_number)</span><br></pre></td></tr></table></figure>
+
+<p>这段Python代码主要分为三部分：</p>
+<p>@given部分将输入的number=10转为整形并存入变量中</p>
+<p>@when部分调用fib函数，计算fib数列值</p>
+<p>@then 部分将计算出的fib值与预期值进行断言比较，判断结果是否相等</p>
+<p>3) 切换到fib目录，执行behave命令，结果如下</p>
+<p><img src="/images/behave_result.png" alt="behave_result"></p>
+<p>4) Scenario Outlines场景大纲</p>
+<p>有时相同的一个Scenario需要在很多不同的参数情况下运行，为了避免写过多重复的Scenario ，我们需要使用Scenario Outlines，如fib.feature文件内容可以修改如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Feature:Calc Fib</span><br><span class="line">    In order to introduce Behave</span><br><span class="line">    We calc fib as example</span><br><span class="line"> </span><br><span class="line">  Scenario Outline: Calc fib number</span><br><span class="line">     Given we have the number &lt;number&gt;</span><br><span class="line">      when we calc the fib</span><br><span class="line">      then we get the fib number &lt;fib_number&gt;</span><br><span class="line"> </span><br><span class="line">      Examples: Some Numbers</span><br><span class="line">        | number    | fib_number |</span><br><span class="line">        | 1         | 1          |</span><br><span class="line">        | 2         | 2          |</span><br><span class="line">        | 10        | 55         |</span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下：</p>
+<p><img src="/images/behave_result2.png" alt="behave_result2"></p>
+<p>5) 更多的beahve示例可以参考附录4.4</p>
+<h2 id="4-附录"><a href="#4-附录" class="headerlink" title="4. 附录"></a>4. 附录</h2><p>作者只对Python BDD自动化测试框架进行了简单了解和学习，没有在实际的项目中进行实践，本文只算是一篇BDD自动化测试的入门。</p>
+<p>各位若想更深入了解BDD，可参考如下网页资料：</p>
+<p>4.1 BDD详细介绍：<a href="https://pythonhosted.org/behave/philosophy.html" target="_blank" rel="noopener">https://pythonhosted.org/behave/philosophy.html</a></p>
+<p>4.2 常用测试框架对比：<a href="https://pythonhosted.org/behave/comparison.html" target="_blank" rel="noopener">https://pythonhosted.org/behave/comparison.html</a></p>
+<p>4.3 Hamcrest断言模块：<a href="https://github.com/hamcrest/PyHamcrest" target="_blank" rel="noopener">https://github.com/hamcrest/PyHamcrest</a></p>
+<p>4.4 Behave示例：<a href="http://jenisys.github.io/behave.example/" target="_blank" rel="noopener">http://jenisys.github.io/behave.example/</a></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#BDD" >
+    <span class="tag-code">BDD</span>
+  </a>
+
+  <a href="/tags#TDD" >
+    <span class="tag-code">TDD</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2014/05/06/importerror-no-module-named-mysqldb-jie-jue-fang-fa/">
+        <span class="nav-arrow">← </span>
+        
+          ImportError No module named MySQLdb解决方法
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2014/09/03/python-fastdfs-simple-sample/">
+        
+          Python操作fastdfs简单示例
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-什么是BDD"><span class="toc-nav-text">1. 什么是BDD</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-常用BDD框架介绍"><span class="toc-nav-text">2. 常用BDD框架介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-Behave示例"><span class="toc-nav-text">3. Behave示例</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-1-Behave安装"><span class="toc-nav-text">3.1 Behave安装</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-2-基础知识"><span class="toc-nav-text">3.2 基础知识</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2-1-Gherkin语法"><span class="toc-nav-text">3.2.1 Gherkin语法</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2-2-断言模块"><span class="toc-nav-text">3.2.2 断言模块</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-2-3-目录结构"><span class="toc-nav-text">3.2.3 目录结构</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-3-Behave示例"><span class="toc-nav-text">3.3 Behave示例</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-附录"><span class="toc-nav-text">4. 附录</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://lovesoo.org/2014/08/07/python-bdd-exploration-of-the-automated-testing-framework/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    | All Rights Reserved.
+    <br>
+    <a href="https://beian.miit.gov.cn/">皖ICP备16005546号-1</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

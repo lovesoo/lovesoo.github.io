@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="大爱 | 眼前一切都很美丽">
+  <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
+  
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+  
+  <title>
+    
+      大爱
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>大爱</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2016/03/09/python-and-javascript-json-datetime-format-conversion-method/">Python和JavaScript JSON datetime格式转换方法</a>
+      </h2>
+      <p class="article-date">March 9, 2016</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#datatime" >
+    <span class="tag-code">datatime</span>
+  </a>
+
+  <a href="/tags#hessian" >
+    <span class="tag-code">hessian</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          最近在用Python调用Java Hessian接口，中间涉及到传递的参数中，有datatime格式时，json转换报错的问题。在stackoverflow上找到了解决方法。
+需要在json.dumps方法中添加自定义的 ‘default’参数，代码如下：
+12345678date_hand ...
+        
+      </div>
+      <a class="more" href="/2016/03/09/python-and-javascript-json-datetime-format-conversion-method/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2016/01/14/python-dict-sorted-by-key-or-value/">Python dict按key或value值排序方法</a>
+      </h2>
+      <p class="article-date">January 14, 2016</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#dict" >
+    <span class="tag-code">dict</span>
+  </a>
+
+  <a href="/tags#排序" >
+    <span class="tag-code">排序</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          本文主要介绍python2.7中dict字典按key或value排序的方法。
+
+测试dict字典内容如下：
+
+1test_dict=&#123;&apos;zhangsan&apos;:20,&apos;lisi&apos;:30,&apos;wangerma&apos;:40&#125;
+ ...
+        
+      </div>
+      <a class="more" href="/2016/01/14/python-dict-sorted-by-key-or-value/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2015/12/08/python-implements-rsa-encryption-and-decryption-method/">Python实现RSA加密解密方法</a>
+      </h2>
+      <p class="article-date">December 8, 2015</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#M2Crypto" >
+    <span class="tag-code">M2Crypto</span>
+  </a>
+
+  <a href="/tags#rsa" >
+    <span class="tag-code">rsa</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          本文主要介绍在Windows+python2.7环境下实现RSA加密解密。
+1. 使用M2Crypto1) 安装M2Crypto
+M2Crypto库本身在windows下安装比较麻烦，但这里我们使用大神打包好的安装包^^。
+百度网盘地址：http://pan.baidu.com/s/1qXn ...
+        
+      </div>
+      <a class="more" href="/2015/12/08/python-implements-rsa-encryption-and-decryption-method/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2015/04/14/python-codec-details-encode-and-decode/">Python编解码详解encode与decode</a>
+      </h2>
+      <p class="article-date">April 14, 2015</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#encode" >
+    <span class="tag-code">encode</span>
+  </a>
+
+  <a href="/tags#decode" >
+    <span class="tag-code">decode</span>
+  </a>
+
+  <a href="/tags#编码" >
+    <span class="tag-code">编码</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          在Python内部，字符串使用unicode编码，因此，在做编码转换时，通常需要以unicode作为中间编码，即先将其他编码的字符串解码（decode）成unicode，再从unicode编码（encode）成另一种编码。
+1) decode的作用是将其他编码的字符串转换成unicode编码 ...
+        
+      </div>
+      <a class="more" href="/2015/04/14/python-codec-details-encode-and-decode/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2014/09/16/pythonic-interpretation-and-example/">Pythonic释义及示例</a>
+      </h2>
+      <p class="article-date">September 16, 2014</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#Pythonic" >
+    <span class="tag-code">Pythonic</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          1.什么是Pythonic简单说来，Pythonic就是简单、优美、清晰，不要过分强调技巧，尽量使用 Python 已经提供的功能以及符合Python的思维方式。
+执行 import this 可以看到: 
+123456789101112131415161718192021222324$im ...
+        
+      </div>
+      <a class="more" href="/2014/09/16/pythonic-interpretation-and-example/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2014/09/03/python-fastdfs-simple-sample/">Python操作fastdfs简单示例</a>
+      </h2>
+      <p class="article-date">September 3, 2014</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#fastdfs" >
+    <span class="tag-code">fastdfs</span>
+  </a>
+
+  <a href="/tags#删除" >
+    <span class="tag-code">删除</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          本文主要介绍在Python 2.7上通过fastdfs client进行文件上传、下载、删除等操作方法。
+
+下载fastdfs client的python版本，官方地址：https://fastdfs.googlecode.com/files/fdfs_client-py-1.2.6.tar ...
+        
+      </div>
+      <a class="more" href="/2014/09/03/python-fastdfs-simple-sample/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2014/08/07/python-bdd-exploration-of-the-automated-testing-framework/">Python BDD自动化测试框架初探</a>
+      </h2>
+      <p class="article-date">August 7, 2014</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#BDD" >
+    <span class="tag-code">BDD</span>
+  </a>
+
+  <a href="/tags#TDD" >
+    <span class="tag-code">TDD</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          1. 什么是BDDBDD全称Behavior Driven Development，译作”行为驱动开发”，是基于TDD (Test Driven Development 测试驱动开发)的软件开发过程和方法。 
+BDD可以让项目成员（甚至是不懂编程的）使用自然语言来描述系统功能和场景，从而根据 ...
+        
+      </div>
+      <a class="more" href="/2014/08/07/python-bdd-exploration-of-the-automated-testing-framework/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2014/05/06/importerror-no-module-named-mysqldb-jie-jue-fang-fa/">ImportError No module named MySQLdb解决方法</a>
+      </h2>
+      <p class="article-date">May 6, 2014</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#CentOS" >
+    <span class="tag-code">CentOS</span>
+  </a>
+
+  <a href="/tags#ImportError" >
+    <span class="tag-code">ImportError</span>
+  </a>
+
+  <a href="/tags#MySQLdb" >
+    <span class="tag-code">MySQLdb</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          最近在CentOS上执行需要操作MySQL的Python脚本时，报错ImportError No module named MySQLdb。
+本以为缺模块只是很简单的事情，没想到还是花了不少时间，总结下解决的方法如下：
+系统：CentOS 6.3
+Python版本：2.7.6 
+1. 安装s ...
+        
+      </div>
+      <a class="more" href="/2014/05/06/importerror-no-module-named-mysqldb-jie-jue-fang-fa/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2014/04/30/python-script-error-attributeerror-module-object-has-no-attribute-solve-method/">Python脚本报错AttributeError: 'module' object has no attribute'xxx'解决方法</a>
+      </h2>
+      <p class="article-date">April 30, 2014</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#AttributeError" >
+    <span class="tag-code">AttributeError</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          最近在编写Python脚本过程中遇到一个问题比较奇怪：Python脚本完全正常没问题，但执行总报错”AttributeError: ‘module’ object has no attribute ‘xxx’”。这其实是.pyc文件存在问题。
+问题定位：
+查看import库的源文件，发现源文 ...
+        
+      </div>
+      <a class="more" href="/2014/04/30/python-script-error-attributeerror-module-object-has-no-attribute-solve-method/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2014/04/28/python-args-kwargs/">Python函数可变参数args及kwargs释义</a>
+      </h2>
+      <p class="article-date">April 28, 2014</p>
+      
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#args" >
+    <span class="tag-code">args</span>
+  </a>
+
+  <a href="/tags#kwargs" >
+    <span class="tag-code">kwargs</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          初学Python看到代码中类似func(*args, **kwargs)这样的定义时，经常感到一头雾水。
+下面通过一个简单的例子来解释Python函数可变参数args及kwargs的意思：
+1) *args表示任何多个无名参数，它是一个tuple
+2) **kwargs表示关键字参数，它是一 ...
+        
+      </div>
+      <a class="more" href="/2014/04/28/python-args-kwargs/">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/2/"><span class="page-arrow">← </span>Prev</a>
+  
+  
+    <a href="/page/4/">Next<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    | All Rights Reserved.
+    <br>
+    <a href="https://beian.miit.gov.cn/">皖ICP备16005546号-1</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

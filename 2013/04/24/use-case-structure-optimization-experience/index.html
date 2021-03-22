@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="大爱 | 眼前一切都很美丽">
+  <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
+  
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+  
+  <title>
+    
+      用例结构优化心得 | 大爱
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>大爱</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>用例结构优化心得</h2>
+  <p class="post-date">2013-04-24</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>在大型项目的测试中通常都伴随着大量的测试用例。如何优化用例以提高编写的效率，如何组织用例以提高执行的效率经常困扰着我们；因此总结了一些在编写用例时的心得。</p>
+<h2 id="1-用例框架的优化"><a href="#1-用例框架的优化" class="headerlink" title="1. 用例框架的优化"></a>1. 用例框架的优化</h2><p>一份好的用例设计需要有一个好的用例框架的支撑，因此用例结构优化的第一步就是优化用例框架。</p>
+<p>一般我们的用例框架是先以测试方法作为基础，第一层是测试类型，考虑系统所需要测试的测试类型。</p>
+<p>如果用例偏重于场景法的话，那么第二层是场景考虑，此时暂不要去思考如何实现；如果用例偏重于模块测试的话，那么第二层是你划分的各个模块；如果用例设计偏重于逻辑路径的话，那么第二层是你每个路径主要实现的功能。</p>
+<p>第三层是功能点，以场景为导向的考虑的是实现这个场景需要哪些功能模块支撑，每个模块做什么；以模块为导向的则考虑每个模块中主要实现的功能点；以路径为导向的则是考虑路径中的功能点的实现。</p>
+<h2 id="2-组件机制与模块功能的分离"><a href="#2-组件机制与模块功能的分离" class="headerlink" title="2. 组件机制与模块功能的分离"></a>2. 组件机制与模块功能的分离</h2><p>不管是什么组件，总有它自己使用的机制，与它实现的功能点没有任何关系。最常见的是调度机制以及最基本的配置读取的机制。这些都可以剥离出来单独测一次就够了，不需要在每个模块中测一次，重复编写用例。</p>
+<h2 id="3-提取公共用例"><a href="#3-提取公共用例" class="headerlink" title="3. 提取公共用例"></a>3. 提取公共用例</h2><p>在这个方法中，什么样的用例可以作为公共用例是最关键的。一般情况下可以作为公共用例的有两种类型：</p>
+<p>第一种是测试方法在所有项目中通用，一般类似于翻页、导出、上传这些；测试方法统一，会因为设计的不同在每个项目中略有不同，但是在一个项目的各个地方的功能实现基本是一致的。此时一般会将用例设计写为一份，作为公共用例设计，但是测试用例会分散在各个模块中有多份以方便执行。</p>
+<p>第二种是在一个项目中多个组件共同使用的方法，此时会将用例设计与用例都单独作为一份进行编写，执行时也只需要执行一遍就可以，不需要在每个组件中再单独都执行。</p>
+<p>另外其实还会有一种比较不常见的公共用例，例如在报表系统中的ETL过程，虽然ETL过程是对数据进行抽取、转换、加载，是对不同的数据源进行处理，但实际在流程处理上是一致的，只会在需要进行数据进行有条件的转换时不一致。因此整一套流程实际就是一份公共用例。</p>
+<p>第一种公共用例比较好分辨，第二种的话需要对逻辑设计有一定的认识，并且需要从开发那边获取信息，比如说开发把哪些部分封装成了公共调用方法；此时并不一定是一开始就规划了这部分作为公共用例，而是在写用例设计过程中发现大部分设计几乎相同，才会考虑开发是否会把此部分作为公共代码，能否作为公共代码以及与开发沟通他们准备如何实现。</p>
+<h2 id="4-条件细分，正向组合"><a href="#4-条件细分，正向组合" class="headerlink" title="4. 条件细分，正向组合"></a>4. 条件细分，正向组合</h2><p>如果涉及到的用例是由很多条件组合控制的话，尽量将用例设计中的各个条件细分到最小的粒度，而不是使用组合的方式展现。</p>
+<p>当条件细分到最低粒度的时候很多的用例设计就有了共同的地方，此时就会出现很多可复用的测试用例设计，这样能够减少用例设计的工作量。</p>
+<p>然后再在细分到最小粒度的用例设计基础上进行一定的组合优化，因为有些正向数据实际是由多个最小粒度的条件组合而成，不需要单独进行验证，所以组合后能够减少用例执行的时间。</p>
+<h2 id="5-场景分析剔除"><a href="#5-场景分析剔除" class="headerlink" title="5. 场景分析剔除"></a>5. 场景分析剔除</h2><p>对于状态控制很多的用例，需要进行一定的场景分析，对一些不存在的场景进行用例的删除。因为即使开发没有做对应的控制，要求开发修改的可能性也非常小，并且此类的修改没有意义。</p>
+<h2 id="6-用例设计粒度的控制"><a href="#6-用例设计粒度的控制" class="headerlink" title="6. 用例设计粒度的控制"></a>6. 用例设计粒度的控制</h2><p>如果测试要求粒度特别细的状态下，用例量几乎是翻倍的。这是可以从路径覆盖的角度上分析，实际会发现有很多重复检查某一部分的用例量。此时需要我们做的是测试用例粒度的把控。在最正常的路径中做详细的测试，在其他路径中做粒度略粗的测试，一定要特别注意有没有特殊场景不能做粒度的放粗。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#测试用例" >
+    <span class="tag-code">测试用例</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2012/07/11/web-page-testing-methods-summary/">
+        <span class="nav-arrow">← </span>
+        
+          Web页面测试方案总结
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2013/08/28/common-ntp-server-address-and-ip/">
+        
+          常用NTP服务器地址及IP
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-用例框架的优化"><span class="toc-nav-text">1. 用例框架的优化</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-组件机制与模块功能的分离"><span class="toc-nav-text">2. 组件机制与模块功能的分离</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-提取公共用例"><span class="toc-nav-text">3. 提取公共用例</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-条件细分，正向组合"><span class="toc-nav-text">4. 条件细分，正向组合</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#5-场景分析剔除"><span class="toc-nav-text">5. 场景分析剔除</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#6-用例设计粒度的控制"><span class="toc-nav-text">6. 用例设计粒度的控制</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://lovesoo.org/2013/04/24/use-case-structure-optimization-experience/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    | All Rights Reserved.
+    <br>
+    <a href="https://beian.miit.gov.cn/">皖ICP备16005546号-1</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="大爱 | 眼前一切都很美丽">
+  <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
+  
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+  
+  <title>
+    
+      Nose框架编写测试用例方法 | 大爱
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>大爱</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Nose框架编写测试用例方法</h2>
+  <p class="post-date">2017-09-22</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="0-概述"><a href="#0-概述" class="headerlink" title="0. 概述"></a>0. 概述</h2><p>nose会自动识别源文件，目录或包中的测试用例。</p>
+<p>任何匹配testMatch正则表达式（默认为(?:^|[\b_.-])[Tt]est，在一个单词的边界处或者紧跟-或_处有test或Test）的函数或类，并且所在的模块也匹配该表达式，都会被识别为测试并执行。</p>
+<p>出于对unittest兼容性的考虑，nose也支持继承unittest.TestCase的子类测试用例。与py.test类似，nose按照测试集在模块文件中出现的顺序执行功能测试。继承于TestCase的测试集和测试类按照字母表顺序执行。</p>
+<h2 id="1-Fixtures"><a href="#1-Fixtures" class="headerlink" title="1. Fixtures"></a>1. Fixtures</h2><p>nose支持包，模块，类和函数例级别的Fixtures（setup和teardown方法，用以自动测试的初始化或者清理工作）</p>
+<h2 id="2-Test-packages"><a href="#2-Test-packages" class="headerlink" title="2. Test packages"></a>2. Test packages</h2><p>nose允许测试例以包的方式分组。</p>
+<p>因此，也需要包级别的setup；比如，如果你想要创建一个数据库测试，你可能会想要在包setup时创建数据库，当每个测试结束之后运行包teardown时，销毁它。而不是在每一个测试模块或者测试例中创建和销毁数据库。</p>
+<p>想要创建包级别的setup和teardown函数，你需要在测试包的_ init_.py 函数中定义setup和teardown函数。setup函数可以被命名为setup，setup_package，setUp，或者setUpPackage；teardown可以被命名为teardown,teardown_package, tearDown, 或者tearDownPackage。一旦第一个测试模块从测试包中被加载后，一个包中的测试例就开始执行。</p>
+<h2 id="3-Test-modules"><a href="#3-Test-modules" class="headerlink" title="3. Test modules"></a>3. Test modules</h2><p>Test modules是一个匹配testMatch的python模块。</p>
+<p>测试模块提供模块级别的setup和teardown。可以定义setup, setup_module, setUp, setUpModule用于setup，teardown, teardown_module, tearDownModule用于teardown。一旦一个模块中所有的用例被收集完后，模块中的测试就开始执行。</p>
+<h2 id="4-Test-classes"><a href="#4-Test-classes" class="headerlink" title="4. Test classes"></a>4. Test classes</h2><p>Test classes是模块中定义的匹配testMatch或者继承unittest.TestCase的类。</p>
+<p>所有的测试类以相同方式运行：通过testMatch匹配的找到类中的方法，并以全新的测试类实例运行测试方法。</p>
+<p>像继承于unittest.TestCase的子类一样，测试类可以定义setUp tearDown函数，它们将会分别在每一个测试方法之前和之后运行。类级别setup fixture可以被命名为setup_class, setupClass, setUpClass, setupAll, setUpAll；teardown被命名为teardown_class, teardownClass, tearDownClass, teardownAll, tearDownAll, 类级别setup和teardown必须是类方法。</p>
+<h2 id="5-Test-functions"><a href="#5-Test-functions" class="headerlink" title="5. Test functions"></a>5. Test functions</h2><p>模块中任何匹配TestMatch的方法都将会被FunctionTestCase装饰，然后以用例的方式运行。最简单的失败和成功的用例如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def test():</span><br><span class="line">    assert False</span><br><span class="line">def test():</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+
+<p>测试函数也可定义setup和teardown属性，它们将会在测试函数开始和结束的时候运行。还可以使用@with_setup装饰器，该方式尤其适用于在相同的模块中的许多方法需要相同的setup操作。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def setup_func():</span><br><span class="line">    &quot;set up test fixtures&quot;</span><br><span class="line"> </span><br><span class="line">def teardown_func():</span><br><span class="line">    &quot;tear down test fixtures&quot;</span><br><span class="line"> </span><br><span class="line">@with_setup(setup_func, teardown_func)</span><br><span class="line">def test():</span><br><span class="line">    &quot;test ...&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-Test-generators"><a href="#6-Test-generators" class="headerlink" title="6. Test generators"></a>6. Test generators</h2><p>nose支持生成器测试函数和测试方法。如下： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def test_evens():</span><br><span class="line">    for i in range(0, 5):</span><br><span class="line">        yield check_even, i, i*3</span><br><span class="line"> </span><br><span class="line">def check_even(n, nn):</span><br><span class="line">    assert n % 2 == 0 or nn % 2 == 0</span><br></pre></td></tr></table></figure>
+
+<p>上述代码执行五次测试。nose生成迭代器，创建一个函数测试用例包，包装每一个yield tuple。</p>
+<p>Test generators必须yield tuples,且第一个元素必须是可调用的函数，其他的元素作为参数传递。</p>
+<p>Test generators测试用例默认名称是函数或方法的名字+参数。如果你想要显示不同的名称，可以设置yield函数的description属性。</p>
+<p>Test generators中定义的setup和teardown函数仅仅会被执行一次。若想对于每一个yield的用例都执行，可将setup和teardown属性设置到被yield的函数中，或者yield一个带有setup和teardown属性的可调用对象的实例。</p>
+<p>比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@with_setup(setup_func, teardown_func)</span><br><span class="line">def test_generator():</span><br><span class="line">    # ...</span><br><span class="line">    yield func, arg, arg # ...</span><br></pre></td></tr></table></figure>
+
+<p>上面的例子中，setup和teardown只会被执行一次。与此相比：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def test_generator():</span><br><span class="line">    # ...</span><br><span class="line">    yield func, arg, arg # ...</span><br><span class="line"> </span><br><span class="line">@with_setup(setup_func, teardown_func)</span><br><span class="line">def func(arg):</span><br><span class="line">    assert something_about(arg)</span><br></pre></td></tr></table></figure>
+
+<p>这个例子中，setup和teardown函数将会在每一次yield中执行。</p>
+<p>对于生成器方法，class中的setUp和tearDown方法将会在每一个生成的测试用例之前或者之后运行。setUp和tearDown方法并不会在生成器方法本身 之前运行，这就导致在第一个用例运行之前setUp运行两次，之间却没有tearDown运行。</p>
+<p>请注意，unittest.TestCase子类不支持Test generators方法。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#nose" >
+    <span class="tag-code">nose</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2017/09/20/test-automation-framework-taffy/">
+        <span class="nav-arrow">← </span>
+        
+          自动化测试框架Taffy
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2017/09/29/locust-performance-testing-framework-from-entry-to-mastery/">
+        
+          Locust性能测试框架，从入门到精通
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#0-概述"><span class="toc-nav-text">0. 概述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Fixtures"><span class="toc-nav-text">1. Fixtures</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Test-packages"><span class="toc-nav-text">2. Test packages</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-Test-modules"><span class="toc-nav-text">3. Test modules</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-Test-classes"><span class="toc-nav-text">4. Test classes</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#5-Test-functions"><span class="toc-nav-text">5. Test functions</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#6-Test-generators"><span class="toc-nav-text">6. Test generators</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://lovesoo.org/2017/09/22/nose-writing-tests/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    | All Rights Reserved.
+    <br>
+    <a href="https://beian.miit.gov.cn/">皖ICP备16005546号-1</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

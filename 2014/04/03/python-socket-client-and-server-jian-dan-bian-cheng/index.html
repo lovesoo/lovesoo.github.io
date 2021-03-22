@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="大爱 | 眼前一切都很美丽">
+  <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
+  
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+  
+  <title>
+    
+      Python Socket Client及Server简单编程 | 大爱
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>大爱</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Python Socket Client及Server简单编程</h2>
+  <p class="post-date">2014-04-03</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>本文主要介绍使用Python语言编写Socket协议Server及Client的简单实现方法。</p>
+<h2 id="1-Python-Socket编程简介"><a href="#1-Python-Socket编程简介" class="headerlink" title="1. Python Socket编程简介"></a>1. Python Socket编程简介</h2><p>Socket通常也称作”套接字”，应用程序通常通过”套接字”向网络发出请求或者应答网络请求。</p>
+<p>三种流行的套接字类型是:stream,datagram和raw。stream和datagram套接字可以直接与TCP协议进行接口，而raw套接字则接口到IP协议。</p>
+<p>Python Socket模块提供了对低层BSD套接字样式网络的访问，使用该模块建立具有TCP和流套接字的简单服务器。详见<a href="https://docs.python.org/2/library/socket.html" target="_blank" rel="noopener">https://docs.python.org/2/library/socket.html</a></p>
+<h2 id="2-Python-Socket-Server"><a href="#2-Python-Socket-Server" class="headerlink" title="2. Python Socket Server"></a>2. Python Socket Server</h2><p>实现代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">from socket import *</span><br><span class="line"> </span><br><span class="line">def SocketServer():</span><br><span class="line">    try:</span><br><span class="line">        Colon = ServerUrl.find(&apos;:&apos;)</span><br><span class="line">        IP = ServerUrl[0:Colon]</span><br><span class="line">        Port = int(ServerUrl[Colon+1:])</span><br><span class="line"> </span><br><span class="line">        #建立socket对象</span><br><span class="line">        print &apos;Server start:%s&apos;%ServerUrl</span><br><span class="line">        sockobj = socket(AF_INET, SOCK_STREAM)</span><br><span class="line">        sockobj.setsockopt(SOL_SOCKET,SO_REUSEADDR, 1)</span><br><span class="line"> </span><br><span class="line">        #绑定IP端口号</span><br><span class="line">        sockobj.bind((IP, Port))</span><br><span class="line">        #监听，允许5个连结</span><br><span class="line">        sockobj.listen(5)</span><br><span class="line"> </span><br><span class="line">        #直到进程结束时才结束循环</span><br><span class="line">        while True:</span><br><span class="line">            #等待client连结</span><br><span class="line">            connection, address = sockobj.accept( )</span><br><span class="line">            print &apos;Server connected by client:&apos;, address</span><br><span class="line">            while True:</span><br><span class="line">                #读取Client消息包内容</span><br><span class="line">                data = connection.recv(1024)</span><br><span class="line">                #如果没有data，跳出循环</span><br><span class="line">                if not data: break</span><br><span class="line">                #发送回复至Client</span><br><span class="line">                RES=&apos;200 OK&apos;</span><br><span class="line">                connection.send(RES)</span><br><span class="line">                print &apos;Receive MSG:%s&apos;%data.strip()</span><br><span class="line">                print &apos;Send RES:%s\r\n&apos;%RES</span><br><span class="line">            #关闭Socket</span><br><span class="line">            connection.close( )</span><br><span class="line"> </span><br><span class="line">    except Exception,ex:</span><br><span class="line">        print ex</span><br><span class="line"> </span><br><span class="line">ServerUrl = &quot;192.168.16.15:9999&quot;</span><br><span class="line">SocketServer()</span><br></pre></td></tr></table></figure>
+
+<p>注：需要注意的是Socket对象建立后需要加上sockobj.setsockopt(SOL_SOCKET,SO_REUSEADDR, 1)，否则会出现Python脚本重启后Socket Server端口不会立刻关闭，出现端口占用错误。</p>
+<h2 id="3-Python-Socket-Client"><a href="#3-Python-Socket-Client" class="headerlink" title="3. Python Socket Client"></a>3. Python Socket Client</h2><p>实现代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">from socket import *</span><br><span class="line"> </span><br><span class="line">def SocketClient():</span><br><span class="line">    try:</span><br><span class="line">        #建立socket对象</span><br><span class="line">        s=socket(AF_INET,SOCK_STREAM,0)</span><br><span class="line"> </span><br><span class="line">        Colon = ServerUrl.find(&apos;:&apos;)</span><br><span class="line">        IP = ServerUrl[0:Colon]</span><br><span class="line">        Port = ServerUrl[Colon+1:]</span><br><span class="line"> </span><br><span class="line">        #建立连接</span><br><span class="line">        s.connect((IP,int(Port)))</span><br><span class="line">        sdata=&apos;GET /Test HTTP/1.1\r\n\</span><br><span class="line">Host: %s\r\n\r\n&apos;%ServerUrl</span><br><span class="line"> </span><br><span class="line">        print &quot;Request:\r\n%s\r\n&quot;%sdata</span><br><span class="line">        s.send(sdata)</span><br><span class="line">        sresult=s.recv(1024)</span><br><span class="line"> </span><br><span class="line">        print &quot;Response:\r\n%s\r\n&quot; %sresult</span><br><span class="line">        #关闭Socket</span><br><span class="line">        s.close()</span><br><span class="line">    except Exception,ex:</span><br><span class="line">        print ex</span><br><span class="line"> </span><br><span class="line">ServerUrl = &quot;192.168.16.15:9999&quot;</span><br><span class="line">SocketClient()</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-运行结果"><a href="#3-运行结果" class="headerlink" title="3. 运行结果"></a>3. 运行结果</h2><p>Socket Server端运行截图如下：</p>
+<p><img src="/images/socket_server.png" alt="upload successful"></p>
+<p>Socket Client端运行截图如下：</p>
+<p><img src="/images/socket_client.png" alt="upload successful"></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#socket" >
+    <span class="tag-code">socket</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2013/08/28/common-ntp-server-address-and-ip/">
+        <span class="nav-arrow">← </span>
+        
+          常用NTP服务器地址及IP
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2014/04/21/python-fabric-yuan-cheng-zi-dong-bu-shu-jian-jie/">
+        
+          Python fabric远程自动部署简介
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Python-Socket编程简介"><span class="toc-nav-text">1. Python Socket编程简介</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Python-Socket-Server"><span class="toc-nav-text">2. Python Socket Server</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-Python-Socket-Client"><span class="toc-nav-text">3. Python Socket Client</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-运行结果"><span class="toc-nav-text">3. 运行结果</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://lovesoo.org/2014/04/03/python-socket-client-and-server-jian-dan-bian-cheng/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    | All Rights Reserved.
+    <br>
+    <a href="https://beian.miit.gov.cn/">皖ICP备16005546号-1</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="大爱 | 眼前一切都很美丽">
+  <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
+  
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+  
+  <title>
+    
+      Taffy集成Locust性能测试框架使用说明 | 大爱
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>大爱</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Taffy集成Locust性能测试框架使用说明</h2>
+  <p class="post-date">2019-01-16</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h2><p>Locust是使用Python语言编写实现的开源性能测试工具，简洁、轻量、高效，并发机制基于gevent协程，可以实现单机模拟生成较高的并发压力。 </p>
+<p>官网：<a href="https://locust.io/" target="_blank" rel="noopener">https://locust.io/</a> </p>
+<p>主要特点如下： </p>
+<p>使用普通的Python脚本用户测试场景 </p>
+<p>分布式和可扩展，支持成千上万的用户 </p>
+<p>基于Web的用户界面，用户可以实时监控脚本运行状态 </p>
+<p>几乎可以测试任何系统，除了web http接口外，还可自定义clients测试其他类型系统</p>
+<h2 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install locustio</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、使用"><a href="#3、使用" class="headerlink" title="3、使用"></a>3、使用</h2><p>taffy集成locust的基本流程如下：</p>
+<h3 id="3-1-配置-config-locust-yml"><a href="#3-1-配置-config-locust-yml" class="headerlink" title="3.1 配置 config/locust.yml"></a>3.1 配置 config/locust.yml</h3><p>YAML是对人友好的数据序列化标准，可适用所有的编程语言。 </p>
+<p>与Json数据在线转换网站：<a href="https://www.json2yaml.com/" target="_blank" rel="noopener">https://www.json2yaml.com/</a> </p>
+<p>可以使用pip安装PyYAML： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install PyYAML</span><br></pre></td></tr></table></figure>
+
+<p>locust.yml主要配置项如下： </p>
+<p>1) mode 运行模式 </p>
+<p>为0表示单例模式</p>
+<p>为1表示分布式，使用可选参数 slaves_num, master_port</p>
+<p>2) no-web 是否以no-web模式运行 </p>
+<p>为0表示普通模式，使用可选参数port，运行后需要先手工在浏览器打开locust 页面，填入并发用户数及每秒请求数后再执行测试 </p>
+<p>为1表示no-web模式，使用可选参数csv,c,r,run_time </p>
+<p>3) min_wait及max_wait，可选参数，表示任务执行之间最小及最大等待时间（默认值分别为100/1000，单位ms） </p>
+<p>4) task为测试任务配置：必填参数file,class,function分别代表测试文件，类及方法；可选参数weight（默认值1） </p>
+<p>特别注意：使用nose框架Test generators方法编写的Tests,转换为locustfile后Locust无法正常执行性能测试（运行结果为空），所以这里填写的class/function暂不支持Test generators</p>
+<p>locust.yml示例如下： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">#mode 运行模式（默认为0） 0:单例模式; 1:分布式</span><br><span class="line">#no-web 是否以no-web模式运行（默认为0） 0:否; 1:是</span><br><span class="line">#min_wait/max_wait 任务执行之间的最小、最大等待时间（默认为10/1000ms）</span><br><span class="line"></span><br><span class="line">#只有mode为1时，params中如下参数才有效：slaves_num,master_port</span><br><span class="line">  #slaves_num slaves数目（默认为当前机器cpu核数）</span><br><span class="line">  #master_port master绑定端口号（默认5557）</span><br><span class="line"></span><br><span class="line">#只有no-web为0时，params中如下参数才有效：port</span><br><span class="line">  #port web端口号，默认8089</span><br><span class="line"></span><br><span class="line">#只有no-web为1时，params中如下参数才有效：csv,c,r,run_time</span><br><span class="line">  #csv 运行结果文件名</span><br><span class="line">  #c 并发用户数</span><br><span class="line">  #r 每秒请求数</span><br><span class="line">  #run_time 运行时间</span><br><span class="line">mode: 1</span><br><span class="line">no_web: 0</span><br><span class="line">min_wait: 10</span><br><span class="line">max_wait: 100</span><br><span class="line">params:</span><br><span class="line">  slaves_num: 4</span><br><span class="line">  master_port: 5557</span><br><span class="line">  port: 8089</span><br><span class="line">  csv: locust</span><br><span class="line">  c: 10</span><br><span class="line">  r: 10</span><br><span class="line">  run_time: 5m</span><br><span class="line">#task 性能测试任务</span><br><span class="line">task:</span><br><span class="line">  #file 测试文件名，支持相对路径如test_xxx/text_xxx_file.py</span><br><span class="line">  #class 测试类</span><br><span class="line">  #function 测试方法</span><br><span class="line">  #weight 任务选择的概率权重（默认1）</span><br><span class="line">- file: test_demo.py</span><br><span class="line">  class: test_demo</span><br><span class="line">  function: test_httpbin_get</span><br><span class="line">  weight: 2</span><br><span class="line">- file: test_demo.py</span><br><span class="line">  class: test_demo</span><br><span class="line">  function: test_httpbin_post</span><br><span class="line">  weight: 1</span><br><span class="line">- file: test_demo.py</span><br><span class="line">  class: test_demo</span><br><span class="line">  function: test_webservice</span><br><span class="line">  weight: 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-运行locust-py"><a href="#3-2-运行locust-py" class="headerlink" title="3.2 运行locust.py"></a>3.2 运行locust.py</h3><p>根据配置文件locust.yml，读取模板生成locustfile文件，然后运行locust执行性能测试，命令如下： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd Taffy\Tests</span><br><span class="line">$ python test_locust.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-与jmeter性能测试结果对比"><a href="#3-3-与jmeter性能测试结果对比" class="headerlink" title="3.3 与jmeter性能测试结果对比"></a>3.3 与jmeter性能测试结果对比</h3><p>针对百度首页搜索接口，分别使用jmeter及locust进行了10路并发性能测试（时间为5min）</p>
+<p>1) jmeter及locust总体请求数分别为1173及1248<br>2) 平均响应时间分别为2.539s及2.390s，每秒请求数分别为3.9及4.2。 </p>
+<p>可以得出结论：<strong>locust与jmeter性能基本一致。</strong></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#locust" >
+    <span class="tag-code">locust</span>
+  </a>
+
+  <a href="/tags#性能测试" >
+    <span class="tag-code">性能测试</span>
+  </a>
+
+  <a href="/tags#Taffy" >
+    <span class="tag-code">Taffy</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/02/10/python-flask-wechat-development/">
+        <span class="nav-arrow">← </span>
+        
+          细数Python Flask微信公众号开发中遇到的那些坑
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2020/03/13/running-a-successful-test-career/">
+        
+          James Whittaker：经营成功的测试职业生涯
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1、简介"><span class="toc-nav-text">1、简介</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2、安装"><span class="toc-nav-text">2、安装</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3、使用"><span class="toc-nav-text">3、使用</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-1-配置-config-locust-yml"><span class="toc-nav-text">3.1 配置 config/locust.yml</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-2-运行locust-py"><span class="toc-nav-text">3.2 运行locust.py</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-3-与jmeter性能测试结果对比"><span class="toc-nav-text">3.3 与jmeter性能测试结果对比</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://lovesoo.org/2019/01/16/taffy-using-locust-performance-testing/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    | All Rights Reserved.
+    <br>
+    <a href="https://beian.miit.gov.cn/">皖ICP备16005546号-1</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

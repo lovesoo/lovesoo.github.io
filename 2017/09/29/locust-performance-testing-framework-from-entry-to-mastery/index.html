@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="大爱 | 眼前一切都很美丽">
+  <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
+  
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+  
+  <title>
+    
+      Locust性能测试框架，从入门到精通 | 大爱
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>大爱</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Locust性能测试框架，从入门到精通</h2>
+  <p class="post-date">2017-09-29</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="1、Locust简介"><a href="#1、Locust简介" class="headerlink" title="1、Locust简介"></a>1、Locust简介</h2><p>Locust是使用Python语言编写实现的开源性能测试工具，简洁、轻量、高效，并发机制基于gevent协程，可以实现单机模拟生成较高的并发压力。 </p>
+<p>官网：<a href="https://locust.io/" target="_blank" rel="noopener">https://locust.io/</a> </p>
+<p>主要特点如下： </p>
+<p>1) 使用普通的Python脚本用户测试场景 </p>
+<p>2) 分布式和可扩展，支持成千上万的用户</p>
+<p>3) 基于Web的用户界面，用户可以实时监控脚本运行状态 </p>
+<p>4) 几乎可以测试任何系统，除了web http接口外，还可自定义clients测试其他类型系统</p>
+<h2 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h2><p>使用pip或easy_install，可以方便安装Locust </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install locustio</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，可以在shell或cmd中运行locust命令，如查看可用的选项：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locust --help</span><br></pre></td></tr></table></figure>
+
+<p>Locust主要由下面的几个库构成： </p>
+<p>1) gevent </p>
+<p>gevent是一种基于协程的Python网络库，它用到Greenlet提供的，封装了libevent事件循环的高层同步API。 </p>
+<p>2) flask </p>
+<p>Python编写的轻量级Web应用框架。 </p>
+<p>3) requests </p>
+<p>Python Http库 </p>
+<p>4) msgpack-python </p>
+<p>MessagePack是一种快速、紧凑的二进制序列化格式，适用于类似JSON的数据格式。msgpack-python主要提供MessagePack数据序列化及反序列化的方法。 </p>
+<p>5) six </p>
+<p>Python2和3兼容库，用来封装Python2和Python3之间的差异性 </p>
+<p>6) pyzmq </p>
+<p>pyzmq是zeromq(一种通信队列)的Python绑定,主要用来实现Locust的分布式模式运行</p>
+<h2 id="3、快速入门"><a href="#3、快速入门" class="headerlink" title="3、快速入门"></a>3、快速入门</h2><h3 id="3-1-示例"><a href="#3-1-示例" class="headerlink" title="3.1 示例"></a>3.1 示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#coding:utf-8</span><br><span class="line">from locust import HttpLocust, TaskSet, task</span><br><span class="line"> </span><br><span class="line">class UserBehavior(TaskSet):</span><br><span class="line">    def on_start(self):</span><br><span class="line">        &quot;&quot;&quot; on_start is called when a Locust start before any task is scheduled &quot;&quot;&quot;</span><br><span class="line">        self.login()</span><br><span class="line"> </span><br><span class="line">    def login(self):</span><br><span class="line">        self.client.post(&quot;/login&quot;, &#123;&quot;username&quot;:&quot;ellen_key&quot;, &quot;password&quot;:&quot;education&quot;&#125;)</span><br><span class="line"> </span><br><span class="line">    @task(2)</span><br><span class="line">    def index(self):</span><br><span class="line">        self.client.get(&quot;/&quot;)</span><br><span class="line"> </span><br><span class="line">    @task(1)</span><br><span class="line">    def profile(self):</span><br><span class="line">        self.client.get(&quot;/profile&quot;)</span><br><span class="line"> </span><br><span class="line">class WebsiteUser(HttpLocust):</span><br><span class="line">    task_set = UserBehavior</span><br><span class="line">    host=&apos;http://example.com&apos;</span><br><span class="line">    min_wait = 5000</span><br><span class="line">    max_wait = 9000</span><br></pre></td></tr></table></figure>
+
+<p>上面是官方的示例demo，定义了针对 <a href="http://example.com" target="_blank" rel="noopener">http://example.com</a> 网站的测试场景：</p>
+<p>1) 先模拟用户登录系统，然后随机地访问index（/）和profile页面（/profile/），请求比例为2:1；</p>
+<p>2) 并且，在测试过程中，两次请求的间隔时间为5~9秒间的随机值。</p>
+<h3 id="3-2-运行"><a href="#3-2-运行" class="headerlink" title="3.2 运行"></a>3.2 运行</h3><p>要运行上述locust脚本，如果文件名为locustfile.py且在当前目录下，可以这样运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locust</span><br></pre></td></tr></table></figure>
+
+<p>如果locust脚本文件目录不同或名称不同，需要使用-f指定文件(–host用来指定测试主机地址)： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locust -f locust_files/my_locust_file.py --host=http://example.com</span><br></pre></td></tr></table></figure>
+
+<p>要运行分布在多个进程上的locust，我们需要使用–master启动主进程： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locust -f locust_files/my_locust_file.py --master --host=http://example.com</span><br></pre></td></tr></table></figure>
+
+<p>之后使用–slave启动任意数量的从进程： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locust -f locust_files/my_locust_file.py --slave --host=http://example.com</span><br></pre></td></tr></table></figure>
+
+<p>如果在多台机器上分布式运行locust，我们需要在启动从进程时指定master-host（默认为127.0.0.1）： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locust -f locust_files/my_locust_file.py --slave --master-host=192.168.0.100 --host=http://example.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-Locust-web模式"><a href="#3-3-Locust-web模式" class="headerlink" title="3.3 Locust web模式"></a>3.3 Locust web模式</h3><p>Locust默认使用该方式启动，启动后在本机打开 <a href="http://localhost:8089/" target="_blank" rel="noopener">http://localhost:8089/</a> ，可以看到Locust WEB页面，设置并发用户数及每秒请求数后即可开始性能测试。</p>
+<h3 id="3-4-Locust-no-web模式"><a href="#3-4-Locust-no-web模式" class="headerlink" title="3.4 Locust no-web模式"></a>3.4 Locust no-web模式</h3><p>Locust也可使用no-web模式，使用命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locust -f locust_files/my_locust_file.py --no-web --csv=locust -c10 -r2 --run-time 1h30m</span><br></pre></td></tr></table></figure>
+
+<p>其中–no-web表示使用no-web模式，–csv表示运行结果文件名，-c 并发用户数，-r 每秒请求数，–run_time 运行时间</p>
+<h2 id="4、locustfile详解"><a href="#4、locustfile详解" class="headerlink" title="4、locustfile详解"></a>4、locustfile详解</h2><p>locustfile中测试场景均是继承自Locust和TaskSet的子类，下面分别介绍Locust和TaskSet两个类。</p>
+<h3 id="4-1-Locust类"><a href="#4-1-Locust类" class="headerlink" title="4.1 Locust类"></a>4.1 Locust类</h3><p>Locust类的client属性对应虚拟用户作为客户端的请求方法。在使用Locust时，需要先继承Locust类，然后在继承子类中的client属性中绑定客户端的实现类。</p>
+<p>对于常见的HTTP(S)协议，Locust已经实现了HttpLocust类，其client属性绑定了HttpSession类，而HttpSession又继承自requests.Session。因此在测试HTTP(S)的Locust脚本中，我们可以通过client属性来使用Python requests库的所有方法，包括GET/POST/HEAD/PUT/DELETE/PATCH等，调用方式也与requests完全一致。另外，由于requests.Session的使用，因此client的方法调用之间就自动具有了状态记忆的功能。常见的场景就是，在登录系统后可以维持登录状态的Session，从而后续HTTP请求操作都能带上登录状态。</p>
+<p>而对于HTTP(S)以外的协议，我们同样可以使用Locust进行测试，只是需要我们自行实现客户端。在客户端的具体实现上，可通过注册事件的方式，在请求成功时触发events.request_success，在请求失败时触发events.request_failure即可。然后创建一个继承自Locust类的类，对其设置一个client属性并与我们实现的客户端进行绑定。主要，我们就可以像使用HttpLocust类一样，测试其它协议类型的系统了。</p>
+<p>在Locust类中，除了client属性，还有几个属性需要关注下：</p>
+<p>1) task_set: 指向一个TaskSet类，TaskSet类定义了用户的任务信息，该属性为必填；</p>
+<p>2) max_wait/min_wait: 每个用户执行两个任务间隔时间的上下限（毫秒），具体数值在上下限中随机取值，若不指定则默认间隔时间固定为1秒；</p>
+<p>3) host：被测系统的host，当在终端中启动locust时没有指定–host参数时才会用到；</p>
+<p>4) weight：同时运行多个Locust类时会用到，用于控制不同类型任务的执行权重。</p>
+<p>测试开始后，每个虚拟用户（Locust实例）的运行逻辑都会遵循如下规律：</p>
+<p>1) 先执行WebsiteTasks中的on_start（只执行一次），作为初始化；</p>
+<p>2) 从WebsiteTasks中随机挑选（如果定义了任务间的权重关系，那么就是按照权重关系随机挑选）一个任务执行；</p>
+<p>3) 根据Locust类中min_wait和max_wait定义的间隔时间范围（如果TaskSet类中也定义了min_wait或者max_wait，以TaskSet中的优先），在时间范围中随机取一个值，休眠等待；</p>
+<p>重复2~3步骤，直至测试任务终止。</p>
+<h3 id="4-2-Taskset类"><a href="#4-2-Taskset类" class="headerlink" title="4.2 Taskset类"></a>4.2 Taskset类</h3><p>TaskSet类实现了虚拟用户所执行任务的调度算法，包括规划任务执行顺序（schedule_task）、挑选下一个任务（execute_next_task）、执行任务（execute_task）、休眠等待（wait）、中断控制（interrupt）等等。在此基础上，我们就可以在TaskSet子类中采用非常简洁的方式来描述虚拟用户的业务测试场景，对虚拟用户的所有行为（任务）进行组织和描述，并可以对不同任务的权重进行配置。</p>
+<p>在TaskSet子类中定义任务信息时，可以采取两种方式，@task装饰器和tasks属性。</p>
+<p>采用@task装饰器定义任务信息时，描述形式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from locust import TaskSet, task</span><br><span class="line">class UserBehavior(TaskSet):</span><br><span class="line">    @task(1)</span><br><span class="line">    def test_job1(self):</span><br><span class="line">        self.client.get(&apos;/job1&apos;)</span><br><span class="line">    @task(2)</span><br><span class="line">    def test_job2(self):</span><br><span class="line">        self.client.get(&apos;/job2&apos;)</span><br></pre></td></tr></table></figure>
+
+<p>采用tasks属性定义任务信息时，描述形式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from locust import TaskSet</span><br><span class="line">def test_job1(obj):</span><br><span class="line">    obj.client.get(&apos;/job1&apos;)</span><br><span class="line">def test_job2(obj):</span><br><span class="line">    obj.client.get(&apos;/job2&apos;)</span><br><span class="line">class UserBehavior(TaskSet):</span><br><span class="line">    tasks = &#123;test_job1:1, test_job2:2&#125;</span><br><span class="line">    # tasks = [(test_job1,1), (test_job1,2)] # 两种方式等价</span><br></pre></td></tr></table></figure>
+
+<p>在如上两种定义任务信息的方式中，均设置了权重属性，即执行test_job2的频率是test_job1的两倍。</p>
+<p>在TaskSet子类中除了定义任务信息，还有一个是经常用到的是on_start函数。这个和LoadRunner中的vuser_init功能相同，在正式执行测试前执行一次，主要用于完成一些初始化的工作。例如，当测试某个搜索功能，而该搜索功能又要求必须为登录态的时候，就可以先在on_start中进行登录操作；前面也提到，HttpLocust使用到了requests.Session，因此后续所有任务执行过程中就都具有登录状态了。</p>
+<h2 id="5、自定义客户端测试其他系统"><a href="#5、自定义客户端测试其他系统" class="headerlink" title="5、自定义客户端测试其他系统"></a>5、自定义客户端测试其他系统</h2><p>虽然，locust主要是为了测试HTTP而生。然而，它可以很容易地扩展到测试任何基于请求/响应的系统，只需要编写一个触发request_success和request_failure事件自定义客户端即可。</p>
+<p>官网提供了详细的示例，我们简单修改下就可以用来对任意系统进行性能测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">from locust import Locust, TaskSet, events, task</span><br><span class="line">import requests</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">class TestHttpbin(object):</span><br><span class="line">    def status(self):</span><br><span class="line">        try:</span><br><span class="line">            r = requests.get(&apos;http://httpbin.org/status/200&apos;)</span><br><span class="line">            status_code = r.status_code</span><br><span class="line">            print status_code</span><br><span class="line">            assert status_code == 200, &apos;Test Index Error: &#123;0&#125;&apos;.format(status_code)</span><br><span class="line">        except Exception as e:</span><br><span class="line">            print e</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">class CustomClient(object):</span><br><span class="line">    def test_custom(self):</span><br><span class="line">        start_time = time.time()</span><br><span class="line">        try:</span><br><span class="line">            # add your custom test function here</span><br><span class="line">            TestHttpbin().status()</span><br><span class="line">            name = TestHttpbin().status.__name__</span><br><span class="line">        except Exception as e:</span><br><span class="line">            total_time = int((time.time() - start_time) * 1000)</span><br><span class="line">            events.request_failure.fire(request_type=&quot;Custom&quot;, name=name, response_time=total_time, exception=e)</span><br><span class="line">        else:</span><br><span class="line">            total_time = int((time.time() - start_time) * 1000)</span><br><span class="line">            events.request_success.fire(request_type=&quot;Custom&quot;, name=name, response_time=total_time, response_length=0)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">class CustomLocust(Locust):</span><br><span class="line">    def __init__(self, *args, **kwargs):</span><br><span class="line">        super(CustomLocust, self).__init__(*args, **kwargs)</span><br><span class="line">        self.client = CustomClient()</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">class ApiUser(CustomLocust):</span><br><span class="line">    min_wait = 100</span><br><span class="line">    max_wait = 1000</span><br><span class="line"> </span><br><span class="line">    class task_set(TaskSet):</span><br><span class="line">        @task(1)</span><br><span class="line">        def test_custom(self):</span><br><span class="line">            self.client.test_custom()</span><br></pre></td></tr></table></figure>
+
+<p>上述脚本里，我们自定义一个测试类TestHttpbin，其中status方法用来校验接口返回码；我们只需要在CustomClient类的test_custom方法中添加自定义的测试方法TestHttpbin().status()，即可使用locust对该方法进行负载测试。</p>
+<p>taffy框架就是这样做实现了一份代码同时进行功能自动化及性能测试。</p>
+<h2 id="6、参考资料"><a href="#6、参考资料" class="headerlink" title="6、参考资料"></a>6、参考资料</h2><ol>
+<li><p><a href="https://docs.locust.io/en/latest/" target="_blank" rel="noopener">https://docs.locust.io/en/latest/</a></p>
+</li>
+<li><p><a href="http://debugtalk.com/post/head-first-locust-user-guide/" target="_blank" rel="noopener">http://debugtalk.com/post/head-first-locust-user-guide/</a></p>
+</li>
+</ol>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+  <a href="/tags#locust" >
+    <span class="tag-code">locust</span>
+  </a>
+
+  <a href="/tags#性能测试" >
+    <span class="tag-code">性能测试</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2017/09/22/nose-writing-tests/">
+        <span class="nav-arrow">← </span>
+        
+          Nose框架编写测试用例方法
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2017/10/12/pycharm-run-nosetests-and-exports-test-report/">
+        
+          PyCharm运行Nosetests并导出测试报告
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1、Locust简介"><span class="toc-nav-text">1、Locust简介</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2、安装"><span class="toc-nav-text">2、安装</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3、快速入门"><span class="toc-nav-text">3、快速入门</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-1-示例"><span class="toc-nav-text">3.1 示例</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-2-运行"><span class="toc-nav-text">3.2 运行</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-3-Locust-web模式"><span class="toc-nav-text">3.3 Locust web模式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-4-Locust-no-web模式"><span class="toc-nav-text">3.4 Locust no-web模式</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4、locustfile详解"><span class="toc-nav-text">4、locustfile详解</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-1-Locust类"><span class="toc-nav-text">4.1 Locust类</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-2-Taskset类"><span class="toc-nav-text">4.2 Taskset类</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#5、自定义客户端测试其他系统"><span class="toc-nav-text">5、自定义客户端测试其他系统</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#6、参考资料"><span class="toc-nav-text">6、参考资料</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://lovesoo.org/2017/09/29/locust-performance-testing-framework-from-entry-to-mastery/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    | All Rights Reserved.
+    <br>
+    <a href="https://beian.miit.gov.cn/">皖ICP备16005546号-1</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
