@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="大爱 | 眼前一切都很美丽">
   <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
   
-    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
   
   <title>
     
@@ -16,13 +16,17 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
-    <script src="/js/qrious.js"></script>
+    
+<script src="/js/qrious.js"></script>
+
   
   
   
@@ -51,9 +55,9 @@
   
 
 
-</head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 <div class="wechat-share">
-  <img src="/css/images/logo.png">
+  <img src="/css/images/logo.png" />
 </div>
 
   <body>
@@ -150,20 +154,28 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p>本文主要介绍在Windows+python2.7环境下实现RSA加密解密。</p>
-<h2 id="1-使用M2Crypto"><a href="#1-使用M2Crypto" class="headerlink" title="1. 使用M2Crypto"></a>1. 使用M2Crypto</h2><p>1) 安装M2Crypto</p>
+<h2 id="1-使用M2Crypto"><a href="#1-使用M2Crypto" class="headerlink" title="1. 使用M2Crypto"></a>1. 使用M2Crypto</h2><ol>
+<li>安装M2Crypto</li>
+</ol>
 <p>M2Crypto库本身在windows下安装比较麻烦，但这里我们使用大神打包好的安装包^^。</p>
-<p>百度网盘地址：<a href="http://pan.baidu.com/s/1qXnvi1I" target="_blank" rel="noopener">http://pan.baidu.com/s/1qXnvi1I</a></p>
+<p>百度网盘地址：<a href="http://pan.baidu.com/s/1qXnvi1I">http://pan.baidu.com/s/1qXnvi1I</a></p>
 <p>a. 根据你的系统不同下载对应的win32或win64安装包</p>
 <p>b. 解压压缩包，进入目录中，使用 python setup.py install 命令安装即可</p>
-<p>2) 示例</p>
+<ol start="2">
+<li>示例</li>
+</ol>
 <p>使用M2Crypto进行RSA加密示例代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">from M2Crypto import RSA,BIO</span><br><span class="line"> </span><br><span class="line">rsa = RSA.gen_key(1024, 3, lambda *agr:None)</span><br><span class="line">pub_bio = BIO.MemoryBuffer()</span><br><span class="line">priv_bio = BIO.MemoryBuffer()</span><br><span class="line"> </span><br><span class="line">rsa.save_pub_key_bio(pub_bio)</span><br><span class="line">rsa.save_key_bio(priv_bio, None)</span><br><span class="line"> </span><br><span class="line">pub_key = RSA.load_pub_key_bio(pub_bio)</span><br><span class="line">priv_key = RSA.load_key_bio(priv_bio)</span><br><span class="line"> </span><br><span class="line">message = &apos;lovesoo.org&apos;</span><br><span class="line"> </span><br><span class="line">encrypted = pub_key.public_encrypt(message, RSA.pkcs1_padding)</span><br><span class="line">decrypted = priv_key.private_decrypt(encrypted, RSA.pkcs1_padding)</span><br><span class="line"> </span><br><span class="line">print encrypted</span><br><span class="line">print decrypted</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">from M2Crypto import RSA,BIO</span><br><span class="line"> </span><br><span class="line">rsa = RSA.gen_key(1024, 3, lambda *agr:None)</span><br><span class="line">pub_bio = BIO.MemoryBuffer()</span><br><span class="line">priv_bio = BIO.MemoryBuffer()</span><br><span class="line"> </span><br><span class="line">rsa.save_pub_key_bio(pub_bio)</span><br><span class="line">rsa.save_key_bio(priv_bio, None)</span><br><span class="line"> </span><br><span class="line">pub_key = RSA.load_pub_key_bio(pub_bio)</span><br><span class="line">priv_key = RSA.load_key_bio(priv_bio)</span><br><span class="line"> </span><br><span class="line">message = &#x27;lovesoo.org&#x27;</span><br><span class="line"> </span><br><span class="line">encrypted = pub_key.public_encrypt(message, RSA.pkcs1_padding)</span><br><span class="line">decrypted = priv_key.private_decrypt(encrypted, RSA.pkcs1_padding)</span><br><span class="line"> </span><br><span class="line">print encrypted</span><br><span class="line">print decrypted</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-使用rsa库"><a href="#2-使用rsa库" class="headerlink" title="2. 使用rsa库"></a>2. 使用rsa库</h2><p>1) rsa库安装</p>
+<h2 id="2-使用rsa库"><a href="#2-使用rsa库" class="headerlink" title="2. 使用rsa库"></a>2. 使用rsa库</h2><ol>
+<li>rsa库安装</li>
+</ol>
 <p>pip install rsa</p>
-<p>2) 示例</p>
+<ol start="2">
+<li>示例</li>
+</ol>
 <p>我们可以生成RSA公钥和密钥，也可以load一个.pem文件进来</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import rsa</span><br><span class="line"> </span><br><span class="line"># 先生成一对密钥，然后保存.pem格式文件，当然也可以直接使用</span><br><span class="line">(pubkey, privkey) = rsa.newkeys(1024)</span><br><span class="line"> </span><br><span class="line">pub = pubkey.save_pkcs1()</span><br><span class="line">pubfile = open(&apos;public.pem&apos;,&apos;w+&apos;)</span><br><span class="line">pubfile.write(pub)</span><br><span class="line">pubfile.close()</span><br><span class="line"> </span><br><span class="line">pri = privkey.save_pkcs1()</span><br><span class="line">prifile = open(&apos;private.pem&apos;,&apos;w+&apos;)</span><br><span class="line">prifile.write(pri)</span><br><span class="line">prifile.close()</span><br><span class="line"> </span><br><span class="line"># load公钥和密钥</span><br><span class="line">message = &apos;lovesoo.org&apos;</span><br><span class="line">with open(&apos;public.pem&apos;) as publickfile:</span><br><span class="line">    p = publickfile.read()</span><br><span class="line">    pubkey = rsa.PublicKey.load_pkcs1(p)</span><br><span class="line"> </span><br><span class="line">with open(&apos;private.pem&apos;) as privatefile:</span><br><span class="line">    p = privatefile.read()</span><br><span class="line">    privkey = rsa.PrivateKey.load_pkcs1(p)</span><br><span class="line"> </span><br><span class="line"># 用公钥加密、再用私钥解密</span><br><span class="line">crypto = rsa.encrypt(message, pubkey)</span><br><span class="line">message = rsa.decrypt(crypto, privkey)</span><br><span class="line">print message</span><br><span class="line"> </span><br><span class="line"># sign 用私钥签名认证、再用公钥验证签名</span><br><span class="line">signature = rsa.sign(message, privkey, &apos;SHA-1&apos;)</span><br><span class="line">rsa.verify(&apos;lovesoo.org&apos;, signature, pubkey)</span><br></pre></td></tr></table></figure></section>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import rsa</span><br><span class="line"> </span><br><span class="line"># 先生成一对密钥，然后保存.pem格式文件，当然也可以直接使用</span><br><span class="line">(pubkey, privkey) = rsa.newkeys(1024)</span><br><span class="line"> </span><br><span class="line">pub = pubkey.save_pkcs1()</span><br><span class="line">pubfile = open(&#x27;public.pem&#x27;,&#x27;w+&#x27;)</span><br><span class="line">pubfile.write(pub)</span><br><span class="line">pubfile.close()</span><br><span class="line"> </span><br><span class="line">pri = privkey.save_pkcs1()</span><br><span class="line">prifile = open(&#x27;private.pem&#x27;,&#x27;w+&#x27;)</span><br><span class="line">prifile.write(pri)</span><br><span class="line">prifile.close()</span><br><span class="line"> </span><br><span class="line"># load公钥和密钥</span><br><span class="line">message = &#x27;lovesoo.org&#x27;</span><br><span class="line">with open(&#x27;public.pem&#x27;) as publickfile:</span><br><span class="line">    p = publickfile.read()</span><br><span class="line">    pubkey = rsa.PublicKey.load_pkcs1(p)</span><br><span class="line"> </span><br><span class="line">with open(&#x27;private.pem&#x27;) as privatefile:</span><br><span class="line">    p = privatefile.read()</span><br><span class="line">    privkey = rsa.PrivateKey.load_pkcs1(p)</span><br><span class="line"> </span><br><span class="line"># 用公钥加密、再用私钥解密</span><br><span class="line">crypto = rsa.encrypt(message, pubkey)</span><br><span class="line">message = rsa.decrypt(crypto, privkey)</span><br><span class="line">print message</span><br><span class="line"> </span><br><span class="line"># sign 用私钥签名认证、再用公钥验证签名</span><br><span class="line">signature = rsa.sign(message, privkey, &#x27;SHA-1&#x27;)</span><br><span class="line">rsa.verify(&#x27;lovesoo.org&#x27;, signature, pubkey)</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -246,7 +258,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-使用M2Crypto"><span class="toc-nav-text">1. 使用M2Crypto</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-使用rsa库"><span class="toc-nav-text">2. 使用rsa库</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-%E4%BD%BF%E7%94%A8M2Crypto"><span class="toc-nav-text">1. 使用M2Crypto</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-%E4%BD%BF%E7%94%A8rsa%E5%BA%93"><span class="toc-nav-text">2. 使用rsa库</span></a></li></ol>
     
   </div>
 </aside>
@@ -322,7 +334,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
     | All Rights Reserved.
   </p>
 </footer>
@@ -364,6 +376,8 @@
 </script>
 <!-- Baidu Tongji -->
 
+
 <script src="/js/script.js"></script>
+
   </body>
 </html>

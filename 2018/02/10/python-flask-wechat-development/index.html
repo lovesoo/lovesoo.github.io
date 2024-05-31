@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="大爱 | 眼前一切都很美丽">
   <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
   
-    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
   
   <title>
     
@@ -16,13 +16,17 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
-    <script src="/js/qrious.js"></script>
+    
+<script src="/js/qrious.js"></script>
+
   
   
   
@@ -51,9 +55,9 @@
   
 
 
-</head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 <div class="wechat-share">
-  <img src="/css/images/logo.png">
+  <img src="/css/images/logo.png" />
 </div>
 
   <body>
@@ -151,81 +155,104 @@
   <article class="post-article">
     <section class="markdown-content"><p>最近两三个月的时间，断断续续边学边做完成了一个微信公众号页面的开发工作。这是一个快递系统，主要功能有用户管理、寄收件地址管理、用户下单，订单管理，订单查询及一些宣传页面等。本文主要细数下开发过程中遇到的各种坑，也算是另外一种总结吧。</p>
 <h2 id="1、开发语言及框架"><a href="#1、开发语言及框架" class="headerlink" title="1、开发语言及框架"></a>1、开发语言及框架</h2><p>Python + Flask + Bootstrap，数据库使用MySQL</p>
-<h2 id="2、相关文档及Lib库"><a href="#2、相关文档及Lib库" class="headerlink" title="2、相关文档及Lib库"></a>2、相关文档及Lib库</h2><p>1) Bootstrap官方文档 <a href="http://v3.bootcss.com/getting-started/" target="_blank" rel="noopener">http://v3.bootcss.com/getting-started/</a> </p>
-<p>2) 微信公众号开发文档 <a href="https://mp.weixin.qq.com/wiki" target="_blank" rel="noopener">https://mp.weixin.qq.com/wiki</a> </p>
-<p>3) Python 微信SDK <a href="https://github.com/zwczou/weixin-python/" target="_blank" rel="noopener">https://github.com/zwczou/weixin-python/</a> </p>
-<p>4) PDF 《FlaskWeb开发：基于Python的Web应用开发实战》</p>
+<h2 id="2、相关文档及Lib库"><a href="#2、相关文档及Lib库" class="headerlink" title="2、相关文档及Lib库"></a>2、相关文档及Lib库</h2><ol>
+<li><p>Bootstrap官方文档 <a href="http://v3.bootcss.com/getting-started/">http://v3.bootcss.com/getting-started/</a> </p>
+</li>
+<li><p>微信公众号开发文档 <a href="https://mp.weixin.qq.com/wiki">https://mp.weixin.qq.com/wiki</a> </p>
+</li>
+<li><p>Python 微信SDK <a href="https://github.com/zwczou/weixin-python/">https://github.com/zwczou/weixin-python/</a> </p>
+</li>
+<li><p>PDF 《FlaskWeb开发：基于Python的Web应用开发实战》</p>
+</li>
+</ol>
 <h2 id="3、那些坑"><a href="#3、那些坑" class="headerlink" title="3、那些坑"></a>3、那些坑</h2><h3 id="3-1-微信"><a href="#3-1-微信" class="headerlink" title="3.1 微信"></a>3.1 微信</h3><h4 id="3-1-1-微信登陆"><a href="#3-1-1-微信登陆" class="headerlink" title="3.1.1 微信登陆"></a>3.1.1 微信登陆</h4><p>首先你需要仔细阅读官方文档，简单来说微信登陆有如下几步： </p>
-<p>1) 生成微信认证跳转URL，注意有`snsapi_base`跟`snsapi_userinfo`两种方式，前者是静默授权只获取用户openid,后者需要用户手动同意获取用户基本信息 </p>
-<p>2) 获取access_token </p>
-<p>3) 获取用户信息 </p>
-<p>详细信息可以参考文档：<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140842" target="_blank" rel="noopener">https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140842</a></p>
-<p>解决微信OAuth2.0网页授权只能设置一个回调域名的问题，参考：<a href="https://github.com/HADB/GetWeixinCode" target="_blank" rel="noopener">https://github.com/HADB/GetWeixinCode</a> </p>
-<p>Python微信SDK，参考：<a href="https://github.com/zwczou/weixin-python/" target="_blank" rel="noopener">https://github.com/zwczou/weixin-python/</a></p>
+<ol>
+<li><p>生成微信认证跳转URL，注意有`snsapi_base`跟`snsapi_userinfo`两种方式，前者是静默授权只获取用户openid,后者需要用户手动同意获取用户基本信息 </p>
+</li>
+<li><p>获取access_token </p>
+</li>
+<li><p>获取用户信息</p>
+</li>
+</ol>
+<p>详细信息可以参考文档：<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140842">https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140842</a></p>
+<p>解决微信OAuth2.0网页授权只能设置一个回调域名的问题，参考：<a href="https://github.com/HADB/GetWeixinCode">https://github.com/HADB/GetWeixinCode</a> </p>
+<p>Python微信SDK，参考：<a href="https://github.com/zwczou/weixin-python/">https://github.com/zwczou/weixin-python/</a></p>
 <h4 id="3-1-2-模版消息"><a href="#3-1-2-模版消息" class="headerlink" title="3.1.2 模版消息"></a>3.1.2 模版消息</h4><p>登陆微信公众平台 -&gt; 功能 -&gt; 模版消息，选择右侧模版消息接口文档 ，即可查看详细的接口文档。 </p>
 <p>主要步骤如下： </p>
 <p>1）获取access_token，其中token有效期为7200s，而且微信限制了每天的调用次数，这里使用functools.lru_cache维护了一个token的内存缓存 </p>
 <p>2）获取模版ID </p>
 <p>3）请求接口 </p>
-<p>POST URL: <a href="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN" target="_blank" rel="noopener">https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN</a></p>
+<p>POST URL: <a href="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN">https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN</a></p>
 <p>POST Data: 请求包为json</p>
-<h3 id="3-2-MySQL"><a href="#3-2-MySQL" class="headerlink" title="3.2 MySQL"></a>3.2 MySQL</h3><h4 id="3-2-1-编码问题"><a href="#3-2-1-编码问题" class="headerlink" title="3.2.1 编码问题"></a>3.2.1 编码问题</h4><p>MySQL遇到最大的坑还是编码问题，因为涉及到获取微信用户名含有各种emoji表情的问题，需要设置字符编码为utf8mb4（<a href="https://mathiasbynens.be/notes/mysql-utf8mb4）" target="_blank" rel="noopener">https://mathiasbynens.be/notes/mysql-utf8mb4）</a></p>
-<p>然后在Flask SQLAlchemy配置<br>app.config[‘SQLALCHEMY_DATABASE_URI’] = ‘mysql://root@localhost:3306/test?charset=utf8mb4’</p>
+<h3 id="3-2-MySQL"><a href="#3-2-MySQL" class="headerlink" title="3.2 MySQL"></a>3.2 MySQL</h3><h4 id="3-2-1-编码问题"><a href="#3-2-1-编码问题" class="headerlink" title="3.2.1 编码问题"></a>3.2.1 编码问题</h4><p>MySQL遇到最大的坑还是编码问题，因为涉及到获取微信用户名含有各种emoji表情的问题，需要设置字符编码为utf8mb4（<a href="https://mathiasbynens.be/notes/mysql-utf8mb4%EF%BC%89">https://mathiasbynens.be/notes/mysql-utf8mb4）</a></p>
+<p>然后在Flask SQLAlchemy配置<br>app.config[‘SQLALCHEMY_DATABASE_URI’] &#x3D; ‘mysql:&#x2F;&#x2F;root@localhost:3306&#x2F;test?charset&#x3D;utf8mb4’</p>
 <p>运行报错sqlalchemy.exc.OperationalError: (_mysql_exceptions.OperationalError) (2019, “Can’t initialize character set utf8mb4 (path: C:\mysql\share\charsets)“) </p>
 <p>最终解决方案是： </p>
-<p>1) Flask SQLAlchemy配置</p>
-<p>app.config[‘SQLALCHEMY_DATABASE_URI’] = ‘mysql://root@localhost:3306/test?charset=utf8’ </p>
-<p>2) 微信用户名写入数据库时使用repr()方法将写入原始unicode字符，读取的时候再使用eval()进行转换</p>
-<h4 id="3-2-2-SQLAlchemy查询数据转换为Dict"><a href="#3-2-2-SQLAlchemy查询数据转换为Dict" class="headerlink" title="3.2.2 SQLAlchemy查询数据转换为Dict"></a>3.2.2 SQLAlchemy查询数据转换为Dict</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for u in session.query(User).all():</span><br><span class="line">    u = dict(u.__dict__)</span><br><span class="line">    u.pop(&apos;_sa_instance_state&apos;, None)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Flask SQLAlchemy配置</li>
+</ol>
+<p>app.config[‘SQLALCHEMY_DATABASE_URI’] &#x3D; ‘mysql:&#x2F;&#x2F;root@localhost:3306&#x2F;test?charset&#x3D;utf8’ </p>
+<ol start="2">
+<li>微信用户名写入数据库时使用repr()方法将写入原始unicode字符，读取的时候再使用eval()进行转换</li>
+</ol>
+<h4 id="3-2-2-SQLAlchemy查询数据转换为Dict"><a href="#3-2-2-SQLAlchemy查询数据转换为Dict" class="headerlink" title="3.2.2 SQLAlchemy查询数据转换为Dict"></a>3.2.2 SQLAlchemy查询数据转换为Dict</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for u in session.query(User).all():</span><br><span class="line">    u = dict(u.__dict__)</span><br><span class="line">    u.pop(&#x27;_sa_instance_state&#x27;, None)</span><br></pre></td></tr></table></figure>
 
 <p>参考文章： </p>
-<p>1) <a href="https://stackoverflow.com/questions/1958219/convert-sqlalchemy-row-object-to-python-dict" target="_blank" rel="noopener">https://stackoverflow.com/questions/1958219/convert-sqlalchemy-row-object-to-python-dict</a> </p>
-<p>2) <a href="http://www.kaka-ace.com/sqlalchemy-model-to-dict/" target="_blank" rel="noopener">http://www.kaka-ace.com/sqlalchemy-model-to-dict/</a></p>
-<h3 id="3-4-Flask"><a href="#3-4-Flask" class="headerlink" title="3.4 Flask"></a>3.4 Flask</h3><h4 id="3-4-1-cookie相关"><a href="#3-4-1-cookie相关" class="headerlink" title="3.4.1 cookie相关"></a>3.4.1 cookie相关</h4><p>1) 设置cookie </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&apos;/set_cookie&apos;)</span><br><span class="line">def set_cookie():</span><br><span class="line">    response=make_response(&apos;Hello World&apos;);</span><br><span class="line">    response.set_cookie(&apos;Name&apos;,&apos;Joo&apos;)</span><br><span class="line">    return response</span><br></pre></td></tr></table></figure>
-
-<p>2) 获取cookie</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&apos;/get_cookie&apos;)</span><br><span class="line">def get_cookie():</span><br><span class="line">    name=request.cookies.get(&apos;Name&apos;)</span><br><span class="line">    return name</span><br></pre></td></tr></table></figure>
-
-<p>3) 删除cookie </p>
+<ol>
+<li><p><a href="https://stackoverflow.com/questions/1958219/convert-sqlalchemy-row-object-to-python-dict">https://stackoverflow.com/questions/1958219/convert-sqlalchemy-row-object-to-python-dict</a> </p>
+</li>
+<li><p><a href="http://www.kaka-ace.com/sqlalchemy-model-to-dict/">http://www.kaka-ace.com/sqlalchemy-model-to-dict/</a></p>
+</li>
+</ol>
+<h3 id="3-4-Flask"><a href="#3-4-Flask" class="headerlink" title="3.4 Flask"></a>3.4 Flask</h3><h4 id="3-4-1-cookie相关"><a href="#3-4-1-cookie相关" class="headerlink" title="3.4.1 cookie相关"></a>3.4.1 cookie相关</h4><ol>
+<li><p>设置cookie </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&#x27;/set_cookie&#x27;)</span><br><span class="line">def set_cookie():</span><br><span class="line">    response=make_response(&#x27;Hello World&#x27;);</span><br><span class="line">    response.set_cookie(&#x27;Name&#x27;,&#x27;Joo&#x27;)</span><br><span class="line">    return response</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取cookie</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&#x27;/get_cookie&#x27;)</span><br><span class="line">def get_cookie():</span><br><span class="line">    name=request.cookies.get(&#x27;Name&#x27;)</span><br><span class="line">    return name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除cookie</p>
+</li>
+</ol>
 <p>设置过期时间为0 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&apos;/del_cookie&apos;)</span><br><span class="line">def del_cookie():</span><br><span class="line">    response=make_response(&apos;delete cookie&apos;)</span><br><span class="line">    response.set_cookie(&apos;Name&apos;,&apos;&apos;,expires=0)</span><br><span class="line">    return response</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&#x27;/del_cookie&#x27;)</span><br><span class="line">def del_cookie():</span><br><span class="line">    response=make_response(&#x27;delete cookie&#x27;)</span><br><span class="line">    response.set_cookie(&#x27;Name&#x27;,&#x27;&#x27;,expires=0)</span><br><span class="line">    return response</span><br></pre></td></tr></table></figure>
 
 <p>使用delete_cookie方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&apos;/del_cookie&apos;)</span><br><span class="line">def del_cookie():</span><br><span class="line">    response=make_response(&apos;delete cookie&apos;)</span><br><span class="line">    response.delete_cookie(&apos;Name&apos;)</span><br><span class="line">    return response</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&#x27;/del_cookie&#x27;)</span><br><span class="line">def del_cookie():</span><br><span class="line">    response=make_response(&#x27;delete cookie&#x27;)</span><br><span class="line">    response.delete_cookie(&#x27;Name&#x27;)</span><br><span class="line">    return response</span><br></pre></td></tr></table></figure>
 
-<h4 id="3-4-2-flask-make-response-实例"><a href="#3-4-2-flask-make-response-实例" class="headerlink" title="3.4.2 flask.make_response() 实例"></a>3.4.2 flask.make_response() 实例</h4><p><a href="https://www.programcreek.com/python/example/51527/flask.make_response" target="_blank" rel="noopener">https://www.programcreek.com/python/example/51527/flask.make_response</a></p>
-<h4 id="3-4-3-详细解读Jquery各Ajax函数：-get-post-ajax-getJSON"><a href="#3-4-3-详细解读Jquery各Ajax函数：-get-post-ajax-getJSON" class="headerlink" title="3.4.3 详细解读Jquery各Ajax函数：$.get(),$.post(),$.ajax(),$.getJSON()"></a>3.4.3 详细解读Jquery各Ajax函数：$.get(),$.post(),$.ajax(),$.getJSON()</h4><p><a href="http://www.cnblogs.com/liuling/archive/2013/02/07/sdafsd.html" target="_blank" rel="noopener">http://www.cnblogs.com/liuling/archive/2013/02/07/sdafsd.html</a></p>
-<h4 id="3-4-4-bootstrap对话框插件"><a href="#3-4-4-bootstrap对话框插件" class="headerlink" title="3.4.4 bootstrap对话框插件"></a>3.4.4 bootstrap对话框插件</h4><p><a href="http://bootboxjs.com" target="_blank" rel="noopener">http://bootboxjs.com</a></p>
-<h4 id="3-4-5-Flask-flash增加link"><a href="#3-4-5-Flask-flash增加link" class="headerlink" title="3.4.5 Flask flash增加link"></a>3.4.5 Flask flash增加link</h4><p><a href="https://stackoverflow.com/questions/21248718/how-to-flashing-a-message-with-link-using-flask-flash" target="_blank" rel="noopener">https://stackoverflow.com/questions/21248718/how-to-flashing-a-message-with-link-using-flask-flash</a></p>
-<h4 id="3-4-6-HTML颜色编码"><a href="#3-4-6-HTML颜色编码" class="headerlink" title="3.4.6 HTML颜色编码"></a>3.4.6 HTML颜色编码</h4><p><a href="http://www.tutorialspoint.com/html/html\_color\_names.htm" target="_blank" rel="noopener">http://www.tutorialspoint.com/html/html\_color\_names.htm</a></p>
-<h4 id="3-4-7-Python缓存"><a href="#3-4-7-Python缓存" class="headerlink" title="3.4.7 Python缓存"></a>3.4.7 Python缓存</h4><p>微信获取access_token时有效期是7200s，而且微信限制了每天的调用频率（2000次/天），所以简单使用lru_cache在内存中维护了一个token缓冲，示例代码如下： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@lru_cache(None)</span><br><span class="line">def getAccessToken():</span><br><span class="line">    url = &apos;https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=&#123;0&#125;&amp;secret=&#123;1&#125;&apos;.format(app_id, app_secret)</span><br><span class="line">    r = requests.get(url)</span><br><span class="line">    access_token = r.json().get(&apos;access_token&apos;)</span><br><span class="line">    time_now = datetime.now().strftime(&quot;%Y-%m-%d %H:%M:%S&quot;)</span><br><span class="line">    print &apos;[&#123;0&#125;] getAccessToken Result:\t&#123;1&#125;&apos;.format(time_now, r.text)</span><br><span class="line">    return access_token, datetime.now()</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">def getToken():</span><br><span class="line">    token, t = getAccessToken()</span><br><span class="line">    if (datetime.now() - t).seconds &gt; 3600:</span><br><span class="line">        getAccessToken.cache_clear()</span><br><span class="line">        token, t = getAccessToken()</span><br><span class="line">        return token</span><br><span class="line">    else:</span><br><span class="line">        return token</span><br></pre></td></tr></table></figure>
+<h4 id="3-4-2-flask-make-response-实例"><a href="#3-4-2-flask-make-response-实例" class="headerlink" title="3.4.2 flask.make_response() 实例"></a>3.4.2 flask.make_response() 实例</h4><p><a href="https://www.programcreek.com/python/example/51527/flask.make_response">https://www.programcreek.com/python/example/51527/flask.make_response</a></p>
+<h4 id="3-4-3-详细解读Jquery各Ajax函数：-get-post-ajax-getJSON"><a href="#3-4-3-详细解读Jquery各Ajax函数：-get-post-ajax-getJSON" class="headerlink" title="3.4.3 详细解读Jquery各Ajax函数：$.get(),$.post(),$.ajax(),$.getJSON()"></a>3.4.3 详细解读Jquery各Ajax函数：$.get(),$.post(),$.ajax(),$.getJSON()</h4><p><a href="http://www.cnblogs.com/liuling/archive/2013/02/07/sdafsd.html">http://www.cnblogs.com/liuling/archive/2013/02/07/sdafsd.html</a></p>
+<h4 id="3-4-4-bootstrap对话框插件"><a href="#3-4-4-bootstrap对话框插件" class="headerlink" title="3.4.4 bootstrap对话框插件"></a>3.4.4 bootstrap对话框插件</h4><p><a href="http://bootboxjs.com/">http://bootboxjs.com</a></p>
+<h4 id="3-4-5-Flask-flash增加link"><a href="#3-4-5-Flask-flash增加link" class="headerlink" title="3.4.5 Flask flash增加link"></a>3.4.5 Flask flash增加link</h4><p><a href="https://stackoverflow.com/questions/21248718/how-to-flashing-a-message-with-link-using-flask-flash">https://stackoverflow.com/questions/21248718/how-to-flashing-a-message-with-link-using-flask-flash</a></p>
+<h4 id="3-4-6-HTML颜色编码"><a href="#3-4-6-HTML颜色编码" class="headerlink" title="3.4.6 HTML颜色编码"></a>3.4.6 HTML颜色编码</h4><p><a href="http://www.tutorialspoint.com/html/html/_color/_names.htm">http://www.tutorialspoint.com/html/html\_color\_names.htm</a></p>
+<h4 id="3-4-7-Python缓存"><a href="#3-4-7-Python缓存" class="headerlink" title="3.4.7 Python缓存"></a>3.4.7 Python缓存</h4><p>微信获取access_token时有效期是7200s，而且微信限制了每天的调用频率（2000次&#x2F;天），所以简单使用lru_cache在内存中维护了一个token缓冲，示例代码如下： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@lru_cache(None)</span><br><span class="line">def getAccessToken():</span><br><span class="line">    url = &#x27;https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=&#123;0&#125;&amp;secret=&#123;1&#125;&#x27;.format(app_id, app_secret)</span><br><span class="line">    r = requests.get(url)</span><br><span class="line">    access_token = r.json().get(&#x27;access_token&#x27;)</span><br><span class="line">    time_now = datetime.now().strftime(&quot;%Y-%m-%d %H:%M:%S&quot;)</span><br><span class="line">    print &#x27;[&#123;0&#125;] getAccessToken Result:\t&#123;1&#125;&#x27;.format(time_now, r.text)</span><br><span class="line">    return access_token, datetime.now()</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">def getToken():</span><br><span class="line">    token, t = getAccessToken()</span><br><span class="line">    if (datetime.now() - t).seconds &gt; 3600:</span><br><span class="line">        getAccessToken.cache_clear()</span><br><span class="line">        token, t = getAccessToken()</span><br><span class="line">        return token</span><br><span class="line">    else:</span><br><span class="line">        return token</span><br></pre></td></tr></table></figure>
 
 <p>参考：</p>
-<p><a href="http://blog.konghy.cn/2016/04/20/python-cache/" target="_blank" rel="noopener">http://blog.konghy.cn/2016/04/20/python-cache/</a></p>
-<p><a href="https://docs.python.org/3.4/library/functools.html#functools.lru_cache" target="_blank" rel="noopener">https://docs.python.org/3.4/library/functools.html#functools.lru_cache</a></p>
-<h4 id="3-4-8-修改Bootstrap使用国内源"><a href="#3-4-8-修改Bootstrap使用国内源" class="headerlink" title="3.4.8 修改Bootstrap使用国内源"></a>3.4.8 修改Bootstrap使用国内源</h4><p>默认Bootstrap使用的CDN是：<a href="http://cdnjs.cloudflare.com" target="_blank" rel="noopener">http://cdnjs.cloudflare.com</a></p>
+<p><a href="http://blog.konghy.cn/2016/04/20/python-cache/">http://blog.konghy.cn/2016/04/20/python-cache/</a></p>
+<p><a href="https://docs.python.org/3.4/library/functools.html#functools.lru_cache">https://docs.python.org/3.4/library/functools.html#functools.lru_cache</a></p>
+<h4 id="3-4-8-修改Bootstrap使用国内源"><a href="#3-4-8-修改Bootstrap使用国内源" class="headerlink" title="3.4.8 修改Bootstrap使用国内源"></a>3.4.8 修改Bootstrap使用国内源</h4><p>默认Bootstrap使用的CDN是：<a href="http://cdnjs.cloudflare.com/">http://cdnjs.cloudflare.com</a></p>
 <p>国内访问较慢，所以需要修改默认CDN为国内源。 </p>
-<p>找到C:\Python27\Lib\site-packages\flask_bootstrap_<em>init_</em>.py（其中 C:\Python27 为你当前Python版本路径），在文件最后找到如下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">bootstrap = lwrap(</span><br><span class="line">    WebCDN(&apos;//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/%s/&apos; %</span><br><span class="line">           BOOTSTRAP_VERSION), local)</span><br><span class="line"> </span><br><span class="line">jquery = lwrap(</span><br><span class="line">    WebCDN(&apos;//cdnjs.cloudflare.com/ajax/libs/jquery/%s/&apos; %</span><br><span class="line">           JQUERY_VERSION), local)</span><br><span class="line"> </span><br><span class="line">html5shiv = lwrap(</span><br><span class="line">    WebCDN(&apos;//cdnjs.cloudflare.com/ajax/libs/html5shiv/%s/&apos; %</span><br><span class="line">           HTML5SHIV_VERSION))</span><br><span class="line"> </span><br><span class="line">respondjs = lwrap(</span><br><span class="line">    WebCDN(&apos;//cdnjs.cloudflare.com/ajax/libs/respond.js/%s/&apos; %</span><br><span class="line">           RESPONDJS_VERSION))</span><br></pre></td></tr></table></figure>
+<p>找到C:\Python27\Lib\site-packages\flask_bootstrap_<em>init</em>_.py（其中 C:\Python27 为你当前Python版本路径），在文件最后找到如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">bootstrap = lwrap(</span><br><span class="line">    WebCDN(&#x27;//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/%s/&#x27; %</span><br><span class="line">           BOOTSTRAP_VERSION), local)</span><br><span class="line"> </span><br><span class="line">jquery = lwrap(</span><br><span class="line">    WebCDN(&#x27;//cdnjs.cloudflare.com/ajax/libs/jquery/%s/&#x27; %</span><br><span class="line">           JQUERY_VERSION), local)</span><br><span class="line"> </span><br><span class="line">html5shiv = lwrap(</span><br><span class="line">    WebCDN(&#x27;//cdnjs.cloudflare.com/ajax/libs/html5shiv/%s/&#x27; %</span><br><span class="line">           HTML5SHIV_VERSION))</span><br><span class="line"> </span><br><span class="line">respondjs = lwrap(</span><br><span class="line">    WebCDN(&#x27;//cdnjs.cloudflare.com/ajax/libs/respond.js/%s/&#x27; %</span><br><span class="line">           RESPONDJS_VERSION))</span><br></pre></td></tr></table></figure>
+
 
 <p>替换为国内源cdn.bootcss.com，代码如下： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">bootstrap = lwrap(</span><br><span class="line">    WebCDN(&apos;//cdn.bootcss.com/twitter-bootstrap/%s/&apos; %</span><br><span class="line">           BOOTSTRAP_VERSION), local)</span><br><span class="line"> </span><br><span class="line">jquery = lwrap(</span><br><span class="line">    WebCDN(&apos;//cdn.bootcss.com/jquery/%s/&apos; %</span><br><span class="line">           JQUERY_VERSION), local)</span><br><span class="line"> </span><br><span class="line">html5shiv = lwrap(</span><br><span class="line">    WebCDN(&apos;//cdn.bootcss.com/html5shiv/%s/&apos; %</span><br><span class="line">           HTML5SHIV_VERSION))</span><br><span class="line"> </span><br><span class="line">respondjs = lwrap(</span><br><span class="line">    WebCDN(&apos;//cdn.bootcss.com/respond.js/%s/&apos; %</span><br><span class="line">           RESPONDJS_VERSION))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">bootstrap = lwrap(</span><br><span class="line">    WebCDN(&#x27;//cdn.bootcss.com/twitter-bootstrap/%s/&#x27; %</span><br><span class="line">           BOOTSTRAP_VERSION), local)</span><br><span class="line"> </span><br><span class="line">jquery = lwrap(</span><br><span class="line">    WebCDN(&#x27;//cdn.bootcss.com/jquery/%s/&#x27; %</span><br><span class="line">           JQUERY_VERSION), local)</span><br><span class="line"> </span><br><span class="line">html5shiv = lwrap(</span><br><span class="line">    WebCDN(&#x27;//cdn.bootcss.com/html5shiv/%s/&#x27; %</span><br><span class="line">           HTML5SHIV_VERSION))</span><br><span class="line"> </span><br><span class="line">respondjs = lwrap(</span><br><span class="line">    WebCDN(&#x27;//cdn.bootcss.com/respond.js/%s/&#x27; %</span><br><span class="line">           RESPONDJS_VERSION))</span><br></pre></td></tr></table></figure>
 
 <p>参考资料： </p>
-<p><a href="https://zhuanlan.zhihu.com/p/23412590" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/23412590</a> </p>
-<p><a href="http://www.bootcdn.cn/" target="_blank" rel="noopener">http://www.bootcdn.cn/</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/23412590">https://zhuanlan.zhihu.com/p/23412590</a> </p>
+<p><a href="http://www.bootcdn.cn/">http://www.bootcdn.cn/</a></p>
 <h4 id="3-4-9-flask部署"><a href="#3-4-9-flask部署" class="headerlink" title="3.4.9 flask部署"></a>3.4.9 flask部署</h4><p>flask通常在Linux上部署方式是 flask + wsgi + nginx，windows上则是flask + iis + nginx。</p>
 <p>这里实际部署的环境是Windows Server 2007，由于项目实际访问量较小的关系，最终选用简单的flask + tornado部署方式。 </p>
 <p>在flask项目里原来的入口程序假设为run.py的同级目录添加tornado_server.py，内容如下： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># coding:utf-8</span><br><span class="line">  </span><br><span class="line">from tornado.wsgi import WSGIContainer</span><br><span class="line">from tornado.httpserver import HTTPServer</span><br><span class="line">from tornado.ioloop import IOLoop</span><br><span class="line">from run import app</span><br><span class="line">http_server = HTTPServer(WSGIContainer(app))</span><br><span class="line"> </span><br><span class="line"># address为实际访问URL，port为端口号</span><br><span class="line">http_server.listen(port=5000, address=&quot;127.0.0.1&quot;)</span><br><span class="line">IOLoop.instance().start()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># coding:utf-8</span><br><span class="line">  </span><br><span class="line">from tornado.wsgi import WSGIContainer</span><br><span class="line">from tornado.httpserver import HTTPServer</span><br><span class="line">from tornado.ioloop import IOLoop</span><br><span class="line">from run import app</span><br><span class="line">http_server = HTTPServer(WSGIContainer(app))</span><br><span class="line"> </span><br><span class="line"># address为实际访问URL，port为端口号</span><br><span class="line">http_server.listen(port=5000, address=&quot;127.0.0.1&quot;)</span><br><span class="line">IOLoop.instance().start()</span><br></pre></td></tr></table></figure>
 
 <p>使用 python tornado_server.py 即可启动。 </p>
 <p>参考文档： </p>
-<p><a href="https://www.cnblogs.com/kiddy/p/5749687.html" target="_blank" rel="noopener">https://www.cnblogs.com/kiddy/p/5749687.html</a> </p>
-<p><a href="https://segmentfault.com/q/1010000005641722?_ea=849637" target="_blank" rel="noopener">https://segmentfault.com/q/1010000005641722?_ea=849637</a> </p>
-<p><a href="http://flask.pocoo.org/docs/0.11/deploying/" target="_blank" rel="noopener">http://flask.pocoo.org/docs/0.11/deploying/</a></p>
+<p><a href="https://www.cnblogs.com/kiddy/p/5749687.html">https://www.cnblogs.com/kiddy/p/5749687.html</a> </p>
+<p><a href="https://segmentfault.com/q/1010000005641722?_ea=849637">https://segmentfault.com/q/1010000005641722?_ea=849637</a> </p>
+<p><a href="http://flask.pocoo.org/docs/0.11/deploying/">http://flask.pocoo.org/docs/0.11/deploying/</a></p>
 </section>
     <!-- Tags START -->
     
@@ -317,7 +344,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1、开发语言及框架"><span class="toc-nav-text">1、开发语言及框架</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2、相关文档及Lib库"><span class="toc-nav-text">2、相关文档及Lib库</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3、那些坑"><span class="toc-nav-text">3、那些坑</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-1-微信"><span class="toc-nav-text">3.1 微信</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-1-1-微信登陆"><span class="toc-nav-text">3.1.1 微信登陆</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-1-2-模版消息"><span class="toc-nav-text">3.1.2 模版消息</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-2-MySQL"><span class="toc-nav-text">3.2 MySQL</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2-1-编码问题"><span class="toc-nav-text">3.2.1 编码问题</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2-2-SQLAlchemy查询数据转换为Dict"><span class="toc-nav-text">3.2.2 SQLAlchemy查询数据转换为Dict</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-4-Flask"><span class="toc-nav-text">3.4 Flask</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-1-cookie相关"><span class="toc-nav-text">3.4.1 cookie相关</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-2-flask-make-response-实例"><span class="toc-nav-text">3.4.2 flask.make_response() 实例</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-3-详细解读Jquery各Ajax函数：-get-post-ajax-getJSON"><span class="toc-nav-text">3.4.3 详细解读Jquery各Ajax函数：$.get(),$.post(),$.ajax(),$.getJSON()</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-4-bootstrap对话框插件"><span class="toc-nav-text">3.4.4 bootstrap对话框插件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-5-Flask-flash增加link"><span class="toc-nav-text">3.4.5 Flask flash增加link</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-6-HTML颜色编码"><span class="toc-nav-text">3.4.6 HTML颜色编码</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-7-Python缓存"><span class="toc-nav-text">3.4.7 Python缓存</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-8-修改Bootstrap使用国内源"><span class="toc-nav-text">3.4.8 修改Bootstrap使用国内源</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-9-flask部署"><span class="toc-nav-text">3.4.9 flask部署</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1%E3%80%81%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80%E5%8F%8A%E6%A1%86%E6%9E%B6"><span class="toc-nav-text">1、开发语言及框架</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2%E3%80%81%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3%E5%8F%8ALib%E5%BA%93"><span class="toc-nav-text">2、相关文档及Lib库</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3%E3%80%81%E9%82%A3%E4%BA%9B%E5%9D%91"><span class="toc-nav-text">3、那些坑</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-1-%E5%BE%AE%E4%BF%A1"><span class="toc-nav-text">3.1 微信</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-1-1-%E5%BE%AE%E4%BF%A1%E7%99%BB%E9%99%86"><span class="toc-nav-text">3.1.1 微信登陆</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-1-2-%E6%A8%A1%E7%89%88%E6%B6%88%E6%81%AF"><span class="toc-nav-text">3.1.2 模版消息</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-2-MySQL"><span class="toc-nav-text">3.2 MySQL</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2-1-%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98"><span class="toc-nav-text">3.2.1 编码问题</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2-2-SQLAlchemy%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%E4%B8%BADict"><span class="toc-nav-text">3.2.2 SQLAlchemy查询数据转换为Dict</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-4-Flask"><span class="toc-nav-text">3.4 Flask</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-1-cookie%E7%9B%B8%E5%85%B3"><span class="toc-nav-text">3.4.1 cookie相关</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-2-flask-make-response-%E5%AE%9E%E4%BE%8B"><span class="toc-nav-text">3.4.2 flask.make_response() 实例</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-3-%E8%AF%A6%E7%BB%86%E8%A7%A3%E8%AF%BBJquery%E5%90%84Ajax%E5%87%BD%E6%95%B0%EF%BC%9A-get-post-ajax-getJSON"><span class="toc-nav-text">3.4.3 详细解读Jquery各Ajax函数：$.get(),$.post(),$.ajax(),$.getJSON()</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-4-bootstrap%E5%AF%B9%E8%AF%9D%E6%A1%86%E6%8F%92%E4%BB%B6"><span class="toc-nav-text">3.4.4 bootstrap对话框插件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-5-Flask-flash%E5%A2%9E%E5%8A%A0link"><span class="toc-nav-text">3.4.5 Flask flash增加link</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-6-HTML%E9%A2%9C%E8%89%B2%E7%BC%96%E7%A0%81"><span class="toc-nav-text">3.4.6 HTML颜色编码</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-7-Python%E7%BC%93%E5%AD%98"><span class="toc-nav-text">3.4.7 Python缓存</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-8-%E4%BF%AE%E6%94%B9Bootstrap%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E6%BA%90"><span class="toc-nav-text">3.4.8 修改Bootstrap使用国内源</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-9-flask%E9%83%A8%E7%BD%B2"><span class="toc-nav-text">3.4.9 flask部署</span></a></li></ol></li></ol></li></ol>
     
   </div>
 </aside>
@@ -393,7 +420,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
     | All Rights Reserved.
   </p>
 </footer>
@@ -435,6 +462,8 @@
 </script>
 <!-- Baidu Tongji -->
 
+
 <script src="/js/script.js"></script>
+
   </body>
 </html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="大爱 | 眼前一切都很美丽">
   <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
   
-    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
   
   <title>
     
@@ -16,13 +16,17 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
-    <script src="/js/qrious.js"></script>
+    
+<script src="/js/qrious.js"></script>
+
   
   
   
@@ -51,9 +55,9 @@
   
 
 
-</head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 <div class="wechat-share">
-  <img src="/css/images/logo.png">
+  <img src="/css/images/logo.png" />
 </div>
 
   <body>
@@ -152,13 +156,13 @@
     <section class="markdown-content"><p>本文主要介绍使用Python语言编写Socket协议Server及Client的简单实现方法。</p>
 <h2 id="1-Python-Socket编程简介"><a href="#1-Python-Socket编程简介" class="headerlink" title="1. Python Socket编程简介"></a>1. Python Socket编程简介</h2><p>Socket通常也称作”套接字”，应用程序通常通过”套接字”向网络发出请求或者应答网络请求。</p>
 <p>三种流行的套接字类型是:stream,datagram和raw。stream和datagram套接字可以直接与TCP协议进行接口，而raw套接字则接口到IP协议。</p>
-<p>Python Socket模块提供了对低层BSD套接字样式网络的访问，使用该模块建立具有TCP和流套接字的简单服务器。详见<a href="https://docs.python.org/2/library/socket.html" target="_blank" rel="noopener">https://docs.python.org/2/library/socket.html</a></p>
+<p>Python Socket模块提供了对低层BSD套接字样式网络的访问，使用该模块建立具有TCP和流套接字的简单服务器。详见<a href="https://docs.python.org/2/library/socket.html">https://docs.python.org/2/library/socket.html</a></p>
 <h2 id="2-Python-Socket-Server"><a href="#2-Python-Socket-Server" class="headerlink" title="2. Python Socket Server"></a>2. Python Socket Server</h2><p>实现代码如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">from socket import *</span><br><span class="line"> </span><br><span class="line">def SocketServer():</span><br><span class="line">    try:</span><br><span class="line">        Colon = ServerUrl.find(&apos;:&apos;)</span><br><span class="line">        IP = ServerUrl[0:Colon]</span><br><span class="line">        Port = int(ServerUrl[Colon+1:])</span><br><span class="line"> </span><br><span class="line">        #建立socket对象</span><br><span class="line">        print &apos;Server start:%s&apos;%ServerUrl</span><br><span class="line">        sockobj = socket(AF_INET, SOCK_STREAM)</span><br><span class="line">        sockobj.setsockopt(SOL_SOCKET,SO_REUSEADDR, 1)</span><br><span class="line"> </span><br><span class="line">        #绑定IP端口号</span><br><span class="line">        sockobj.bind((IP, Port))</span><br><span class="line">        #监听，允许5个连结</span><br><span class="line">        sockobj.listen(5)</span><br><span class="line"> </span><br><span class="line">        #直到进程结束时才结束循环</span><br><span class="line">        while True:</span><br><span class="line">            #等待client连结</span><br><span class="line">            connection, address = sockobj.accept( )</span><br><span class="line">            print &apos;Server connected by client:&apos;, address</span><br><span class="line">            while True:</span><br><span class="line">                #读取Client消息包内容</span><br><span class="line">                data = connection.recv(1024)</span><br><span class="line">                #如果没有data，跳出循环</span><br><span class="line">                if not data: break</span><br><span class="line">                #发送回复至Client</span><br><span class="line">                RES=&apos;200 OK&apos;</span><br><span class="line">                connection.send(RES)</span><br><span class="line">                print &apos;Receive MSG:%s&apos;%data.strip()</span><br><span class="line">                print &apos;Send RES:%s\r\n&apos;%RES</span><br><span class="line">            #关闭Socket</span><br><span class="line">            connection.close( )</span><br><span class="line"> </span><br><span class="line">    except Exception,ex:</span><br><span class="line">        print ex</span><br><span class="line"> </span><br><span class="line">ServerUrl = &quot;192.168.16.15:9999&quot;</span><br><span class="line">SocketServer()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">from socket import *</span><br><span class="line"> </span><br><span class="line">def SocketServer():</span><br><span class="line">    try:</span><br><span class="line">        Colon = ServerUrl.find(&#x27;:&#x27;)</span><br><span class="line">        IP = ServerUrl[0:Colon]</span><br><span class="line">        Port = int(ServerUrl[Colon+1:])</span><br><span class="line"> </span><br><span class="line">        #建立socket对象</span><br><span class="line">        print &#x27;Server start:%s&#x27;%ServerUrl</span><br><span class="line">        sockobj = socket(AF_INET, SOCK_STREAM)</span><br><span class="line">        sockobj.setsockopt(SOL_SOCKET,SO_REUSEADDR, 1)</span><br><span class="line"> </span><br><span class="line">        #绑定IP端口号</span><br><span class="line">        sockobj.bind((IP, Port))</span><br><span class="line">        #监听，允许5个连结</span><br><span class="line">        sockobj.listen(5)</span><br><span class="line"> </span><br><span class="line">        #直到进程结束时才结束循环</span><br><span class="line">        while True:</span><br><span class="line">            #等待client连结</span><br><span class="line">            connection, address = sockobj.accept( )</span><br><span class="line">            print &#x27;Server connected by client:&#x27;, address</span><br><span class="line">            while True:</span><br><span class="line">                #读取Client消息包内容</span><br><span class="line">                data = connection.recv(1024)</span><br><span class="line">                #如果没有data，跳出循环</span><br><span class="line">                if not data: break</span><br><span class="line">                #发送回复至Client</span><br><span class="line">                RES=&#x27;200 OK&#x27;</span><br><span class="line">                connection.send(RES)</span><br><span class="line">                print &#x27;Receive MSG:%s&#x27;%data.strip()</span><br><span class="line">                print &#x27;Send RES:%s\r\n&#x27;%RES</span><br><span class="line">            #关闭Socket</span><br><span class="line">            connection.close( )</span><br><span class="line"> </span><br><span class="line">    except Exception,ex:</span><br><span class="line">        print ex</span><br><span class="line"> </span><br><span class="line">ServerUrl = &quot;192.168.16.15:9999&quot;</span><br><span class="line">SocketServer()</span><br></pre></td></tr></table></figure>
 
 <p>注：需要注意的是Socket对象建立后需要加上sockobj.setsockopt(SOL_SOCKET,SO_REUSEADDR, 1)，否则会出现Python脚本重启后Socket Server端口不会立刻关闭，出现端口占用错误。</p>
 <h2 id="3-Python-Socket-Client"><a href="#3-Python-Socket-Client" class="headerlink" title="3. Python Socket Client"></a>3. Python Socket Client</h2><p>实现代码如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">from socket import *</span><br><span class="line"> </span><br><span class="line">def SocketClient():</span><br><span class="line">    try:</span><br><span class="line">        #建立socket对象</span><br><span class="line">        s=socket(AF_INET,SOCK_STREAM,0)</span><br><span class="line"> </span><br><span class="line">        Colon = ServerUrl.find(&apos;:&apos;)</span><br><span class="line">        IP = ServerUrl[0:Colon]</span><br><span class="line">        Port = ServerUrl[Colon+1:]</span><br><span class="line"> </span><br><span class="line">        #建立连接</span><br><span class="line">        s.connect((IP,int(Port)))</span><br><span class="line">        sdata=&apos;GET /Test HTTP/1.1\r\n\</span><br><span class="line">Host: %s\r\n\r\n&apos;%ServerUrl</span><br><span class="line"> </span><br><span class="line">        print &quot;Request:\r\n%s\r\n&quot;%sdata</span><br><span class="line">        s.send(sdata)</span><br><span class="line">        sresult=s.recv(1024)</span><br><span class="line"> </span><br><span class="line">        print &quot;Response:\r\n%s\r\n&quot; %sresult</span><br><span class="line">        #关闭Socket</span><br><span class="line">        s.close()</span><br><span class="line">    except Exception,ex:</span><br><span class="line">        print ex</span><br><span class="line"> </span><br><span class="line">ServerUrl = &quot;192.168.16.15:9999&quot;</span><br><span class="line">SocketClient()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">from socket import *</span><br><span class="line"> </span><br><span class="line">def SocketClient():</span><br><span class="line">    try:</span><br><span class="line">        #建立socket对象</span><br><span class="line">        s=socket(AF_INET,SOCK_STREAM,0)</span><br><span class="line"> </span><br><span class="line">        Colon = ServerUrl.find(&#x27;:&#x27;)</span><br><span class="line">        IP = ServerUrl[0:Colon]</span><br><span class="line">        Port = ServerUrl[Colon+1:]</span><br><span class="line"> </span><br><span class="line">        #建立连接</span><br><span class="line">        s.connect((IP,int(Port)))</span><br><span class="line">        sdata=&#x27;GET /Test HTTP/1.1\r\n\</span><br><span class="line">Host: %s\r\n\r\n&#x27;%ServerUrl</span><br><span class="line"> </span><br><span class="line">        print &quot;Request:\r\n%s\r\n&quot;%sdata</span><br><span class="line">        s.send(sdata)</span><br><span class="line">        sresult=s.recv(1024)</span><br><span class="line"> </span><br><span class="line">        print &quot;Response:\r\n%s\r\n&quot; %sresult</span><br><span class="line">        #关闭Socket</span><br><span class="line">        s.close()</span><br><span class="line">    except Exception,ex:</span><br><span class="line">        print ex</span><br><span class="line"> </span><br><span class="line">ServerUrl = &quot;192.168.16.15:9999&quot;</span><br><span class="line">SocketClient()</span><br></pre></td></tr></table></figure>
 
 <h2 id="3-运行结果"><a href="#3-运行结果" class="headerlink" title="3. 运行结果"></a>3. 运行结果</h2><p>Socket Server端运行截图如下：</p>
 <p><img src="/images/socket_server.png" alt="upload successful"></p>
@@ -243,7 +247,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Python-Socket编程简介"><span class="toc-nav-text">1. Python Socket编程简介</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Python-Socket-Server"><span class="toc-nav-text">2. Python Socket Server</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-Python-Socket-Client"><span class="toc-nav-text">3. Python Socket Client</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-运行结果"><span class="toc-nav-text">3. 运行结果</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Python-Socket%E7%BC%96%E7%A8%8B%E7%AE%80%E4%BB%8B"><span class="toc-nav-text">1. Python Socket编程简介</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Python-Socket-Server"><span class="toc-nav-text">2. Python Socket Server</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-Python-Socket-Client"><span class="toc-nav-text">3. Python Socket Client</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-nav-text">3. 运行结果</span></a></li></ol>
     
   </div>
 </aside>
@@ -319,7 +323,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
     | All Rights Reserved.
   </p>
 </footer>
@@ -361,6 +365,8 @@
 </script>
 <!-- Baidu Tongji -->
 
+
 <script src="/js/script.js"></script>
+
   </body>
 </html>

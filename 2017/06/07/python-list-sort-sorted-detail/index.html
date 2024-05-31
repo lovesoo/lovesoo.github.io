@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="大爱 | 眼前一切都很美丽">
   <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
   
-    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
   
   <title>
     
@@ -16,13 +16,17 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
-    <script src="/js/qrious.js"></script>
+    
+<script src="/js/qrious.js"></script>
+
   
   
   
@@ -51,9 +55,9 @@
   
 
 
-</head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 <div class="wechat-share">
-  <img src="/css/images/logo.png">
+  <img src="/css/images/logo.png" />
 </div>
 
   <body>
@@ -151,11 +155,15 @@
   <article class="post-article">
     <section class="markdown-content"><p>python2.7中提供了两种方法对list进行排序，分别是list成员函数sort及built-in函数sorted.</p>
 <p>函数原型分别如下：</p>
-<p>1) sort(…)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">L.sort(cmp=None, key=None, reverse=False) -- stable sort *IN PLACE*;</span><br><span class="line">cmp(x, y) -&gt; -1, 0, 1</span><br></pre></td></tr></table></figure>
+<ol>
+<li>sort(…)</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">L.sort(cmp=None, key=None, reverse=False) -- stable sort *IN PLACE*;</span><br><span class="line">cmp(x, y) -&gt; -1, 0, 1</span><br></pre></td></tr></table></figure>
 
-<p>2) sorted(…)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sorted(iterable, cmp=None, key=None, reverse=False) --&gt; new sorted list</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>sorted(…)</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sorted(iterable, cmp=None, key=None, reverse=False) --&gt; new sorted list</span><br></pre></td></tr></table></figure>
 
 <p>2个函数参数及功能基本一致，唯一的区别是sort是在原有list上修改排序，sorted则是排序生成新的列表。</p>
 <p>以sorted函数为例，参数详解如下：</p>
@@ -165,7 +173,7 @@
 </li>
 <li><p>第二类是一些非序列类型，比如dict(字典)、file(文件)。</p>
 </li>
-<li><p>第三类是你定义的任何包含<strong>iter</strong>()或<strong>getitem</strong>()方法的类的对象。</p>
+<li><p>第三类是你定义的任何包含__iter__()或__getitem__()方法的类的对象。</p>
 </li>
 </ul>
 <p>2）cmp：比较函数，这个函数接收两个参数（iterable的元素）</p>
@@ -183,10 +191,10 @@
 <p>注1：key和reverse比一个等价的cmp函数处理速度要快。这是因为对于每个列表元素，cmp都会被调用多次，而key和reverse只被调用一次。</p>
 <p>注2：cmp和key可以使用lambda表达式</p>
 <p>示例代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">L=[(&apos;a&apos;,4),(&apos;a&apos;,1),(&apos;c&apos;,3),(&apos;d&apos;,3)]</span><br><span class="line">print sorted(L,cmp=lambda i,j:cmp(i[0],j[0]),reverse=True)  #按第一个关键字倒序排列</span><br><span class="line">print sorted(L,cmp=lambda i,j:cmp(i[1],j[1]),reverse=True)  #按第二关键字倒序排列</span><br><span class="line">print sorted(L,key=lambda i:(i[0]),reverse=True)    #按第一个关键字倒序排列</span><br><span class="line">print sorted(L,key=lambda i:(i[1]),reverse=True)    #按第二关键字倒序排列</span><br><span class="line">print sorted(L,key=lambda i:(i[0],i[1]),reverse=True) #关联第一，第二关键字倒序排列</span><br><span class="line">print sorted(L,key=lambda i:(i[1],i[0]),reverse=True) #关联第二，第一关键字倒序排列</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">L=[(&#x27;a&#x27;,4),(&#x27;a&#x27;,1),(&#x27;c&#x27;,3),(&#x27;d&#x27;,3)]</span><br><span class="line">print sorted(L,cmp=lambda i,j:cmp(i[0],j[0]),reverse=True)  #按第一个关键字倒序排列</span><br><span class="line">print sorted(L,cmp=lambda i,j:cmp(i[1],j[1]),reverse=True)  #按第二关键字倒序排列</span><br><span class="line">print sorted(L,key=lambda i:(i[0]),reverse=True)    #按第一个关键字倒序排列</span><br><span class="line">print sorted(L,key=lambda i:(i[1]),reverse=True)    #按第二关键字倒序排列</span><br><span class="line">print sorted(L,key=lambda i:(i[0],i[1]),reverse=True) #关联第一，第二关键字倒序排列</span><br><span class="line">print sorted(L,key=lambda i:(i[1],i[0]),reverse=True) #关联第二，第一关键字倒序排列</span><br></pre></td></tr></table></figure>
 
 <p>运行结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[(&apos;d&apos;, 3), (&apos;c&apos;, 3), (&apos;a&apos;, 4), (&apos;a&apos;, 1)]</span><br><span class="line">[(&apos;a&apos;, 4), (&apos;c&apos;, 3), (&apos;d&apos;, 3), (&apos;a&apos;, 1)]</span><br><span class="line">[(&apos;d&apos;, 3), (&apos;c&apos;, 3), (&apos;a&apos;, 4), (&apos;a&apos;, 1)]</span><br><span class="line">[(&apos;a&apos;, 4), (&apos;c&apos;, 3), (&apos;d&apos;, 3), (&apos;a&apos;, 1)]</span><br><span class="line">[(&apos;d&apos;, 3), (&apos;c&apos;, 3), (&apos;a&apos;, 4), (&apos;a&apos;, 1)]</span><br><span class="line">[(&apos;a&apos;, 4), (&apos;d&apos;, 3), (&apos;c&apos;, 3), (&apos;a&apos;, 1)]</span><br></pre></td></tr></table></figure></section>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[(&#x27;d&#x27;, 3), (&#x27;c&#x27;, 3), (&#x27;a&#x27;, 4), (&#x27;a&#x27;, 1)]</span><br><span class="line">[(&#x27;a&#x27;, 4), (&#x27;c&#x27;, 3), (&#x27;d&#x27;, 3), (&#x27;a&#x27;, 1)]</span><br><span class="line">[(&#x27;d&#x27;, 3), (&#x27;c&#x27;, 3), (&#x27;a&#x27;, 4), (&#x27;a&#x27;, 1)]</span><br><span class="line">[(&#x27;a&#x27;, 4), (&#x27;c&#x27;, 3), (&#x27;d&#x27;, 3), (&#x27;a&#x27;, 1)]</span><br><span class="line">[(&#x27;d&#x27;, 3), (&#x27;c&#x27;, 3), (&#x27;a&#x27;, 4), (&#x27;a&#x27;, 1)]</span><br><span class="line">[(&#x27;a&#x27;, 4), (&#x27;d&#x27;, 3), (&#x27;c&#x27;, 3), (&#x27;a&#x27;, 1)]</span><br><span class="line"></span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -345,7 +353,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
     | All Rights Reserved.
   </p>
 </footer>
@@ -387,6 +395,8 @@
 </script>
 <!-- Baidu Tongji -->
 
+
 <script src="/js/script.js"></script>
+
   </body>
 </html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="大爱 | 眼前一切都很美丽">
   <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
   
-    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
   
   <title>
     
@@ -16,13 +16,17 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
-    <script src="/js/qrious.js"></script>
+    
+<script src="/js/qrious.js"></script>
+
   
   
   
@@ -51,9 +55,9 @@
   
 
 
-</head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 <div class="wechat-share">
-  <img src="/css/images/logo.png">
+  <img src="/css/images/logo.png" />
 </div>
 
   <body>
@@ -156,21 +160,21 @@
 </ol>
 <p>可以看到 stop -force命令是先stop，如果5秒后进程还存在则直接 -KILL。</p>
 <p>注意下面的Note提到，使用-force命令必须先定义变量$CATALINA_PID。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost apache-tomcat]# ./bin/catalina.sh --help</span><br><span class="line">Using CATALINA_BASE:   /home/apache-tomcat</span><br><span class="line">Using CATALINA_HOME:   /home/apache-tomcat</span><br><span class="line">Using CATALINA_TMPDIR: /home/apache-tomcat/temp</span><br><span class="line">Using JRE_HOME:        /usr/java/jdk1.8.0_91</span><br><span class="line">Using CLASSPATH:       /home/apache-tomcat/bin/bootstrap.jar:/home/apache-tomcat/bin/tomcat-juli.jar</span><br><span class="line">Using CATALINA_PID:    /home/apache-tomcat/bin/CATALINA_PID</span><br><span class="line">Usage: catalina.sh ( commands ... )</span><br><span class="line">commands:</span><br><span class="line">  debug             Start Catalina in a debugger</span><br><span class="line">  debug -security   Debug Catalina with a security manager</span><br><span class="line">  jpda start        Start Catalina under JPDA debugger</span><br><span class="line">  run               Start Catalina in the current window</span><br><span class="line">  run -security     Start in the current window with security manager</span><br><span class="line">  start             Start Catalina in a separate window</span><br><span class="line">  start -security   Start in a separate window with security manager</span><br><span class="line">  stop              Stop Catalina, waiting up to 5 seconds for the process to end</span><br><span class="line">  stop n            Stop Catalina, waiting up to n seconds for the process to end</span><br><span class="line">  stop -force       Stop Catalina, wait up to 5 seconds and then use kill -KILL if still running</span><br><span class="line">  stop n -force     Stop Catalina, wait up to n seconds and then use kill -KILL if still running</span><br><span class="line">  configtest        Run a basic syntax check on server.xml - check exit code for result</span><br><span class="line">  version           What version of tomcat are you running?</span><br><span class="line">Note: Waiting for the process to end and use of the -force option require that $CATALINA_PID is defined</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost apache-tomcat]# ./bin/catalina.sh --help</span><br><span class="line">Using CATALINA_BASE:   /home/apache-tomcat</span><br><span class="line">Using CATALINA_HOME:   /home/apache-tomcat</span><br><span class="line">Using CATALINA_TMPDIR: /home/apache-tomcat/temp</span><br><span class="line">Using JRE_HOME:        /usr/java/jdk1.8.0_91</span><br><span class="line">Using CLASSPATH:       /home/apache-tomcat/bin/bootstrap.jar:/home/apache-tomcat/bin/tomcat-juli.jar</span><br><span class="line">Using CATALINA_PID:    /home/apache-tomcat/bin/CATALINA_PID</span><br><span class="line">Usage: catalina.sh ( commands ... )</span><br><span class="line">commands:</span><br><span class="line">  debug             Start Catalina in a debugger</span><br><span class="line">  debug -security   Debug Catalina with a security manager</span><br><span class="line">  jpda start        Start Catalina under JPDA debugger</span><br><span class="line">  run               Start Catalina in the current window</span><br><span class="line">  run -security     Start in the current window with security manager</span><br><span class="line">  start             Start Catalina in a separate window</span><br><span class="line">  start -security   Start in a separate window with security manager</span><br><span class="line">  stop              Stop Catalina, waiting up to 5 seconds for the process to end</span><br><span class="line">  stop n            Stop Catalina, waiting up to n seconds for the process to end</span><br><span class="line">  stop -force       Stop Catalina, wait up to 5 seconds and then use kill -KILL if still running</span><br><span class="line">  stop n -force     Stop Catalina, wait up to n seconds and then use kill -KILL if still running</span><br><span class="line">  configtest        Run a basic syntax check on server.xml - check exit code for result</span><br><span class="line">  version           What version of tomcat are you running?</span><br><span class="line">Note: Waiting for the process to end and use of the -force option require that $CATALINA_PID is defined</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
 <li>查看catalina.sh文件寻求帮助</li>
 </ol>
-<p>catalina.sh文件开头就说明了如何配置变量：不能在catalina.sh中设置，正确的做法是在$CATALINA_BASH/bin/setenv.sh脚本文件中配置。</p>
+<p>catalina.sh文件开头就说明了如何配置变量：不能在catalina.sh中设置，正确的做法是在$CATALINA_BASH&#x2F;bin&#x2F;setenv.sh脚本文件中配置。</p>
 <p>重点看我们需要使用的CATALINA_PID参数，这是一个文件路径存放了Tomcat启动时PID，stop -force时会打开这个文件，获取pid，如果5秒后进程还在就直接KILL。</p>
 <p>它还详细解释了其他变量的含义，在此不做赘述。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost apache-tomcat]# vim bin/catalina.sh</span><br><span class="line"># Environment Variable Prerequisites</span><br><span class="line">#</span><br><span class="line">#   Do not set the variables in this script. Instead put them into a script</span><br><span class="line">#   setenv.sh in CATALINA_BASE/bin to keep your customizations separate.</span><br><span class="line">#</span><br><span class="line">#   CATALINA_HOME   May point at your Catalina &quot;build&quot; directory.</span><br><span class="line">#</span><br><span class="line">#   ...</span><br><span class="line"> </span><br><span class="line">#   CATALINA_PID    (Optional) Path of the file which should contains the pid</span><br><span class="line">#                   of the catalina startup java process, when start (fork) is</span><br><span class="line">#                   used</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost apache-tomcat]# vim bin/catalina.sh</span><br><span class="line"># Environment Variable Prerequisites</span><br><span class="line">#</span><br><span class="line">#   Do not set the variables in this script. Instead put them into a script</span><br><span class="line">#   setenv.sh in CATALINA_BASE/bin to keep your customizations separate.</span><br><span class="line">#</span><br><span class="line">#   CATALINA_HOME   May point at your Catalina &quot;build&quot; directory.</span><br><span class="line">#</span><br><span class="line">#   ...</span><br><span class="line"> </span><br><span class="line">#   CATALINA_PID    (Optional) Path of the file which should contains the pid</span><br><span class="line">#                   of the catalina startup java process, when start (fork) is</span><br><span class="line">#                   used</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>修改setenv.sh文件</li>
 </ol>
-<p>编辑文件$CATALINA_HOME/bin/setenv.sh并增加x权限</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">CATALINA_PID=$CATALINA_HOME/bin/CATALINA_PID</span><br></pre></td></tr></table></figure>
+<p>编辑文件$CATALINA_HOME&#x2F;bin&#x2F;setenv.sh并增加x权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">CATALINA_PID=$CATALINA_HOME/bin/CATALINA_PID</span><br></pre></td></tr></table></figure>
 
 <p>至此可以正常使用stop -force命令强制关闭Tomcat进程。</p>
 </section>
@@ -328,7 +332,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
     | All Rights Reserved.
   </p>
 </footer>
@@ -370,6 +374,8 @@
 </script>
 <!-- Baidu Tongji -->
 
+
 <script src="/js/script.js"></script>
+
   </body>
 </html>

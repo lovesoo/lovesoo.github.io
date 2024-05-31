@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="大爱 | 眼前一切都很美丽">
   <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
   
-    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
   
   <title>
     
@@ -16,13 +16,17 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
-    <script src="/js/qrious.js"></script>
+    
+<script src="/js/qrious.js"></script>
+
   
   
   
@@ -51,9 +55,9 @@
   
 
 
-</head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 <div class="wechat-share">
-  <img src="/css/images/logo.png">
+  <img src="/css/images/logo.png" />
 </div>
 
   <body>
@@ -151,16 +155,20 @@
   <article class="post-article">
     <section class="markdown-content"><p>初学Python看到代码中类似func(*args, **kwargs)这样的定义时，经常感到一头雾水。</p>
 <p>下面通过一个简单的例子来解释Python函数可变参数args及kwargs的意思：</p>
-<p>1) *args表示任何多个无名参数，它是一个tuple</p>
-<p>2) **kwargs表示关键字参数，它是一个dict</p>
-<p>同时使用 *args 和 **kwargs 时，args 参数列必须要在 kwargs 前，要是像foo(1,a=1,b=2,c=3,2,3)这样调用的话，则会提示语法错误“SyntaxError: non-keyword arg after keyword arg”。</p>
+<ol>
+<li><p>*args表示任何多个无名参数，它是一个tuple</p>
+</li>
+<li><p>**kwargs表示关键字参数，它是一个dict</p>
+</li>
+</ol>
+<p>同时使用 *args 和 **kwargs 时，args 参数列必须要在 kwargs 前，要是像foo(1,a&#x3D;1,b&#x3D;2,c&#x3D;3,2,3)这样调用的话，则会提示语法错误“SyntaxError: non-keyword arg after keyword arg”。</p>
 <p>测试代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def foo(*args,**kwargs):</span><br><span class="line">    print &apos;args=&apos;,args</span><br><span class="line">    print &apos;kwargs=&apos;,kwargs</span><br><span class="line">    print &apos;**********************&apos;</span><br><span class="line"> </span><br><span class="line">if __name__==&apos;__main__&apos;:</span><br><span class="line">    foo(1,2,3)</span><br><span class="line">    foo(a=1,b=2,c=3)</span><br><span class="line">    foo(1,2,3,a=1,b=2,c=3)</span><br><span class="line">    foo(1,&apos;b&apos;,&apos;c&apos;,a=1,b=&apos;b&apos;,c=&apos;c&apos;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def foo(*args,**kwargs):</span><br><span class="line">    print &#x27;args=&#x27;,args</span><br><span class="line">    print &#x27;kwargs=&#x27;,kwargs</span><br><span class="line">    print &#x27;**********************&#x27;</span><br><span class="line"> </span><br><span class="line">if __name__==&#x27;__main__&#x27;:</span><br><span class="line">    foo(1,2,3)</span><br><span class="line">    foo(a=1,b=2,c=3)</span><br><span class="line">    foo(1,2,3,a=1,b=2,c=3)</span><br><span class="line">    foo(1,&#x27;b&#x27;,&#x27;c&#x27;,a=1,b=&#x27;b&#x27;,c=&#x27;c&#x27;)</span><br></pre></td></tr></table></figure>
 
 <p>执行结果如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">args= (1, 2, 3)</span><br><span class="line">kwargs= &#123;&#125;</span><br><span class="line">**********************</span><br><span class="line">args= ()</span><br><span class="line">kwargs= &#123;&apos;a&apos;: 1, &apos;c&apos;: 3, &apos;b&apos;: 2&#125;</span><br><span class="line">**********************</span><br><span class="line">args= (1, 2, 3)</span><br><span class="line">kwargs= &#123;&apos;a&apos;: 1, &apos;c&apos;: 3, &apos;b&apos;: 2&#125;</span><br><span class="line">**********************</span><br><span class="line">args= (1, &apos;b&apos;, &apos;c&apos;)</span><br><span class="line">kwargs= &#123;&apos;a&apos;: 1, &apos;c&apos;: &apos;c&apos;, &apos;b&apos;: &apos;b&apos;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">args= (1, 2, 3)</span><br><span class="line">kwargs= &#123;&#125;</span><br><span class="line">**********************</span><br><span class="line">args= ()</span><br><span class="line">kwargs= &#123;&#x27;a&#x27;: 1, &#x27;c&#x27;: 3, &#x27;b&#x27;: 2&#125;</span><br><span class="line">**********************</span><br><span class="line">args= (1, 2, 3)</span><br><span class="line">kwargs= &#123;&#x27;a&#x27;: 1, &#x27;c&#x27;: 3, &#x27;b&#x27;: 2&#125;</span><br><span class="line">**********************</span><br><span class="line">args= (1, &#x27;b&#x27;, &#x27;c&#x27;)</span><br><span class="line">kwargs= &#123;&#x27;a&#x27;: 1, &#x27;c&#x27;: &#x27;c&#x27;, &#x27;b&#x27;: &#x27;b&#x27;&#125;</span><br></pre></td></tr></table></figure>
 
-<p>若还是不能理解的话，建议阅读这篇文章：<a href="http://blog.csdn.net/FeiSan/article/details/1729905" target="_blank" rel="noopener">http://blog.csdn.net/FeiSan/article/details/1729905</a></p>
+<p>若还是不能理解的话，建议阅读这篇文章：<a href="http://blog.csdn.net/FeiSan/article/details/1729905">http://blog.csdn.net/FeiSan/article/details/1729905</a></p>
 </section>
     <!-- Tags START -->
     
@@ -320,7 +328,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
     | All Rights Reserved.
   </p>
 </footer>
@@ -362,6 +370,8 @@
 </script>
 <!-- Baidu Tongji -->
 
+
 <script src="/js/script.js"></script>
+
   </body>
 </html>

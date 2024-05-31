@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="大爱 | 眼前一切都很美丽">
   <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
   
-    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
   
   <title>
     
@@ -16,13 +16,17 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
-    <script src="/js/qrious.js"></script>
+    
+<script src="/js/qrious.js"></script>
+
   
   
   
@@ -51,9 +55,9 @@
   
 
 
-</head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 <div class="wechat-share">
-  <img src="/css/images/logo.png">
+  <img src="/css/images/logo.png" />
 </div>
 
   <body>
@@ -150,9 +154,13 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p>本文主要介绍python异步并发模块concurrent.futures。它非常简单易用，主要用来实现多线程和多进程的异步并发。</p>
-<h2 id="1-模块安装"><a href="#1-模块安装" class="headerlink" title="1. 模块安装"></a>1. 模块安装</h2><p>1) python 3.x中自带了concurrent.futures模块</p>
-<p>2) python 2.7需要安装futures模块，使用命令pip install futures安装即可</p>
-<p>pypi地址：<a href="https://pypi.python.org/pypi/futures/" target="_blank" rel="noopener">https://pypi.python.org/pypi/futures/</a></p>
+<h2 id="1-模块安装"><a href="#1-模块安装" class="headerlink" title="1. 模块安装"></a>1. 模块安装</h2><ol>
+<li><p>python 3.x中自带了concurrent.futures模块</p>
+</li>
+<li><p>python 2.7需要安装futures模块，使用命令pip install futures安装即可</p>
+</li>
+</ol>
+<p>pypi地址：<a href="https://pypi.python.org/pypi/futures/">https://pypi.python.org/pypi/futures/</a></p>
 <h2 id="2-Executor对象"><a href="#2-Executor对象" class="headerlink" title="2. Executor对象"></a>2. Executor对象</h2><p>class concurrent.futures.Executor</p>
 <p>Executor是一个抽象类，它提供了异步执行调用的方法。它不能直接使用，但可以通过它的两个子类ThreadPoolExecutor或者ProcessPoolExecutor进行调用。</p>
 <h3 id="2-1-Executor-submit"><a href="#2-1-Executor-submit" class="headerlink" title="2.1 Executor.submit"></a>2.1 Executor.submit</h3><p>函数原型：Executor.submit(fn, *args, **kwargs)</p>
@@ -160,24 +168,24 @@
 <p>fn：需要异步执行的函数</p>
 <p>*args, **kwargs：fn参数</p>
 <p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#-*- coding:utf-8 -*-</span><br><span class="line">from concurrent import futures</span><br><span class="line"> </span><br><span class="line">def test(num):</span><br><span class="line">    import time</span><br><span class="line">    return time.ctime(),num</span><br><span class="line"> </span><br><span class="line">with futures.ThreadPoolExecutor(max_workers=1) as executor:</span><br><span class="line">    future = executor.submit(test,1)</span><br><span class="line">    print future.result()</span><br><span class="line"> </span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">(&apos;Tue Jan 17 15:23:10 2017&apos;, 1)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#-*- coding:utf-8 -*-</span><br><span class="line">from concurrent import futures</span><br><span class="line"> </span><br><span class="line">def test(num):</span><br><span class="line">    import time</span><br><span class="line">    return time.ctime(),num</span><br><span class="line"> </span><br><span class="line">with futures.ThreadPoolExecutor(max_workers=1) as executor:</span><br><span class="line">    future = executor.submit(test,1)</span><br><span class="line">    print future.result()</span><br><span class="line"> </span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">(&#x27;Tue Jan 17 15:23:10 2017&#x27;, 1)</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-2-Executor-map-func-iterables-timeout-None"><a href="#2-2-Executor-map-func-iterables-timeout-None" class="headerlink" title="2.2 Executor.map(func, *iterables, timeout=None)"></a>2.2 Executor.map(func, *iterables, timeout=None)</h3><p>相当于map(func, *iterables)，但是func是异步执行。timeout的值可以是int或float，如果操作超时，会返回raisesTimeoutError；如果不指定timeout参数，则不设置超时间。</p>
+<h3 id="2-2-Executor-map-func-iterables-timeout-None"><a href="#2-2-Executor-map-func-iterables-timeout-None" class="headerlink" title="2.2 Executor.map(func, *iterables, timeout&#x3D;None)"></a>2.2 Executor.map(func, *iterables, timeout&#x3D;None)</h3><p>相当于map(func, *iterables)，但是func是异步执行。timeout的值可以是int或float，如果操作超时，会返回raisesTimeoutError；如果不指定timeout参数，则不设置超时间。</p>
 <p>func：需要异步执行的函数</p>
 <p>*iterables：可迭代对象，如列表等。每一次func执行，都会从iterables中取参数。</p>
 <p>timeout：设置每次异步操作的超时时间</p>
 <p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#-*- coding:utf-8 -*-</span><br><span class="line">from concurrent import futures</span><br><span class="line"> </span><br><span class="line">def test(num):</span><br><span class="line">    import time</span><br><span class="line">    return time.ctime(),num</span><br><span class="line"> </span><br><span class="line">data=[1,2,3]</span><br><span class="line">with futures.ThreadPoolExecutor(max_workers=1) as executor:</span><br><span class="line">    for future in executor.map(test,data):</span><br><span class="line">        print future</span><br><span class="line"> </span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">(&apos;Tue Jan 17 15:23:47 2017&apos;, 1)</span><br><span class="line">(&apos;Tue Jan 17 15:23:47 2017&apos;, 2)</span><br><span class="line">(&apos;Tue Jan 17 15:23:47 2017&apos;, 3)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#-*- coding:utf-8 -*-</span><br><span class="line">from concurrent import futures</span><br><span class="line"> </span><br><span class="line">def test(num):</span><br><span class="line">    import time</span><br><span class="line">    return time.ctime(),num</span><br><span class="line"> </span><br><span class="line">data=[1,2,3]</span><br><span class="line">with futures.ThreadPoolExecutor(max_workers=1) as executor:</span><br><span class="line">    for future in executor.map(test,data):</span><br><span class="line">        print future</span><br><span class="line"> </span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">(&#x27;Tue Jan 17 15:23:47 2017&#x27;, 1)</span><br><span class="line">(&#x27;Tue Jan 17 15:23:47 2017&#x27;, 2)</span><br><span class="line">(&#x27;Tue Jan 17 15:23:47 2017&#x27;, 3)</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-3-Executor-shutdown-wait-True"><a href="#2-3-Executor-shutdown-wait-True" class="headerlink" title="2.3 Executor.shutdown(wait=True)"></a>2.3 Executor.shutdown(wait=True)</h3><p>释放系统资源,在Executor.submit()或 Executor.map()等异步操作后调用。使用with语句可以避免显式调用此方法。</p>
+<h3 id="2-3-Executor-shutdown-wait-True"><a href="#2-3-Executor-shutdown-wait-True" class="headerlink" title="2.3 Executor.shutdown(wait&#x3D;True)"></a>2.3 Executor.shutdown(wait&#x3D;True)</h3><p>释放系统资源,在Executor.submit()或 Executor.map()等异步操作后调用。使用with语句可以避免显式调用此方法。</p>
 <h2 id="3-ThreadPoolExecutor对象"><a href="#3-ThreadPoolExecutor对象" class="headerlink" title="3. ThreadPoolExecutor对象"></a>3. ThreadPoolExecutor对象</h2><p>ThreadPoolExecutor类是Executor子类，使用线程池执行异步调用.</p>
 <p>class concurrent.futures.ThreadPoolExecutor(max_workers)</p>
 <p>使用max_workers数目的线程池执行异步调用</p>
 <h2 id="4-ProcessPoolExecutor对象"><a href="#4-ProcessPoolExecutor对象" class="headerlink" title="4. ProcessPoolExecutor对象"></a>4. ProcessPoolExecutor对象</h2><p>ThreadPoolExecutor类是Executor子类，使用进程池执行异步调用.</p>
-<p>class concurrent.futures.ProcessPoolExecutor(max_workers=None)</p>
+<p>class concurrent.futures.ProcessPoolExecutor(max_workers&#x3D;None)</p>
 <p>使用max_workers数目的进程池执行异步调用，如果max_workers为None则使用机器的处理器数目（如4核机器max_worker配置为None时，则使用4个进程进行异步并发）。</p>
 <p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#-*- coding:utf-8 -*-</span><br><span class="line">from concurrent import futures</span><br><span class="line"> </span><br><span class="line">def test(num):</span><br><span class="line">    import time</span><br><span class="line">    return time.ctime(),num</span><br><span class="line"> </span><br><span class="line">def muti_exec(m,n):</span><br><span class="line">    #m 并发次数</span><br><span class="line">    #n 运行次数</span><br><span class="line"> </span><br><span class="line">    with futures.ProcessPoolExecutor(max_workers=m) as executor: #多进程</span><br><span class="line">    #with futures.ThreadPoolExecutor(max_workers=m) as executor: #多线程</span><br><span class="line">        executor_dict=dict((executor.submit(test,times), times) for times in range(m*n))</span><br><span class="line"> </span><br><span class="line">    for future in futures.as_completed(executor_dict):</span><br><span class="line">        times = executor_dict[future]</span><br><span class="line">        if future.exception() is not None:</span><br><span class="line">            print(&apos;%r generated an exception: %s&apos; % (times,future.exception()))</span><br><span class="line">        else:</span><br><span class="line">            print(&apos;RunTimes:%d,Res:%s&apos;% (times, future.result()))</span><br><span class="line"> </span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    muti_exec(5,1)</span><br><span class="line"> </span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">RunTimes:0,Res:(&apos;Tue Jan 17 15:56:53 2017&apos;, 0)</span><br><span class="line">RunTimes:4,Res:(&apos;Tue Jan 17 15:56:53 2017&apos;, 4)</span><br><span class="line">RunTimes:3,Res:(&apos;Tue Jan 17 15:56:53 2017&apos;, 3)</span><br><span class="line">RunTimes:1,Res:(&apos;Tue Jan 17 15:56:53 2017&apos;, 1)</span><br><span class="line">RunTimes:2,Res:(&apos;Tue Jan 17 15:56:53 2017&apos;, 2)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#-*- coding:utf-8 -*-</span><br><span class="line">from concurrent import futures</span><br><span class="line"> </span><br><span class="line">def test(num):</span><br><span class="line">    import time</span><br><span class="line">    return time.ctime(),num</span><br><span class="line"> </span><br><span class="line">def muti_exec(m,n):</span><br><span class="line">    #m 并发次数</span><br><span class="line">    #n 运行次数</span><br><span class="line"> </span><br><span class="line">    with futures.ProcessPoolExecutor(max_workers=m) as executor: #多进程</span><br><span class="line">    #with futures.ThreadPoolExecutor(max_workers=m) as executor: #多线程</span><br><span class="line">        executor_dict=dict((executor.submit(test,times), times) for times in range(m*n))</span><br><span class="line"> </span><br><span class="line">    for future in futures.as_completed(executor_dict):</span><br><span class="line">        times = executor_dict[future]</span><br><span class="line">        if future.exception() is not None:</span><br><span class="line">            print(&#x27;%r generated an exception: %s&#x27; % (times,future.exception()))</span><br><span class="line">        else:</span><br><span class="line">            print(&#x27;RunTimes:%d,Res:%s&#x27;% (times, future.result()))</span><br><span class="line"> </span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    muti_exec(5,1)</span><br><span class="line"> </span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">RunTimes:0,Res:(&#x27;Tue Jan 17 15:56:53 2017&#x27;, 0)</span><br><span class="line">RunTimes:4,Res:(&#x27;Tue Jan 17 15:56:53 2017&#x27;, 4)</span><br><span class="line">RunTimes:3,Res:(&#x27;Tue Jan 17 15:56:53 2017&#x27;, 3)</span><br><span class="line">RunTimes:1,Res:(&#x27;Tue Jan 17 15:56:53 2017&#x27;, 1)</span><br><span class="line">RunTimes:2,Res:(&#x27;Tue Jan 17 15:56:53 2017&#x27;, 2)</span><br></pre></td></tr></table></figure>
 
 <p>建议使用多进程并发而不是多线程并发，理由如下。</p>
 <h2 id="5-Python-GIL相关"><a href="#5-Python-GIL相关" class="headerlink" title="5. Python GIL相关"></a>5. Python GIL相关</h2><p>要理解GIL的含义，我们需要从Python的基础讲起。像C++这样的语言是编译型语言，所谓编译型语言，是指程序输入到编译器，编译器再根据语言的语 法进行解析，然后翻译成语言独立的中间表示，最终链接成具有高度优化的机器码的可执行程序。编译器之所以可以深层次的对代码进行优化，是因为它可以看到整 个程序（或者一大块独立的部分）。这使得它可以对不同的语言指令之间的交互进行推理，从而给出更有效的优化手段。</p>
@@ -186,7 +194,7 @@
 <p>那么，不同线程同时访问时，数据的保护机制是怎样的呢？答案是解释器全局锁。从名字上看能告诉我们很多东西，很显然，这是一个加在解释器上的全局（从解释器的角度看）锁（从互斥或者类似角度看）。这种方式当然很安全，但是它有一层隐含的意思（Python初学者需要了解这个）：对于任何Python程序，不管有多少的处理器，任何时候都总是只有一个线程在执行。</p>
 <p>”为什么我全新的多线程Python程序运行得比其只有一个线程的时候还要慢？“许多人在问这个问题时还是非常犯晕的，因为显然一个具有两个线程的程序要比其只有一个线程时要快（假设该程序确实是可并行的）。事实上，这个问题被问得如此频繁以至于Python的专家们精心制作了一个标准答案：”不要使用多线程，请使用多进程”。</p>
 <p>所以，对于计算密集型的，我还是建议不要使用python的多线程而是使用多进程方式，而对于IO密集型的，还是劝你使用多进程方式，因为使用多线程方式出了问题，最后都不知道问题出在了哪里，这是多么让人沮丧的一件事情！</p>
-<h2 id="6-参考文档"><a href="#6-参考文档" class="headerlink" title="6. 参考文档"></a>6. 参考文档</h2><p><a href="http://pythonhosted.org/futures/" target="_blank" rel="noopener">http://pythonhosted.org/futures/</a></p>
+<h2 id="6-参考文档"><a href="#6-参考文档" class="headerlink" title="6. 参考文档"></a>6. 参考文档</h2><p><a href="http://pythonhosted.org/futures/">http://pythonhosted.org/futures/</a></p>
 </section>
     <!-- Tags START -->
     
@@ -274,7 +282,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-模块安装"><span class="toc-nav-text">1. 模块安装</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Executor对象"><span class="toc-nav-text">2. Executor对象</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-1-Executor-submit"><span class="toc-nav-text">2.1 Executor.submit</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-2-Executor-map-func-iterables-timeout-None"><span class="toc-nav-text">2.2 Executor.map(func, *iterables, timeout=None)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-3-Executor-shutdown-wait-True"><span class="toc-nav-text">2.3 Executor.shutdown(wait=True)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-ThreadPoolExecutor对象"><span class="toc-nav-text">3. ThreadPoolExecutor对象</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-ProcessPoolExecutor对象"><span class="toc-nav-text">4. ProcessPoolExecutor对象</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#5-Python-GIL相关"><span class="toc-nav-text">5. Python GIL相关</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#6-参考文档"><span class="toc-nav-text">6. 参考文档</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85"><span class="toc-nav-text">1. 模块安装</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Executor%E5%AF%B9%E8%B1%A1"><span class="toc-nav-text">2. Executor对象</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-1-Executor-submit"><span class="toc-nav-text">2.1 Executor.submit</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-2-Executor-map-func-iterables-timeout-None"><span class="toc-nav-text">2.2 Executor.map(func, *iterables, timeout&#x3D;None)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-3-Executor-shutdown-wait-True"><span class="toc-nav-text">2.3 Executor.shutdown(wait&#x3D;True)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-ThreadPoolExecutor%E5%AF%B9%E8%B1%A1"><span class="toc-nav-text">3. ThreadPoolExecutor对象</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-ProcessPoolExecutor%E5%AF%B9%E8%B1%A1"><span class="toc-nav-text">4. ProcessPoolExecutor对象</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#5-Python-GIL%E7%9B%B8%E5%85%B3"><span class="toc-nav-text">5. Python GIL相关</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#6-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-nav-text">6. 参考文档</span></a></li></ol>
     
   </div>
 </aside>
@@ -350,7 +358,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
     | All Rights Reserved.
   </p>
 </footer>
@@ -392,6 +400,8 @@
 </script>
 <!-- Baidu Tongji -->
 
+
 <script src="/js/script.js"></script>
+
   </body>
 </html>

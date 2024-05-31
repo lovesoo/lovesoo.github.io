@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="大爱 | 眼前一切都很美丽">
   <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
   
-    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
   
   <title>
     
@@ -16,13 +16,17 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
-    <script src="/js/qrious.js"></script>
+    
+<script src="/js/qrious.js"></script>
+
   
   
   
@@ -51,9 +55,9 @@
   
 
 
-</head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 <div class="wechat-share">
-  <img src="/css/images/logo.png">
+  <img src="/css/images/logo.png" />
 </div>
 
   <body>
@@ -162,23 +166,22 @@
 <p>所有的测试类以相同方式运行：通过testMatch匹配的找到类中的方法，并以全新的测试类实例运行测试方法。</p>
 <p>像继承于unittest.TestCase的子类一样，测试类可以定义setUp tearDown函数，它们将会分别在每一个测试方法之前和之后运行。类级别setup fixture可以被命名为setup_class, setupClass, setUpClass, setupAll, setUpAll；teardown被命名为teardown_class, teardownClass, tearDownClass, teardownAll, tearDownAll, 类级别setup和teardown必须是类方法。</p>
 <h2 id="5-Test-functions"><a href="#5-Test-functions" class="headerlink" title="5. Test functions"></a>5. Test functions</h2><p>模块中任何匹配TestMatch的方法都将会被FunctionTestCase装饰，然后以用例的方式运行。最简单的失败和成功的用例如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def test():</span><br><span class="line">    assert False</span><br><span class="line">def test():</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def test():</span><br><span class="line">    assert False</span><br><span class="line">def test():</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
 
 <p>测试函数也可定义setup和teardown属性，它们将会在测试函数开始和结束的时候运行。还可以使用@with_setup装饰器，该方式尤其适用于在相同的模块中的许多方法需要相同的setup操作。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def setup_func():</span><br><span class="line">    &quot;set up test fixtures&quot;</span><br><span class="line"> </span><br><span class="line">def teardown_func():</span><br><span class="line">    &quot;tear down test fixtures&quot;</span><br><span class="line"> </span><br><span class="line">@with_setup(setup_func, teardown_func)</span><br><span class="line">def test():</span><br><span class="line">    &quot;test ...&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def setup_func():</span><br><span class="line">    &quot;set up test fixtures&quot;</span><br><span class="line"> </span><br><span class="line">def teardown_func():</span><br><span class="line">    &quot;tear down test fixtures&quot;</span><br><span class="line"> </span><br><span class="line">@with_setup(setup_func, teardown_func)</span><br><span class="line">def test():</span><br><span class="line">    &quot;test ...&quot;</span><br></pre></td></tr></table></figure>
 
 <h2 id="6-Test-generators"><a href="#6-Test-generators" class="headerlink" title="6. Test generators"></a>6. Test generators</h2><p>nose支持生成器测试函数和测试方法。如下： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def test_evens():</span><br><span class="line">    for i in range(0, 5):</span><br><span class="line">        yield check_even, i, i*3</span><br><span class="line"> </span><br><span class="line">def check_even(n, nn):</span><br><span class="line">    assert n % 2 == 0 or nn % 2 == 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def test_evens():</span><br><span class="line">    for i in range(0, 5):</span><br><span class="line">        yield check_even, i, i*3</span><br><span class="line"> </span><br><span class="line">def check_even(n, nn):</span><br><span class="line">    assert n % 2 == 0 or nn % 2 == 0</span><br></pre></td></tr></table></figure>
 
 <p>上述代码执行五次测试。nose生成迭代器，创建一个函数测试用例包，包装每一个yield tuple。</p>
 <p>Test generators必须yield tuples,且第一个元素必须是可调用的函数，其他的元素作为参数传递。</p>
 <p>Test generators测试用例默认名称是函数或方法的名字+参数。如果你想要显示不同的名称，可以设置yield函数的description属性。</p>
 <p>Test generators中定义的setup和teardown函数仅仅会被执行一次。若想对于每一个yield的用例都执行，可将setup和teardown属性设置到被yield的函数中，或者yield一个带有setup和teardown属性的可调用对象的实例。</p>
 <p>比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@with_setup(setup_func, teardown_func)</span><br><span class="line">def test_generator():</span><br><span class="line">    # ...</span><br><span class="line">    yield func, arg, arg # ...</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@with_setup(setup_func, teardown_func)</span><br><span class="line">def test_generator():</span><br><span class="line">    # ...</span><br><span class="line">    yield func, arg, arg # ...</span><br></pre></td></tr></table></figure>
 <p>上面的例子中，setup和teardown只会被执行一次。与此相比：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def test_generator():</span><br><span class="line">    # ...</span><br><span class="line">    yield func, arg, arg # ...</span><br><span class="line"> </span><br><span class="line">@with_setup(setup_func, teardown_func)</span><br><span class="line">def func(arg):</span><br><span class="line">    assert something_about(arg)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def test_generator():</span><br><span class="line">    # ...</span><br><span class="line">    yield func, arg, arg # ...</span><br><span class="line"> </span><br><span class="line">@with_setup(setup_func, teardown_func)</span><br><span class="line">def func(arg):</span><br><span class="line">    assert something_about(arg)</span><br></pre></td></tr></table></figure>
 
 <p>这个例子中，setup和teardown函数将会在每一次yield中执行。</p>
 <p>对于生成器方法，class中的setUp和tearDown方法将会在每一个生成的测试用例之前或者之后运行。setUp和tearDown方法并不会在生成器方法本身 之前运行，这就导致在第一个用例运行之前setUp运行两次，之间却没有tearDown运行。</p>
@@ -262,7 +265,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#0-概述"><span class="toc-nav-text">0. 概述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Fixtures"><span class="toc-nav-text">1. Fixtures</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Test-packages"><span class="toc-nav-text">2. Test packages</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-Test-modules"><span class="toc-nav-text">3. Test modules</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-Test-classes"><span class="toc-nav-text">4. Test classes</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#5-Test-functions"><span class="toc-nav-text">5. Test functions</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#6-Test-generators"><span class="toc-nav-text">6. Test generators</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#0-%E6%A6%82%E8%BF%B0"><span class="toc-nav-text">0. 概述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Fixtures"><span class="toc-nav-text">1. Fixtures</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Test-packages"><span class="toc-nav-text">2. Test packages</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-Test-modules"><span class="toc-nav-text">3. Test modules</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-Test-classes"><span class="toc-nav-text">4. Test classes</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#5-Test-functions"><span class="toc-nav-text">5. Test functions</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#6-Test-generators"><span class="toc-nav-text">6. Test generators</span></a></li></ol>
     
   </div>
 </aside>
@@ -338,7 +341,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
     | All Rights Reserved.
   </p>
 </footer>
@@ -380,6 +383,8 @@
 </script>
 <!-- Baidu Tongji -->
 
+
 <script src="/js/script.js"></script>
+
   </body>
 </html>

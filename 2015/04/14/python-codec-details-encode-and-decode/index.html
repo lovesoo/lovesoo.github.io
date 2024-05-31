@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="大爱 | 眼前一切都很美丽">
   <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
   
-    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
   
   <title>
     
@@ -16,13 +16,17 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
-    <script src="/js/qrious.js"></script>
+    
+<script src="/js/qrious.js"></script>
+
   
   
   
@@ -51,9 +55,9 @@
   
 
 
-</head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 <div class="wechat-share">
-  <img src="/css/images/logo.png">
+  <img src="/css/images/logo.png" />
 </div>
 
   <body>
@@ -150,19 +154,30 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p>在Python内部，字符串使用unicode编码，因此，在做编码转换时，通常需要以unicode作为中间编码，即先将其他编码的字符串解码（decode）成unicode，再从unicode编码（encode）成另一种编码。</p>
-<p>1) decode的作用是将其他编码的字符串转换成unicode编码，如str1.decode(‘gbk’)，表示将gbk编码的字符串str1转换成unicode编码。</p>
-<p>2) encode的作用是将unicode编码转换成其他编码的字符串，如str2.encode(‘gbk’)，表示将unicode编码的字符串str2转换成gbk编码。</p>
+<ol>
+<li><p>decode的作用是将其他编码的字符串转换成unicode编码，如str1.decode(‘gbk’)，表示将gbk编码的字符串str1转换成unicode编码。</p>
+</li>
+<li><p>encode的作用是将unicode编码转换成其他编码的字符串，如str2.encode(‘gbk’)，表示将unicode编码的字符串str2转换成gbk编码。</p>
+</li>
+</ol>
 <p>因此，转码的时候一定要先搞明白，字符串str究竟是什么编码格式，先decode成unicode，再encode成其他编码。</p>
 <p>其中，常见编码格式如下：</p>
-<p>1) GB2312编码：适用于汉字处理、汉字通信等系统之间的信息交换</p>
-<p>2) GBK编码：是汉字编码标准之一，是在 GB2312-80 标准基础上的内码扩展规范，使用了双字节编码</p>
-<p>3) ASCII编码：是对英语字符和二进制之间的关系做的统一规定</p>
-<p>4) Unicode编码：这是一种世界上所有字符的编码。当然了它没有规定的存储方式。</p>
-<p>5) UTF-8编码：是 Unicode Transformation Format - 8 bit 的缩写， UTF-8 是 Unicode 的一种实现方式。它是可变长的编码方式，可以使用 1~4 个字节表示一个字符，可根据不同的符号而变化字节长度。</p>
+<ol>
+<li><p>GB2312编码：适用于汉字处理、汉字通信等系统之间的信息交换</p>
+</li>
+<li><p>GBK编码：是汉字编码标准之一，是在 GB2312-80 标准基础上的内码扩展规范，使用了双字节编码</p>
+</li>
+<li><p>ASCII编码：是对英语字符和二进制之间的关系做的统一规定</p>
+</li>
+<li><p>Unicode编码：这是一种世界上所有字符的编码。当然了它没有规定的存储方式。</p>
+</li>
+<li><p>UTF-8编码：是 Unicode Transformation Format - 8 bit 的缩写， UTF-8 是 Unicode 的一种实现方式。它是可变长的编码方式，可以使用 1~4 个字节表示一个字符，可根据不同的符号而变化字节长度。</p>
+</li>
+</ol>
 <p>示例：</p>
 <p>在一个文本中进行两种编码操作时需要编码转换，读取时用decode将文本原来的编码转换成Unicode，写入时用encode将编码转换成需要转换成的编码。</p>
 <p>代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line"> </span><br><span class="line">content=u&apos;你好&apos; #Unicode格式字符串</span><br><span class="line"> </span><br><span class="line">f1=open(&apos;test.txt&apos;, &apos;w&apos;)</span><br><span class="line">info1 = content.encode(&apos;GBK&apos;) #写入时，编码为GBK</span><br><span class="line">f1.write(info1)</span><br><span class="line">f1.close()</span><br><span class="line"> </span><br><span class="line">f2 = open(&apos;test.txt&apos;, &apos;r&apos;)</span><br><span class="line">info2 = f2.read().decode(&apos;GBK&apos;) #读取时，已知GBK，解码为Unicode</span><br></pre></td></tr></table></figure></section>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line"> </span><br><span class="line">content=u&#x27;你好&#x27; #Unicode格式字符串</span><br><span class="line"> </span><br><span class="line">f1=open(&#x27;test.txt&#x27;, &#x27;w&#x27;)</span><br><span class="line">info1 = content.encode(&#x27;GBK&#x27;) #写入时，编码为GBK</span><br><span class="line">f1.write(info1)</span><br><span class="line">f1.close()</span><br><span class="line"> </span><br><span class="line">f2 = open(&#x27;test.txt&#x27;, &#x27;r&#x27;)</span><br><span class="line">info2 = f2.read().decode(&#x27;GBK&#x27;) #读取时，已知GBK，解码为Unicode</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -325,7 +340,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
     | All Rights Reserved.
   </p>
 </footer>
@@ -367,6 +382,8 @@
 </script>
 <!-- Baidu Tongji -->
 
+
 <script src="/js/script.js"></script>
+
   </body>
 </html>

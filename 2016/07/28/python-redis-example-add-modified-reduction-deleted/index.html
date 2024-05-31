@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="大爱 | 眼前一切都很美丽">
   <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
   
-    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
   
   <title>
     
@@ -16,13 +16,17 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
-    <script src="/js/qrious.js"></script>
+    
+<script src="/js/qrious.js"></script>
+
   
   
   
@@ -51,9 +55,9 @@
   
 
 
-</head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 <div class="wechat-share">
-  <img src="/css/images/logo.png">
+  <img src="/css/images/logo.png" />
 </div>
 
   <body>
@@ -151,23 +155,27 @@
   <article class="post-article">
     <section class="markdown-content"><p>本文主要介绍通过python对redis数据进行操作的方法示例(包括新增、修改、增加、减少、删除等操作)。</p>
 <p>下面的示例代码包括2个demo：</p>
-<p>1) 对string类型数据进行新增、修改、增加、减少及删除的操作示例；</p>
-<p>2) 对sorted set类型数据进行新增、修改、增加及删除的操作示例。</p>
+<ol>
+<li><p>对string类型数据进行新增、修改、增加、减少及删除的操作示例；</p>
+</li>
+<li><p>对sorted set类型数据进行新增、修改、增加及删除的操作示例。</p>
+</li>
+</ol>
 <p>更多的redis操作命令可以参考附录2.</p>
 <p>首先，当然需要安装python的redis库，使用pip命令安装即可：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install redis</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install redis</span><br></pre></td></tr></table></figure>
 
 <p>python操作redis示例代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import redis</span><br><span class="line"> </span><br><span class="line">pool = redis.ConnectionPool(host=&apos;192.168.1.1&apos;,port=7379,db=0)</span><br><span class="line">r = redis.StrictRedis(connection_pool=pool)</span><br><span class="line"> </span><br><span class="line">sname=&apos;StringTest&apos;</span><br><span class="line">stname=&apos;SortedTest&apos;</span><br><span class="line">member=&apos;abc&apos;</span><br><span class="line">modify_score=8  #修改值</span><br><span class="line">add_score=1 #增加值</span><br><span class="line"> </span><br><span class="line">#操作string数据示例</span><br><span class="line">r.set(sname, 123)   #设置</span><br><span class="line">print r.get(sname)  #获取</span><br><span class="line"> </span><br><span class="line">r.incr(sname,456)   #增加</span><br><span class="line">print r.get(sname) </span><br><span class="line"> </span><br><span class="line">r.decr(sname,123)   #减少</span><br><span class="line">print r.get(sname) </span><br><span class="line"> </span><br><span class="line">r.delete(sname) #删除</span><br><span class="line">print r.get(sname)</span><br><span class="line"> </span><br><span class="line">#操作Sorted set数据示例</span><br><span class="line">r.zadd(stname,modify_score,member)  #修改</span><br><span class="line">print member,r.zscore(stname, member)   #获取</span><br><span class="line"> </span><br><span class="line">r.zincrby(stname, member, add_score)    #增加</span><br><span class="line">print member,r.zscore(stname, member)</span><br><span class="line"> </span><br><span class="line">r.zrem(stname, member)  #删除</span><br><span class="line">print member,r.zscore(stname, member)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import redis</span><br><span class="line"> </span><br><span class="line">pool = redis.ConnectionPool(host=&#x27;192.168.1.1&#x27;,port=7379,db=0)</span><br><span class="line">r = redis.StrictRedis(connection_pool=pool)</span><br><span class="line"> </span><br><span class="line">sname=&#x27;StringTest&#x27;</span><br><span class="line">stname=&#x27;SortedTest&#x27;</span><br><span class="line">member=&#x27;abc&#x27;</span><br><span class="line">modify_score=8  #修改值</span><br><span class="line">add_score=1 #增加值</span><br><span class="line"> </span><br><span class="line">#操作string数据示例</span><br><span class="line">r.set(sname, 123)   #设置</span><br><span class="line">print r.get(sname)  #获取</span><br><span class="line"> </span><br><span class="line">r.incr(sname,456)   #增加</span><br><span class="line">print r.get(sname) </span><br><span class="line"> </span><br><span class="line">r.decr(sname,123)   #减少</span><br><span class="line">print r.get(sname) </span><br><span class="line"> </span><br><span class="line">r.delete(sname) #删除</span><br><span class="line">print r.get(sname)</span><br><span class="line"> </span><br><span class="line">#操作Sorted set数据示例</span><br><span class="line">r.zadd(stname,modify_score,member)  #修改</span><br><span class="line">print member,r.zscore(stname, member)   #获取</span><br><span class="line"> </span><br><span class="line">r.zincrby(stname, member, add_score)    #增加</span><br><span class="line">print member,r.zscore(stname, member)</span><br><span class="line"> </span><br><span class="line">r.zrem(stname, member)  #删除</span><br><span class="line">print member,r.zscore(stname, member)</span><br></pre></td></tr></table></figure>
 
 <p>运行结果如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;</span><br><span class="line">123</span><br><span class="line">579</span><br><span class="line">456</span><br><span class="line">None</span><br><span class="line">abc 8.0</span><br><span class="line">abc 9.0</span><br><span class="line">abc None</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;</span><br><span class="line">123</span><br><span class="line">579</span><br><span class="line">456</span><br><span class="line">None</span><br><span class="line">abc 8.0</span><br><span class="line">abc 9.0</span><br><span class="line">abc None</span><br></pre></td></tr></table></figure>
 
 <p>附录：</p>
 <ol>
-<li><p>Redis库：<a href="https://pypi.python.org/pypi/redis/" target="_blank" rel="noopener">https://pypi.python.org/pypi/redis/</a></p>
+<li><p>Redis库：<a href="https://pypi.python.org/pypi/redis/">https://pypi.python.org/pypi/redis/</a></p>
 </li>
-<li><p>Redis教程（可以查看相关类型操作命令）：<a href="http://www.runoob.com/redis/redis-tutorial.html" target="_blank" rel="noopener">http://www.runoob.com/redis/redis-tutorial.html</a></p>
+<li><p>Redis教程（可以查看相关类型操作命令）：<a href="http://www.runoob.com/redis/redis-tutorial.html">http://www.runoob.com/redis/redis-tutorial.html</a></p>
 </li>
 </ol>
 </section>
@@ -325,7 +333,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
     | All Rights Reserved.
   </p>
 </footer>
@@ -367,6 +375,8 @@
 </script>
 <!-- Baidu Tongji -->
 
+
 <script src="/js/script.js"></script>
+
   </body>
 </html>

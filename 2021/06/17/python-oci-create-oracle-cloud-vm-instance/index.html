@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="大爱 | 眼前一切都很美丽">
   <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
   
-    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
   
   <title>
     
@@ -16,13 +16,17 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
-    <script src="/js/qrious.js"></script>
+    
+<script src="/js/qrious.js"></script>
+
   
   
   
@@ -51,9 +55,9 @@
   
 
 
-</head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 <div class="wechat-share">
-  <img src="/css/images/logo.png">
+  <img src="/css/images/logo.png" />
 </div>
 
   <body>
@@ -153,27 +157,27 @@
 <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>最近才后知后觉知道Oracle Cloud有免费的云服务器可以申请，大家申请比较多的是韩国或日本地区的4核24G ARM主机，手工在网页申请总提示容量不足。简单研究了下看到Oracle官方提供了OCI工具，也提供了Java Python等语言SDK接口，话不多说，脚本撸起！</p>
 <h2 id="2-模块安装"><a href="#2-模块安装" class="headerlink" title="2. 模块安装"></a>2. 模块安装</h2><p>本机环境：Windows 10 + Python 3</p>
 <p>Oracle oci模块，使用命令pip install oci安装即可</p>
-<p>pypi地址：<a href="https://pypi.python.org/pypi/oci/" target="_blank" rel="noopener">https://pypi.python.org/pypi/oci/</a></p>
+<p>pypi地址：<a href="https://pypi.python.org/pypi/oci/">https://pypi.python.org/pypi/oci/</a></p>
 <h2 id="3-API密钥配置"><a href="#3-API密钥配置" class="headerlink" title="3. API密钥配置"></a>3. API密钥配置</h2><p>1、登录Oracle Cloud账号后，右上角点击账号后选择 “用户设置” -&gt; “API密钥” -&gt; “添加 API 密钥” -&gt; “下载私有密钥” -&gt; “添加”，此时系统会生成API秘钥对用以用户鉴权。</p>
 <p><img src="/images/oci-account.jpg" alt="新建用户密钥"></p>
-<p>2、本地新建~/.oci/config文件（我的路径为C:\Users\admin.oci\config），在最后一步生成的配置文件拷贝至config文件中</p>
+<p>2、本地新建~&#x2F;.oci&#x2F;config文件（我的路径为C:\Users\admin.oci\config），在最后一步生成的配置文件拷贝至config文件中</p>
 <p><img src="/images/oci-config.jpg" alt="用户配置"></p>
 <p>3、将下载的私钥拷贝至同一目录下，打开config文件，修改最后一行key_file内容，填写私钥的本地绝对路径</p>
 <p><img src="/images/oci-config-keyfile.jpg" alt="key_file配置"></p>
 <h2 id="4-账户验证"><a href="#4-账户验证" class="headerlink" title="4. 账户验证"></a>4. 账户验证</h2><p>配置好config文件之后，可以运行官方提供的示例代码，校验用户鉴权是否成功，此代码是调用用户接口新增一个名为TestUser的账户。</p>
-<p>其中endpoint url需要修改为你申请账户所在区域的地址，如韩国首尔地址 <a href="https://identity.ap-seoul-1.oraclecloud.com/20160918/users/" target="_blank" rel="noopener">https://identity.ap-seoul-1.oraclecloud.com/20160918/users/</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"># coding: utf-8</span><br><span class="line"># Copyright (c) 2016, 2020, Oracle and/or its affiliates.  All rights reserved.</span><br><span class="line"># This software is dual-licensed to you under the Universal Permissive License (UPL) 1.0 as shown at https://oss.oracle.com/licenses/upl </span><br><span class="line"># or Apache License 2.0 as shown at http://www.apache.org/licenses/LICENSE-2.0. You may choose either license.</span><br><span class="line"></span><br><span class="line">import requests</span><br><span class="line">from oci.config import from_file</span><br><span class="line">from oci.signer import Signer</span><br><span class="line"></span><br><span class="line">config = from_file()</span><br><span class="line">auth = Signer(</span><br><span class="line">tenancy=config[&apos;tenancy&apos;],</span><br><span class="line">user=config[&apos;user&apos;],</span><br><span class="line">fingerprint=config[&apos;fingerprint&apos;],</span><br><span class="line">private_key_file_location=config[&apos;key_file&apos;],</span><br><span class="line">pass_phrase=config[&apos;pass_phrase&apos;]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">endpoint = &apos;https://identity.us-phoenix-1.oraclecloud.com/20160918/users/&apos;</span><br><span class="line"></span><br><span class="line">body = &#123;</span><br><span class="line">&apos;compartmentId&apos;: config[&apos;tenancy&apos;],  # root compartment</span><br><span class="line">&apos;name&apos;: &apos;TestUser&apos;,</span><br><span class="line">&apos;description&apos;: &apos;Created with a raw request&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">response = requests.post(endpoint, json=body, auth=auth)</span><br><span class="line">response.raise_for_status()</span><br><span class="line"></span><br><span class="line">print(response.json()[&apos;id&apos;])</span><br></pre></td></tr></table></figure>
+<p>其中endpoint url需要修改为你申请账户所在区域的地址，如韩国首尔地址 <a href="https://identity.ap-seoul-1.oraclecloud.com/20160918/users/">https://identity.ap-seoul-1.oraclecloud.com/20160918/users/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"># coding: utf-8</span><br><span class="line"># Copyright (c) 2016, 2020, Oracle and/or its affiliates.  All rights reserved.</span><br><span class="line"># This software is dual-licensed to you under the Universal Permissive License (UPL) 1.0 as shown at https://oss.oracle.com/licenses/upl </span><br><span class="line"># or Apache License 2.0 as shown at http://www.apache.org/licenses/LICENSE-2.0. You may choose either license.</span><br><span class="line"></span><br><span class="line">import requests</span><br><span class="line">from oci.config import from_file</span><br><span class="line">from oci.signer import Signer</span><br><span class="line"></span><br><span class="line">config = from_file()</span><br><span class="line">auth = Signer(</span><br><span class="line">tenancy=config[&#x27;tenancy&#x27;],</span><br><span class="line">user=config[&#x27;user&#x27;],</span><br><span class="line">fingerprint=config[&#x27;fingerprint&#x27;],</span><br><span class="line">private_key_file_location=config[&#x27;key_file&#x27;],</span><br><span class="line">pass_phrase=config[&#x27;pass_phrase&#x27;]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">endpoint = &#x27;https://identity.us-phoenix-1.oraclecloud.com/20160918/users/&#x27;</span><br><span class="line"></span><br><span class="line">body = &#123;</span><br><span class="line">&#x27;compartmentId&#x27;: config[&#x27;tenancy&#x27;],  # root compartment</span><br><span class="line">&#x27;name&#x27;: &#x27;TestUser&#x27;,</span><br><span class="line">&#x27;description&#x27;: &#x27;Created with a raw request&#x27;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">response = requests.post(endpoint, json=body, auth=auth)</span><br><span class="line">response.raise_for_status()</span><br><span class="line"></span><br><span class="line">print(response.json()[&#x27;id&#x27;])</span><br></pre></td></tr></table></figure>
 
 <h2 id="5-创建VM实例"><a href="#5-创建VM实例" class="headerlink" title="5. 创建VM实例"></a>5. 创建VM实例</h2><p>在页面上创建VM实例，配置好申请的系统及配置（如Ubuntu, ARM 4核24G），打开浏览器F12调试窗口，点击“创建”按钮，此时会提示容量不足，申请失败。</p>
-<p>找到名为 instances/ 的请求，可以看到此接口报错500，Response是{‘code’: ‘InternalError’, ‘message’: ‘Out of host capacity.’}，拷贝请求URL：<br><a href="https://iaas.ap-seoul-1.oraclecloud.com/20160918/instances/" target="_blank" rel="noopener">https://iaas.ap-seoul-1.oraclecloud.com/20160918/instances/</a></p>
+<p>找到名为 instances&#x2F; 的请求，可以看到此接口报错500，Response是{‘code’: ‘InternalError’, ‘message’: ‘Out of host capacity.’}，拷贝请求URL：<br><a href="https://iaas.ap-seoul-1.oraclecloud.com/20160918/instances/">https://iaas.ap-seoul-1.oraclecloud.com/20160918/instances/</a></p>
 <p><img src="/images/oci-requests.jpg" alt="oci请求"></p>
 <p>下拉找到Request Payload，点击 view source，拷贝完整的请求体，至如下代码body中 (注意替换代码中的true为True，false为False)：</p>
 <p><img src="/images/oci-requests-body.jpg" alt="oci请求体"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import time</span><br><span class="line">from oci.config import from_file</span><br><span class="line">from oci.signer import Signer</span><br><span class="line"></span><br><span class="line">config = from_file()</span><br><span class="line">auth = Signer(</span><br><span class="line">    tenancy=config[&apos;tenancy&apos;],</span><br><span class="line">    user=config[&apos;user&apos;],</span><br><span class="line">    fingerprint=config[&apos;fingerprint&apos;],</span><br><span class="line">    private_key_file_location=config[&apos;key_file&apos;],</span><br><span class="line">    pass_phrase=config[&apos;pass_phrase&apos;]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">endpoint = &apos;https://iaas.ap-seoul-1.oraclecloud.com/20160918/instances/&apos;</span><br><span class="line"></span><br><span class="line">body = &#123; &#125; # add body here</span><br><span class="line"></span><br><span class="line">i = 1</span><br><span class="line">while True:</span><br><span class="line">    response = requests.post(endpoint, json=body, auth=auth)</span><br><span class="line">    </span><br><span class="line">    print(&quot;[&#123;&#125;] Time: &#123;&#125;, Return Code: &#123;&#125;, Response: &#123;&#125;&quot;.format(</span><br><span class="line">        time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, time.localtime()),</span><br><span class="line">        i,</span><br><span class="line">        response.status_code,</span><br><span class="line">        response.json()))</span><br><span class="line">    </span><br><span class="line">    if response.status_code == 200:</span><br><span class="line">        break</span><br><span class="line">    else:</span><br><span class="line">        i += 1</span><br><span class="line">        time.sleep(10)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import time</span><br><span class="line">from oci.config import from_file</span><br><span class="line">from oci.signer import Signer</span><br><span class="line"></span><br><span class="line">config = from_file()</span><br><span class="line">auth = Signer(</span><br><span class="line">    tenancy=config[&#x27;tenancy&#x27;],</span><br><span class="line">    user=config[&#x27;user&#x27;],</span><br><span class="line">    fingerprint=config[&#x27;fingerprint&#x27;],</span><br><span class="line">    private_key_file_location=config[&#x27;key_file&#x27;],</span><br><span class="line">    pass_phrase=config[&#x27;pass_phrase&#x27;]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">endpoint = &#x27;https://iaas.ap-seoul-1.oraclecloud.com/20160918/instances/&#x27;</span><br><span class="line"></span><br><span class="line">body = &#123; &#125; # add body here</span><br><span class="line"></span><br><span class="line">i = 1</span><br><span class="line">while True:</span><br><span class="line">    response = requests.post(endpoint, json=body, auth=auth)</span><br><span class="line">    </span><br><span class="line">    print(&quot;[&#123;&#125;] Time: &#123;&#125;, Return Code: &#123;&#125;, Response: &#123;&#125;&quot;.format(</span><br><span class="line">        time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, time.localtime()),</span><br><span class="line">        i,</span><br><span class="line">        response.status_code,</span><br><span class="line">        response.json()))</span><br><span class="line">    </span><br><span class="line">    if response.status_code == 200:</span><br><span class="line">        break</span><br><span class="line">    else:</span><br><span class="line">        i += 1</span><br><span class="line">        time.sleep(10)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>运行代码，即可间隔10s循环请求调用OCI接口申请ARM VM实例。</p>
 <p><img src="/images/oci-script.jpg" alt="运行oci请求"></p>
-<h2 id="6-参考文档"><a href="#6-参考文档" class="headerlink" title="6. 参考文档"></a>6. 参考文档</h2><p><a href="https://www.cnblogs.com/steinven/p/14786012.html" target="_blank" rel="noopener">https://www.cnblogs.com/steinven/p/14786012.html</a><br><a href="https://www.bobobk.com/612.html" target="_blank" rel="noopener">https://www.bobobk.com/612.html</a><br><a href="https://docs.oracle.com/en-us/iaas/Content/API/Concepts/signingrequests.htm#seven__Python" target="_blank" rel="noopener">https://docs.oracle.com/en-us/iaas/Content/API/Concepts/signingrequests.htm#seven__Python</a></p>
+<h2 id="6-参考文档"><a href="#6-参考文档" class="headerlink" title="6. 参考文档"></a>6. 参考文档</h2><p><a href="https://www.cnblogs.com/steinven/p/14786012.html">https://www.cnblogs.com/steinven/p/14786012.html</a><br><a href="https://www.bobobk.com/612.html">https://www.bobobk.com/612.html</a><br><a href="https://docs.oracle.com/en-us/iaas/Content/API/Concepts/signingrequests.htm#seven__Python">https://docs.oracle.com/en-us/iaas/Content/API/Concepts/signingrequests.htm#seven__Python</a></p>
 </section>
     <!-- Tags START -->
     
@@ -250,7 +254,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-前言"><span class="toc-nav-text">1. 前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-模块安装"><span class="toc-nav-text">2. 模块安装</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-API密钥配置"><span class="toc-nav-text">3. API密钥配置</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-账户验证"><span class="toc-nav-text">4. 账户验证</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#5-创建VM实例"><span class="toc-nav-text">5. 创建VM实例</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#6-参考文档"><span class="toc-nav-text">6. 参考文档</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-%E5%89%8D%E8%A8%80"><span class="toc-nav-text">1. 前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85"><span class="toc-nav-text">2. 模块安装</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-API%E5%AF%86%E9%92%A5%E9%85%8D%E7%BD%AE"><span class="toc-nav-text">3. API密钥配置</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-%E8%B4%A6%E6%88%B7%E9%AA%8C%E8%AF%81"><span class="toc-nav-text">4. 账户验证</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#5-%E5%88%9B%E5%BB%BAVM%E5%AE%9E%E4%BE%8B"><span class="toc-nav-text">5. 创建VM实例</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#6-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-nav-text">6. 参考文档</span></a></li></ol>
     
   </div>
 </aside>
@@ -326,7 +330,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
     | All Rights Reserved.
   </p>
 </footer>
@@ -368,6 +372,8 @@
 </script>
 <!-- Baidu Tongji -->
 
+
 <script src="/js/script.js"></script>
+
   </body>
 </html>

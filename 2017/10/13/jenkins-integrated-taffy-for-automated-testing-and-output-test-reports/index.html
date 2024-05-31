@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="大爱 | 眼前一切都很美丽">
   <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
   
-    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
   
   <title>
     
@@ -16,13 +16,17 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
-    <script src="/js/qrious.js"></script>
+    
+<script src="/js/qrious.js"></script>
+
   
   
   
@@ -51,9 +55,9 @@
   
 
 
-</head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 <div class="wechat-share">
-  <img src="/css/images/logo.png">
+  <img src="/css/images/logo.png" />
 </div>
 
   <body>
@@ -149,13 +153,19 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>本文主要介绍Jenkins集成taffy/nose框架进行自动化测试并输出测试报告方法。</p>
+    <section class="markdown-content"><p>本文主要介绍Jenkins集成taffy&#x2F;nose框架进行自动化测试并输出测试报告方法。</p>
 <h2 id="0、测试环境"><a href="#0、测试环境" class="headerlink" title="0、测试环境"></a>0、测试环境</h2><p>Jenkis主节点部署在CentOS系统上，子节点为Win10 64位系统（即我们本机运行自动化测试脚本的机器）。 另外子节点Windows系统需安装jdk，本文使用版本为jdk-8u144。</p>
-<h2 id="1、新增jenkins节点"><a href="#1、新增jenkins节点" class="headerlink" title="1、新增jenkins节点"></a>1、新增jenkins节点</h2><p>1) 打开Jenkins页面，选择 Jenkins-&gt; 系统管理 -&gt; 管理节点</p>
+<h2 id="1、新增jenkins节点"><a href="#1、新增jenkins节点" class="headerlink" title="1、新增jenkins节点"></a>1、新增jenkins节点</h2><ol>
+<li>打开Jenkins页面，选择 Jenkins-&gt; 系统管理 -&gt; 管理节点</li>
+</ol>
 <p><img src="/images/%E7%AE%A1%E7%90%86%E8%8A%82%E7%82%B9.png" alt="upload successful"></p>
-<p>2) 点击左侧菜单-&gt; 新建节点，填入节点名称taffy，选择Dump Slave后点击OK </p>
+<ol start="2">
+<li>点击左侧菜单-&gt; 新建节点，填入节点名称taffy，选择Dump Slave后点击OK</li>
+</ol>
 <p><img src="/images/%E6%96%B0%E5%BB%BA%E8%8A%82%E7%82%B9.png" alt="upload successful"></p>
-<p>3) 填入节点工作目录，如D:\jenkinsWork，选择启动方法“Launch slave agents via Java Web Start”后点击Save</p>
+<ol start="3">
+<li>填入节点工作目录，如D:\jenkinsWork，选择启动方法“Launch slave agents via Java Web Start”后点击Save</li>
+</ol>
 <p><img src="/images/%E9%85%8D%E7%BD%AE%E8%8A%82%E7%82%B9.png" alt="upload successful"></p>
 <p>4）此时页面跳转至节点页面，点击刚才创建的节点taffy，可以看到jenkins提供了多种启动子节点的方法，任选其一均可启动slave:</p>
 <p><img src="/images/%E5%90%AF%E5%8A%A8%E8%8A%82%E7%82%B9.png" alt="upload successful"></p>
@@ -163,29 +173,47 @@
 <p><img src="/images/%E5%8F%8C%E5%87%BB%E8%BF%90%E8%A1%8C.png" alt="upload successful"></p>
 <p>此时File菜单有一个选项是Install as a service，若设置的话，会在每次子节点系统启动时都自动启动slave服务。 </p>
 <p>b) 在子节点cmd中运行页面提示的javaws或java命令行 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javaws http://192.168.85.xxx:8000/computer/taffy/slave-agent.jnlp</span><br><span class="line">java -jar slave.jar -jnlpUrl http://192.168.85.xxx:8000/computer/taffy/slave-agent.jnlp</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javaws http://192.168.85.xxx:8000/computer/taffy/slave-agent.jnlp</span><br><span class="line">java -jar slave.jar -jnlpUrl http://192.168.85.xxx:8000/computer/taffy/slave-agent.jnlp</span><br></pre></td></tr></table></figure>
 
-<p>5) 返回节点列表，可以看到我们新增的Windows子节点已正常连接</p>
+<ol start="5">
+<li>返回节点列表，可以看到我们新增的Windows子节点已正常连接</li>
+</ol>
 <p><img src="/images/%E6%AD%A3%E5%B8%B8%E8%BF%9E%E6%8E%A5.png" alt="upload successful"></p>
-<h2 id="2、创建自动化测试任务"><a href="#2、创建自动化测试任务" class="headerlink" title="2、创建自动化测试任务"></a>2、创建自动化测试任务</h2><p>1) 返回Jenkins主页面，点击左侧菜单-&gt;新建，填入名称taffy，勾选“构建一个自由风格的软件项目”后，点击OK </p>
+<h2 id="2、创建自动化测试任务"><a href="#2、创建自动化测试任务" class="headerlink" title="2、创建自动化测试任务"></a>2、创建自动化测试任务</h2><ol>
+<li>返回Jenkins主页面，点击左侧菜单-&gt;新建，填入名称taffy，勾选“构建一个自由风格的软件项目”后，点击OK</li>
+</ol>
 <p><img src="/images/%E5%88%9B%E5%BB%BA%E4%BB%BB%E5%8A%A1.png" alt="upload successful"></p>
-<p>2) 勾选Restrict where this project can be run，填入我们刚才创建的节点名称taffy （限制项目在子节点运行）</p>
+<ol start="2">
+<li>勾选Restrict where this project can be run，填入我们刚才创建的节点名称taffy （限制项目在子节点运行）</li>
+</ol>
 <p><img src="/images/%E9%85%8D%E7%BD%AE%E4%BB%BB%E5%8A%A1.png" alt="upload successful"></p>
-<p>3) 在页面下方，选择构建-&gt; 增加构建步骤-&gt; “Execute Windows batch command” </p>
+<ol start="3">
+<li>在页面下方，选择构建-&gt; 增加构建步骤-&gt; “Execute Windows batch command”</li>
+</ol>
 <p><img src="/images/%E8%BF%90%E8%A1%8C%E5%91%BD%E4%BB%A4.png" alt="upload successful"></p>
 <p>4)在输入框中填入运行nosetests脚本命令 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd D:\文档\Taffy\Tests</span><br><span class="line">nosetests -v test_demo.py --with-xunit --xunit-file=D:\jenkinsWork\workspace\taffy\nosetests.xml</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd D:\文档\Taffy\Tests</span><br><span class="line">nosetests -v test_demo.py --with-xunit --xunit-file=D:\jenkinsWork\workspace\taffy\nosetests.xml</span><br></pre></td></tr></table></figure>
 
 <p>其中，nosetests -v test_demo.py 为执行自动测试脚本命令；–with-xunit指定nose输出标准XUnit XML格式的测试结果，并通过–xunit-file指定输出路径为上面配置的节点工作目录 </p>
-<p>5) 点击选择：构建后操作-&gt; 增加构建过后操作步骤-&gt; “Publish JUnit test result report” </p>
+<ol start="5">
+<li>点击选择：构建后操作-&gt; 增加构建过后操作步骤-&gt; “Publish JUnit test result report”</li>
+</ol>
 <p><img src="/images/%E6%9E%84%E5%BB%BA%E5%90%8E%E6%AD%A5%E9%AA%A4.png" alt="upload successful"></p>
-<p>6) 填入测试报告名称：nosetests.xml，点击保存</p>
+<ol start="6">
+<li>填入测试报告名称：nosetests.xml，点击保存</li>
+</ol>
 <p><img src="/images/%E6%8A%A5%E5%91%8A%E5%90%8D%E7%A7%B0.png" alt="upload successful"></p>
-<p>7) 点击Jenkinks页面左侧菜单-&gt; 立即构建，点击进度条进入构建页面</p>
+<ol start="7">
+<li>点击Jenkinks页面左侧菜单-&gt; 立即构建，点击进度条进入构建页面</li>
+</ol>
 <p><img src="/images/%E7%AB%8B%E5%8D%B3%E6%9E%84%E5%BB%BA.png" alt="upload successful"></p>
-<p>8) 在构建页面点击左侧菜单Console Output，可以查看详细的控制台输出日志 </p>
+<ol start="8">
+<li>在构建页面点击左侧菜单Console Output，可以查看详细的控制台输出日志</li>
+</ol>
 <p><img src="/images/%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%87%BA.png" alt="upload successful"></p>
-<p>9) 构建完成后，在项目主页面看到测试结果及测试结果趋势，点击进入可以看到更详细的结果</p>
+<ol start="9">
+<li>构建完成后，在项目主页面看到测试结果及测试结果趋势，点击进入可以看到更详细的结果</li>
+</ol>
 <p><img src="/images/%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.png" alt="upload successful"></p>
 <p><img src="/images/%E7%BB%93%E6%9E%9C%E8%AF%A6%E6%83%85.png" alt="upload successful"></p>
 </section>
@@ -271,7 +299,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#0、测试环境"><span class="toc-nav-text">0、测试环境</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1、新增jenkins节点"><span class="toc-nav-text">1、新增jenkins节点</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2、创建自动化测试任务"><span class="toc-nav-text">2、创建自动化测试任务</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#0%E3%80%81%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83"><span class="toc-nav-text">0、测试环境</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1%E3%80%81%E6%96%B0%E5%A2%9Ejenkins%E8%8A%82%E7%82%B9"><span class="toc-nav-text">1、新增jenkins节点</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2%E3%80%81%E5%88%9B%E5%BB%BA%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1"><span class="toc-nav-text">2、创建自动化测试任务</span></a></li></ol>
     
   </div>
 </aside>
@@ -347,7 +375,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
     | All Rights Reserved.
   </p>
 </footer>
@@ -389,6 +417,8 @@
 </script>
 <!-- Baidu Tongji -->
 
+
 <script src="/js/script.js"></script>
+
   </body>
 </html>

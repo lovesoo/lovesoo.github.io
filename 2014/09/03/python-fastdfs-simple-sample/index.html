@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="大爱 | 眼前一切都很美丽">
   <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
   
-    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
   
   <title>
     
@@ -16,13 +16,17 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
-    <script src="/js/qrious.js"></script>
+    
+<script src="/js/qrious.js"></script>
+
   
   
   
@@ -51,9 +55,9 @@
   
 
 
-</head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 <div class="wechat-share">
-  <img src="/css/images/logo.png">
+  <img src="/css/images/logo.png" />
 </div>
 
   <body>
@@ -151,24 +155,24 @@
   <article class="post-article">
     <section class="markdown-content"><p>本文主要介绍在Python 2.7上通过fastdfs client进行文件上传、下载、删除等操作方法。</p>
 <ol>
-<li><p>下载fastdfs client的python版本，官方地址：<a href="https://fastdfs.googlecode.com/files/fdfs_client-py-1.2.6.tar.gz" target="_blank" rel="noopener">https://fastdfs.googlecode.com/files/fdfs_client-py-1.2.6.tar.gz</a></p>
-<p> 由于google的访问不稳定，我同时上传了百度的网盘，地址：<a href="http://pan.baidu.com/s/1hqqYXoC" target="_blank" rel="noopener">http://pan.baidu.com/s/1hqqYXoC</a></p>
+<li><p>下载fastdfs client的python版本，官方地址：<a href="https://fastdfs.googlecode.com/files/fdfs_client-py-1.2.6.tar.gz">https://fastdfs.googlecode.com/files/fdfs_client-py-1.2.6.tar.gz</a></p>
+<p> 由于google的访问不稳定，我同时上传了百度的网盘，地址：<a href="http://pan.baidu.com/s/1hqqYXoC">http://pan.baidu.com/s/1hqqYXoC</a></p>
 </li>
 <li><p>安装fdfs_client-py-1.2.6</p>
-<p> 解压之后使用python setup.py install命令安装，或解压直接将fdfs_client文件夹拷贝到Python/lib目录下即可</p>
+<p> 解压之后使用python setup.py install命令安装，或解压直接将fdfs_client文件夹拷贝到Python&#x2F;lib目录下即可</p>
 </li>
-<li><p>修改Python/Lib/fdfs_client/storage_client.py文件，将12行删除或注释（否则，使用时会报错ImportError: No module named sendfile）</p>
+<li><p>修改Python&#x2F;Lib&#x2F;fdfs_client&#x2F;storage_client.py文件，将12行删除或注释（否则，使用时会报错ImportError: No module named sendfile）</p>
 </li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#from fdfs_client.sendfile import *</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#from fdfs_client.sendfile import *</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
-<li><p>准备正确的client.conf文件，linux下存放位置一般为/etc/fdfs/client.conf</p>
+<li><p>准备正确的client.conf文件，linux下存放位置一般为&#x2F;etc&#x2F;fdfs&#x2F;client.conf</p>
 </li>
 <li><p>参考README文档，写了简单的文件上传、下载及删除示例如下：</p>
 </li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">from fdfs_client.client import *</span><br><span class="line">import time</span><br><span class="line"> </span><br><span class="line">client_file=&apos;client.conf&apos;</span><br><span class="line">test_file=&apos;test.txt&apos;</span><br><span class="line">download_file=&apos;test2.txt&apos;</span><br><span class="line"> </span><br><span class="line">try:</span><br><span class="line">    client = Fdfs_client(client_file)</span><br><span class="line">    #upload</span><br><span class="line">    ret_upload = client.upload_by_filename(test_file)</span><br><span class="line">    print ret_upload</span><br><span class="line">    time.sleep(5)   #等待5s，否则下载时会报错文件不存在</span><br><span class="line">    file_id=ret_upload[&apos;Remote file_id&apos;].replace(&apos;\\&apos;,&apos;/&apos;)  #新版本文件存放Remote file_id格式变化</span><br><span class="line">     </span><br><span class="line">    #download</span><br><span class="line">    ret_download=client.download_to_file(download_file,file_id)</span><br><span class="line">    print ret_download</span><br><span class="line">     </span><br><span class="line">    #delete</span><br><span class="line">    ret_delete=client.delete_file(file_id)</span><br><span class="line">    print ret_delete</span><br><span class="line">     </span><br><span class="line">except Exception,ex:</span><br><span class="line">    print ex</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">from fdfs_client.client import *</span><br><span class="line">import time</span><br><span class="line"> </span><br><span class="line">client_file=&#x27;client.conf&#x27;</span><br><span class="line">test_file=&#x27;test.txt&#x27;</span><br><span class="line">download_file=&#x27;test2.txt&#x27;</span><br><span class="line"> </span><br><span class="line">try:</span><br><span class="line">    client = Fdfs_client(client_file)</span><br><span class="line">    #upload</span><br><span class="line">    ret_upload = client.upload_by_filename(test_file)</span><br><span class="line">    print ret_upload</span><br><span class="line">    time.sleep(5)   #等待5s，否则下载时会报错文件不存在</span><br><span class="line">    file_id=ret_upload[&#x27;Remote file_id&#x27;].replace(&#x27;\\&#x27;,&#x27;/&#x27;)  #新版本文件存放Remote file_id格式变化</span><br><span class="line">     </span><br><span class="line">    #download</span><br><span class="line">    ret_download=client.download_to_file(download_file,file_id)</span><br><span class="line">    print ret_download</span><br><span class="line">     </span><br><span class="line">    #delete</span><br><span class="line">    ret_delete=client.delete_file(file_id)</span><br><span class="line">    print ret_delete</span><br><span class="line">     </span><br><span class="line">except Exception,ex:</span><br><span class="line">    print ex </span><br></pre></td></tr></table></figure>
 
 </section>
     <!-- Tags START -->
@@ -329,7 +333,7 @@
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 <a href="http://lovesoo.org">lovesoo.org</a>
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
     | All Rights Reserved.
   </p>
 </footer>
@@ -371,6 +375,8 @@
 </script>
 <!-- Baidu Tongji -->
 
+
 <script src="/js/script.js"></script>
+
   </body>
 </html>
