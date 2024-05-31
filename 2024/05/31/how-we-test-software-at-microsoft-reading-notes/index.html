@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="大爱 | 眼前一切都很美丽">
+  <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
+  
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
+  
+  <title>
+    
+      《微软的软件测试之道》读书笔记 | 大爱
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>大爱</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>《微软的软件测试之道》读书笔记</h2>
+  <p class="post-date">2024-05-31</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>本文主要为《微软的软件测试之道》读书笔记。</p>
+<h2 id="一、微软测试介绍"><a href="#一、微软测试介绍" class="headerlink" title="一、微软测试介绍"></a>一、微软测试介绍</h2><p>微软测试工程师的正式职称是“软件开发测试工程师”（Software Development Engineer inTest），英文简称 SDET。</p>
+<p>测试工程师的其他主要职责包括：制定测试计划、设计测试用例、分析缺陷（bug）的根本原因、参与程序代码的审查和产品设计的审查、以及开发测试自动化程序。</p>
+<h3 id="十大工程胜任特征"><a href="#十大工程胜任特征" class="headerlink" title="十大工程胜任特征"></a>十大工程胜任特征</h3><ol>
+<li><p>问题的分析和解决能力 ：这个能力对测试人员非常重要，因为对问题进行解剖和找出问题的症结是提高产品质量的关键。</p>
+</li>
+<li><p>面向客户的创新：应聘者是否以客户为本，是否能够充分理解软件如何才能帮助客户解决问题，并对此充满兴趣和热情。</p>
+</li>
+<li><p>精湛的技术：我们注重的是应聘者是否通晓网络和操作系统，不仅能写代码，而且能够优化代码。</p>
+</li>
+<li><p>项目管理： 对测试人员来说，这个能力是指如何有效支配个人的时间，以及如何策划和确保一个有许多互相牵制成分的计划得以按时完成。</p>
+</li>
+<li><p>对质量的执着追求：如果不具备这个素质，应聘者就无法胜任任何工程技术工作，更不必说测试工作了。</p>
+</li>
+<li><p>战略远见：新员工刚开始这方面比较弱，但是如果我们旨在聘用能够帮助我们找到突破口的员工，以至于能够在竞争中遥遥领先，增加股东价值，那么应聘者一开始就必须具备这个素质。</p>
+</li>
+<li><p>自信：在微软，测试人员找出的软件错误并不一定都能得到修正，在必要时，测试人员需要有自信而去据理力争。</p>
+</li>
+<li><p>冲击力和影响力：影响力来自于自信和经验，冲击力来自于敢于革新。多数应聘者在谈到如何给自己的公司带来变革，或者如何在学校带领团队出色地完成项目时，都会体现这个特征。</p>
+</li>
+<li><p>跨界合作：创新往往来之于各部门之间的合作，只顾埋头自己的项目，甘做井底之蛙的员工是不会成功的。</p>
+</li>
+<li><p>人际意识：主要指自我意识，许多优秀的应聘候选人能够认识到自己的不足之处，并且知道如何不断地提高自己，也就是有一个不断提升自身素质的计划。</p>
+</li>
+</ol>
+<h3 id="工程生命周期"><a href="#工程生命周期" class="headerlink" title="工程生命周期"></a>工程生命周期</h3><p>大多数的微软产品都使用螺旋或其变体的开发模式</p>
+<p>里程碑进度计划建立了项目发布的时间表，也包含了关键的过渡安排和中期版本（例如 Beta 版<br>和业内预览版）的时间表。里程碑进度计划帮助每个团队了解整个项目的期望值和现状。</p>
+<p>里程碑模式的优点是里程碑不仅仅是写在日历上的一个日期。要完成一个里程碑，必须满足具体<br>的、事先定义好的阶段结束标准(Exit Criteria)。阶段标准通常包括以下几条：</p>
+<ol>
+<li><p>关键功能编程完毕 即使尚未完全测试，但关键功能已经实现</p>
+</li>
+<li><p>中期测试目标达到 如代码覆盖目标或测试完成率目标达成</p>
+</li>
+<li><p>Bug(缺陷)目标达到 如无第一类严重(P1)Bug 或无―当机‖的 Bug</p>
+</li>
+<li><p>非功能目标达到 如性能、负荷测试完成且无严重问题</p>
+</li>
+</ol>
+<h2 id="二、测试用例设计"><a href="#二、测试用例设计" class="headerlink" title="二、测试用例设计"></a>二、测试用例设计</h2><p>使用测试模式</p>
+<p>对测试系统的了解</p>
+<p>思考测试策略</p>
+<p>思考可测试性</p>
+<h3 id="测试设计规格说明的基本元素示例"><a href="#测试设计规格说明的基本元素示例" class="headerlink" title="测试设计规格说明的基本元素示例"></a>测试设计规格说明的基本元素示例</h3><p>下面是一些经常会在测试设计规格说明中出现的条目</p>
+<ul>
+<li><p>概要、目标、目的</p>
+</li>
+<li><p>策略</p>
+</li>
+<li><p>功能测试</p>
+</li>
+<li><p>组件测试</p>
+</li>
+<li><p>集成测试或系统测试</p>
+</li>
+<li><p>互操作性测试</p>
+</li>
+<li><p>一致性测试</p>
+</li>
+<li><p>国际化测试（Internationalization）和全球化测试（Globalization）</p>
+</li>
+<li><p>性能测试</p>
+</li>
+<li><p>安全测试</p>
+</li>
+<li><p>安装或部署测试</p>
+</li>
+<li><p>依赖关系</p>
+</li>
+<li><p>度量</p>
+</li>
+<li><p>黑盒、白盒及灰盒测试</p>
+</li>
+<li><p>探索性测试</p>
+</li>
+</ul>
+<h2 id="三、功能测试的相关技术"><a href="#三、功能测试的相关技术" class="headerlink" title="三、功能测试的相关技术"></a>三、功能测试的相关技术</h2><h3 id="等价类划分（equivalenceclass-partitioning，-ECP）"><a href="#等价类划分（equivalenceclass-partitioning，-ECP）" class="headerlink" title="等价类划分（equivalenceclass partitioning， ECP）"></a>等价类划分（equivalenceclass partitioning， ECP）</h3><p>ECP 是个用于设计一组黑盒或白盒的功能性测试技术，并以此来评估输入输出参数的功能性。</p>
+<p>输入和输出条件可以概括为 2 大类别：有效数据类，他会返回正向的结果积极的结果，或不产生错误条件和失效数据类，他通常会产生错误条件。</p>
+<p>每个类的数据会进一步分解成子类。在测试中，任何来自于给定类中特定子类的数据元素，无论它所在的子集是否被使用，都会产生同样的结果。现在，有4个有用的分解数据的启发式方法：数值的范围、变量的相似组、唯一数值和特定数值。</p>
+<h3 id="边界值分析（boundary-value-analysis，-BVA）"><a href="#边界值分析（boundary-value-analysis，-BVA）" class="headerlink" title="边界值分析（boundary value analysis， BVA）"></a>边界值分析（boundary value analysis， BVA）</h3><h3 id="组合分析"><a href="#组合分析" class="headerlink" title="组合分析"></a>组合分析</h3><h3 id="状态转换测试"><a href="#状态转换测试" class="headerlink" title="状态转换测试"></a>状态转换测试</h3><h2 id="四、结构测试技术"><a href="#四、结构测试技术" class="headerlink" title="四、结构测试技术"></a>四、结构测试技术</h2><h3 id="块测试（Block-Testing）"><a href="#块测试（Block-Testing）" class="headerlink" title="块测试（Block Testing）"></a>块测试（Block Testing）</h3><h3 id="决策测试（Decision-Testing）"><a href="#决策测试（Decision-Testing）" class="headerlink" title="决策测试（Decision Testing）"></a>决策测试（Decision Testing）</h3><h3 id="条件测试-（Condition-Testing）"><a href="#条件测试-（Condition-Testing）" class="headerlink" title="条件测试 （Condition Testing）"></a>条件测试 （Condition Testing）</h3><h3 id="基础路径测试-（Basis-Path-Testing）"><a href="#基础路径测试-（Basis-Path-Testing）" class="headerlink" title="基础路径测试 （Basis Path Testing）"></a>基础路径测试 （Basis Path Testing）</h3><p>结构测试技术是一套系统过程，它能帮助测试人员在分析程序代码，提高代码覆盖率时更有效的设计测试。行为测试方法、系统化的功能测试方法和结构测试方法，它们每一个都旨在提供不同类型的信息和从不同的角度评测软件。</p>
+<h3 id="用代码复杂度分析风险"><a href="#用代码复杂度分析风险" class="headerlink" title="用代码复杂度分析风险"></a>用代码复杂度分析风险</h3><p>计算代码行数</p>
+<h3 id="回路复杂度"><a href="#回路复杂度" class="headerlink" title="回路复杂度"></a>回路复杂度</h3><p>回路复杂度（cyclomatic complexity），它是辩别函数中线性独立路径（或者判断）数目的度量方法。一个没有包含条件操作（比如条件语句，循环，或者三元算子）的函数在整个程序中只有一条线性独立的路径。条件语句在程序流中加入了分支也就在函数中创建了另外的路径</p>
+<h4 id="Halstead-度量"><a href="#Halstead-度量" class="headerlink" title="Halstead 度量"></a>Halstead 度量</h4><p>Halstead 度量是一套完全不同的复杂度度量，基于对程序中语法要素的以下 4 个度量：</p>
+<ul>
+<li><p>独特算子（Operators）的数量（n1）</p>
+</li>
+<li><p>独特算域（Operands）的数量（n2）</p>
+</li>
+<li><p>所有算子出现的总数（N1）</p>
+</li>
+<li><p>所有算域出现的总数（N2）</p>
+</li>
+</ul>
+<h4 id="面向对象的度量"><a href="#面向对象的度量" class="headerlink" title="面向对象的度量"></a>面向对象的度量</h4><p>面向对象度量是在各种语言（例如 C++， Jave 和 C#）中类和类结构相关的度量。其中最流行<br>的面向对象度量是由 Chidamber 和 Kemerer33创造的，即通常所说的 CK 度量。 CK 度量包括了以下的内容：</p>
+<ul>
+<li>每个类的权重方法（WMC） 一个类中方法的数目</li>
+<li>继承树的深度（DIT） 一个类所继承的类的数目</li>
+<li>对象类之间的耦合（CBO） 一个类引用其他类的方法或者实例变量的数目</li>
+</ul>
+<p>面向对象度量的提倡者认为那些引用很多方法，拥有很深继承性树状结构，或者过度耦合的类更难测试和维护，也更容易包含漏洞。</p>
+<h2 id="五、基于模型的测试"><a href="#五、基于模型的测试" class="headerlink" title="五、基于模型的测试"></a>五、基于模型的测试</h2><p>一个模型可以是对系统的任意描述。一个典型的行为模型中会有一个开始状态，一个或多个转变，以及一个结束状态。</p>
+<p>FSM（Finite State Machine） 有限状态机是一个专有名词用来描述一系列的状态和中间的变化过程。它很自然地表达了由状态和中间过程所代表的功能。</p>
+<h3 id="建立有限状态模型"><a href="#建立有限状态模型" class="headerlink" title="建立有限状态模型"></a>建立有限状态模型</h3><p>生成模型时会要考虑下面这三个问题：</p>
+<ol>
+<li><p>我在哪里？ 我需要知道现在应用程序处于何种状态，而且我需要能够描述（或知道如何验证）当前状态。</p>
+</li>
+<li><p>我可以进行什么操作？ 根据我当前的状态， 我可以做哪些不同的事情？</p>
+</li>
+<li><p>我做这些事的结果会怎样？ 如果我进行某项操作， 它会将我带入怎样的状态？</p>
+</li>
+</ol>
+<h3 id="模型自动化"><a href="#模型自动化" class="headerlink" title="模型自动化"></a>模型自动化</h3><p>对于基于状态的模型的自动化途径， 它与传统的自动化途径稍有不同。模型的测试自动化并不是对端到端场景（end-to-end scenario） 进行自动化， 而是将重点放在过渡自动化和状态验证上。</p>
+<h3 id="图论和-MBT"><a href="#图论和-MBT" class="headerlink" title="图论和 MBT"></a>图论和 MBT</h3><p>在数学上， 图形是一系列的边（或链接）和节点。在 MBT 中， 边和节点分别代表转移和状态。 MBT 的主要功效体现在遍历算法中。</p>
+<p>随机行走遍历会随机选择一个可用的转换。它没有指导或计划；它只是在您设定的时间内尽可能地走遍各个状态。随机行走通常会发现 缺陷（有人将这些视为“聪明猴子测试 – smartmonkey test”），但可能会花特别长的时间来遍历大的模型。</p>
+<p>加权遍历是稍好一点的解决方案。 加权遍历在某种程度上是有指导的随机行走。选择哪个转换仍然是随机的，但最有可能的选择都进行了加权，以便它们的发生更频繁。<br>最短路径遍历使用最少量的转换走过两个节点间的路径。使用图论算法还有许多其他方法可以遍历状态模型。“所有转换路径”， 正如其名称所示， 确保所有转换路径都被尝试过。请注意，所有转换路径也包括所有节点。 相反，“所有状态遍历” 则不保证所有转换路径都被尝试过。</p>
+<h3 id="贝叶斯图解模型-（Bayesian-Graphical-Modeling）"><a href="#贝叶斯图解模型-（Bayesian-Graphical-Modeling）" class="headerlink" title="贝叶斯图解模型 （Bayesian Graphical Modeling）"></a>贝叶斯图解模型 （Bayesian Graphical Modeling）</h3><p>BGM分析的目标是为了衡量和减少测试的不确定性。它是针对风险分析的一种建模方法。每个程序员都对他要测试的应用程序的代码有一些程度的信心。很多因素形成了这种信心（开发员的声誉，代码的复杂度，依赖的二进制文件的数量，测试时间和成本，以及其它因素）。如果每个测试工程师以及每个应用程序都有同样的假设，那么我们测试及减少不确定性就有了一个好的起点。</p>
+<p>如果一个测试工程师认为要测试的这段代码的质量是好的（特别是在有很强的内部开发控制的情况下），所有测试工程师最好以回答这个问题为起点：我有多少信心认为这段代码没有缺陷？在BGM中，测试工程师表明他对要测试的这些组件的信心，并且详细描述建模的原因。 BGM 将所依赖的组件的不确定性和风险也考虑在内。然后测试工程师运行测试，当发现缺陷的时候，他们就去更新 BGM。</p>
+<h3 id="Petri-网"><a href="#Petri-网" class="headerlink" title="Petri 网"></a>Petri 网</h3><p>Petri 网是一个建模工具，它由库所、 转移（transition） 和连接库所和转移的有向弧三种元素组成。库所也可以包括令牌；每个库所包含的令牌的数量表明模型系统当前的状态。 转移用来表示可能发生的活动（也就是被转移所触发的），从而改变系统状态。 转移只能在激活状态(enabled)下发生，也就是所有前提条件都满足的情况下。当转移发生时，输入库所的令牌被消耗，同时为输出库所产生令牌。使用 Petri 网有点像在和计算机玩棋盘游戏。玩家&#x2F;测试工程师通过移动令牌，观察系统状态，获得对系统更好的理解。</p>
+<p>Petri 网为与软件行为交互提供了一个视觉的方法，主要是针对并发和资源共享的系统来建模。</p>
+<h3 id="建模提示"><a href="#建模提示" class="headerlink" title="建模提示"></a>建模提示</h3><p>团队在尝试使用基于模型的测试时最常见的错误：</p>
+<ul>
+<li><p>过多的建模：有些团队尝试对所有东西模型，而最终却什么都没有测试。 最重要的是牢记在刚开始建模时，从简单功能的小模型开始。 请记住，并非所有情况都适合建模，且大型模型是很难维护的</p>
+</li>
+<li><p>建模并不能代替其他的测试： MBT 只是众多您可以用来做测试的工具之一。 期待MBT 无所不能的团队很快就会发现事实并非如此。开发一个充分利用测试工具箱中所有工具的测试策略将更加有效。</p>
+</li>
+<li><p>只为能验证的东西建模： 随机猴子测试十分有趣，但通过这个方法发现的漏洞极难调试和诊断。 优秀的模型包括每一个步骤的检查，确保当前的状态符合预期的状态。</p>
+</li>
+<li><p>仔细设计： 当测试工程师在编写常见的自动化测试时，一两个错误只是造成一两个测试报告错误的结果。 但是当他在建立一个模型时出错， 则整个系列的测试都可能失败。 所以模型的设计是十分关键的， 需要格外的小心和审查，尤其是对正在学习建模的团队而言。</p>
+</li>
+</ul>
+<p>任何类型的建模都是有益的， 而随着模型而来的从模型产生的测试是强大的。模型能帮助测试工程师们理解（并解释）复杂的系统， 帮助管理风险，和帮助寻找漏洞。<br>当然， 基于模型的测试能做的不仅仅是在应用程序中随机行走。微软的团队曾经使用基于模型的测试与传统的测试自动化相结合， 有效的测试了许多新功能和新应用程序。 成功使用建模的团队也都明白建模只是测试工具箱中众多测试工具之一而已。</p>
+<h2 id="六、缺陷和测试用例管理"><a href="#六、缺陷和测试用例管理" class="headerlink" title="六、缺陷和测试用例管理"></a>六、缺陷和测试用例管理</h2><h3 id="缺陷的工作流程"><a href="#缺陷的工作流程" class="headerlink" title="缺陷的工作流程"></a>缺陷的工作流程</h3><ul>
+<li><p>产品代码-&gt;运行测试用例-&gt;创建缺陷报告-&gt;三方会审（triage）讨论缺陷。</p>
+</li>
+<li><p>如果缺陷没有被批准（not approved），把缺陷按照不修正（fix）来解决（resolve）-&gt; 关闭缺陷。</p>
+</li>
+<li><p>如果缺陷批准了要调查（investigation approved） -&gt;研究是代码错误，还是设计错误。</p>
+</li>
+<li><p>如果是代码错误，提议修正代码错误，再进行三方会审-&gt;如果修正批准了-&gt;修正代码-&gt;解决缺陷（resolve 缺陷）-&gt;重现缺陷-&gt;通过了则关闭缺陷,如果不通过，重新激<br>活缺陷-&gt;重新调查是代码错误还是设计错误。</p>
+</li>
+<li><p>如果是设计错误，修正设计直到批准-&gt;再进行三方会审。其它后续流程和以前类似。</p>
+</li>
+</ul>
+<h3 id="缺陷会审"><a href="#缺陷会审" class="headerlink" title="缺陷会审"></a>缺陷会审</h3><p>缺陷的优先顺序通常设定值如下：</p>
+<ol>
+<li><p>必须修正（Must Fix） 尽快修正这个缺陷。 缺陷影响产品在这一领域的进一步进展。</p>
+</li>
+<li><p>应修正（ Should fix） 此缺陷应该尽快解决，在产品发布前，在这一里程碑末，或在下一轮开发之前。</p>
+</li>
+<li><p>有时间就修正（ Fix if time） 这是一个小缺陷，可推迟取决于产品开发的阶段。</p>
+</li>
+</ol>
+<h3 id="缺陷度量"><a href="#缺陷度量" class="headerlink" title="缺陷度量"></a>缺陷度量</h3><h3 id="缺陷门槛"><a href="#缺陷门槛" class="headerlink" title="缺陷门槛"></a>缺陷门槛</h3><p>缺陷门槛就是一个开发人员在某个特定时间所能接受的一定数量的缺陷。如果分配给开发人员的缺陷数量超过此数量，则开发人员预计将停止功能的开发工作来修改缺陷。根据不同的具体规则，开发人员可能需要将他们的缺陷数接近零或限制在低于某个限度内。</p>
+<h3 id="测试用例管理"><a href="#测试用例管理" class="headerlink" title="测试用例管理"></a>测试用例管理</h3><p>测试用例管理器（test case manager,简称 TCM） 是一个系统， 它可以管理测试用例的定义、版本、储存和执行。</p>
+<h3 id="测试用例和测试点：计算测试用例"><a href="#测试用例和测试点：计算测试用例" class="headerlink" title="测试用例和测试点：计算测试用例"></a>测试用例和测试点：计算测试用例</h3><h3 id="追踪和解释测试结果"><a href="#追踪和解释测试结果" class="headerlink" title="追踪和解释测试结果"></a>追踪和解释测试结果</h3><h2 id="七、测试自动化"><a href="#七、测试自动化" class="headerlink" title="七、测试自动化"></a>七、测试自动化</h2><p>自动化还是不自动化, 主要考虑因素：</p>
+<ul>
+<li><p>投入 确定创建自动化测试的投资回报率（ROI–Return On Investment）的第一步是确定要花费的投入和成本</p>
+</li>
+<li><p>测试的生命期 要考虑被测试的产品本身的使用寿命和产品开发周期长度</p>
+</li>
+<li><p>价值 要考虑自动化测试在其生命周期内的价值</p>
+</li>
+<li><p>切入点 许多成功的测试自动化项目都是测试团队从最开始的时候就参与了。代码写到尾声或者完成之后才开始想到加入自动化测试的项目通常都是失败的。</p>
+</li>
+<li><p>准确性 好的自动化测试在每次运行后会报告准确结果</p>
+</li>
+</ul>
+<h3 id="用户界面自动化"><a href="#用户界面自动化" class="headerlink" title="用户界面自动化"></a>用户界面自动化</h3><p>在微软的实践中，用于界面自动化的主要方法是绕过演示层，直接使用底层的对象模型，或者用相似的方法来操纵用户界面的核心逻辑。 在有的情况下，用户界面自动化会通过模拟鼠标点击和击键直接与 UI 互动。另一种自动化的方式是自动化那些当用户与用户界面互动时发生的行为。</p>
+<h3 id="自动化测试中包括什么？"><a href="#自动化测试中包括什么？" class="headerlink" title="自动化测试中包括什么？"></a>自动化测试中包括什么？</h3><p>Keith Stobie 和 Mark Bergman 在他们 1992 年的论文“How to Automate Testing: The Big Picture”中用缩写“SEARCH” 来描述测试自动化的组成部分38。“SEARCH” 代表的是设置（Setup）、执行（Execution）、分析（Analysis）、报告（Reporting）、清理（Cleanup）和帮助（Help）。</p>
+<ul>
+<li><p>设置 设置指的是将软件准备好，让实际的测试操作可以开始执行。</p>
+</li>
+<li><p>执行 这是测试的核心，包括检验软件功能的特定步骤，充分的错误处理，或者一些其他的相关工作。</p>
+</li>
+<li><p>分析 分析是确定测试通过还是失败的过程。这是最重要的步骤，也常常是测试中最复杂的步骤。</p>
+</li>
+<li><p>报告 报告包括分析结果的显示和传播，例如日志文件、数据库、或者其他分析过程所生成的文件。</p>
+</li>
+<li><p>清理 清理阶段将软件返回到已知状态使得接下来的测试能继续执行。</p>
+</li>
+<li><p>帮助 指的是使测试用例在其生存周期中保持可维护性和健壮性的帮助系统。</p>
+</li>
+</ul>
+<p>在今天的微软，一种更好的几乎被每个团队都采用的解决方案是：使用测试用具(test harness)来运行自动化测试</p>
+<ol>
+<li><p>测试用具启动并检查任何传给它的附加数据</p>
+</li>
+<li><p>测试用具执行测试用例</p>
+</li>
+<li><p>测试用例可以记录测试数据（包括测试状态）并输出到一个文件、一个调试流或者别的固定的位置</p>
+</li>
+</ol>
+<h3 id="测试自动化中的常见错误"><a href="#测试自动化中的常见错误" class="headerlink" title="测试自动化中的常见错误"></a>测试自动化中的常见错误</h3><ul>
+<li><p>硬编码路径 测试在执行时常会用到一些外部文件。最快、最简单的办法是把文件路径写在程序中。但是较好的做法是用 TCM 或自动化测试数据库中的文件记录这些的路径信息。</p>
+</li>
+<li><p>过于复杂 正确的目标是尽可能用最简单的程序充分地测试一个功能。</p>
+</li>
+<li><p>难于调试 测试人员调试测试失败的流程应该快速、简洁，造成调试困难的关键因素是日志记录不充足。</p>
+</li>
+<li><p>误报和漏报 误报指的是测试人员发现测试失败并不是产品的缺陷，而是测试代码中的缺陷引起的。与之相对的漏报的后果则更为严重： 自动化测试错误地报告测试通过。</p>
+</li>
+</ul>
+<h2 id="八、非功能测试"><a href="#八、非功能测试" class="headerlink" title="八、非功能测试"></a>八、非功能测试</h2><h3 id="非功能属性"><a href="#非功能属性" class="headerlink" title="非功能属性"></a>非功能属性</h3><ul>
+<li><p>可靠性：软件使用者期望软件能够无误运行。可靠性是度量软件如何在主流情形和非预期情形下维持它的功能，有时也包括软件出错时的自恢复能力。</p>
+</li>
+<li><p>可用性：如果用户不明白应该如何使用，那么，即使是零差错的软件也会变得毫无用处。可用性测量的是用户学习和控制软件以达到用户需求的容易程度。进行可用性研究、重视顾客反馈意见和对错误信息和交互内容的检查都能提高可用性。</p>
+</li>
+<li><p>可维护性：可维护性描述了修改软件而不引入新错误所需的工作量。产品代码和测试代码都必须具备高度的可维护性。团队成员对代码的熟悉程度，产品的可测性和复杂度都对可维护性有影响。</p>
+</li>
+<li><p>可移植性：Windows 的代码则必须能在 32 位和 64 位处理器上运行。许多微软产品运行在 Windows 和 Macintosh两种平台上。可移植的产品和测试代码对微软的许多部门来说都很关键。</p>
+</li>
+</ul>
+<h3 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h3><p>目标是发现重大的系统瓶颈。</p>
+<ul>
+<li><p>提出疑问：找出有潜在性能问题的地方</p>
+</li>
+<li><p>考虑全局：不是片面地考虑局部的优化，而是考虑全面的用户场景</p>
+</li>
+<li><p>明确目标： 应用 SMART标准来设计目标</p>
+</li>
+</ul>
+<h3 id="性能测试技巧："><a href="#性能测试技巧：" class="headerlink" title="性能测试技巧："></a>性能测试技巧：</h3><ul>
+<li><p>建立基线 早定义、早测量的一个重要方面是建立基线。</p>
+</li>
+<li><p>经常运行测试 一旦你建立了基线，就尽量经常地测量。</p>
+</li>
+<li><p>测量响应效率 性能测试必须着重于测量用户响应时间，而不管该操作的后台计算需要耗费多少时长。</p>
+</li>
+<li><p>测量的是性能 要专注于测量性能。</p>
+</li>
+<li><p>充分利用性能测试 只要有可能，就要把自动化的性能测试方案用在其他自动测试系列中（例如压力测试系列）</p>
+</li>
+<li><p>预估瓶颈 针对延迟会发生的地方做性能测试，比如文件和打印 I&#x2F;O，内存程序，网络操作，或其他任何不响应行为可能发生的地方。</p>
+</li>
+<li><p>使用工具 与上一技巧相联系的是，使用工具来模拟网络或 I&#x2F;O 延迟，以确定该应用软件在非常规条件下的性能特征。</p>
+</li>
+<li><p>合理使用资源很重要 响应时间和延迟两者都是性能的关键标识，但不要在性能测试中忘记检查 CPU 的负荷，磁盘或网络 I&#x2F;O，还有内存。</p>
+</li>
+<li><p>“干净机器” ：用还是不用 让一部分性能测试运行在干净机器上(新安装的操作系统和所测软件)，而其余部分在基于顾客配置的机器上运行。在干净机器上运行性能测试可以给你产生最好的数据，但是在一台装满了软件的机器上产生的数据会更加接近你的顾客所体会到的。</p>
+</li>
+<li><p>避免改变 克制住给你的性能测试小修（或大修）的冲动。长远来看，测试本身改动得越少，所得数据就越精确。</p>
+</li>
+</ul>
+<h3 id="压力测试"><a href="#压力测试" class="headerlink" title="压力测试"></a>压力测试</h3><p>压力测试经常包括了负载测试、平均无故障时间(MTBF - mean time between failure)测试、低资源测试、容量测试、或重复性测试。</p>
+<ul>
+<li><p>压力测试 一般来说，压力测试的目的是要通过模拟比预期要大的工作负载来让只在峰值条件下才出现的缺陷曝光。压力测试是要发现软件的弱点所在。内存泄漏、竞态条件、数据库中的线程或数据行之间的死锁条件、和其他同步问题等等，都是压力测试能发掘出来的常见缺陷。</p>
+</li>
+<li><p>负载测试：探讨在高峰或高于正常水平的负载下，系统或应用软件会发生什么情况。性能测试一般都包括测量峰值负荷下的响应时间。</p>
+</li>
+<li><p>平均无故障时间（MTBF）测试：测量系统或应用软件在出错或当机前的平均运行时间。</p>
+</li>
+<li><p>低资源测试：确定当系统在重要资源（内存、硬盘空间或其他系统定义的资源）降低或完全没有的情况下的状况。重要的是要预估将会发生什么，例如为文件存盘而无足够空间、或一个应用程序的内存分配失败时将会发生什么。</p>
+</li>
+<li><p>容量测试 ：与负载测试非常相似，容量测试一般是用来执行服务器或服务测试。目的是要确定一台或多台计算机能支持的最多用户数目。容量模型通常建立在容量测试数据基础上。</p>
+</li>
+<li><p>重复性测试 重复性测试是为了确定重复某一程序或场景的效果而采取的一项简单而“粗暴” (brute force)的技术。这个技术的精髓是循环运行测试直到达到一个具体界限或临界值，或者是不妙的境况。</p>
+</li>
+</ul>
+<h3 id="兼容性测试"><a href="#兼容性测试" class="headerlink" title="兼容性测试"></a>兼容性测试</h3><p>应用程序兼容性测试(Application compatibility testing)一般注重于应用程序之间或所测试的目标系统与其他内部和外部应用程序之间的交互。</p>
+<h3 id="可达性测试"><a href="#可达性测试" class="headerlink" title="可达性测试"></a>可达性测试</h3><p>可达性是指为每个人提供接触信息和工具的相等机会, 这些信息和工具是他们完成每天工作所必需的。</p>
+<h4 id="可达性角色"><a href="#可达性角色" class="headerlink" title="可达性角色"></a>可达性角色</h4><p>角色(Personas)是用来代表某类用户和他们如何使用我们产品的虚构人群。使用角色有利于产品团队集中精力设计和开发适合这些用户的功能。</p>
+<h3 id="可用性测试"><a href="#可用性测试" class="headerlink" title="可用性测试"></a>可用性测试</h3><p>可达性是指任何一个人都能够使用用户界面，而可用性是指用户能不能很容易的理解和与用户界面互动。</p>
+<h3 id="安全测试"><a href="#安全测试" class="headerlink" title="安全测试"></a>安全测试</h3><p>包括威胁建模、模糊测试</p>
+<h2 id="九、其他工具"><a href="#九、其他工具" class="headerlink" title="九、其他工具"></a>九、其他工具</h2><p>代码改动量</p>
+<p>每日构建</p>
+<p>静态分析</p>
+<h2 id="十、用户反馈系统"><a href="#十、用户反馈系统" class="headerlink" title="十、用户反馈系统"></a>十、用户反馈系统</h2><p>质量感知</p>
+<p>测试数据及用户期望质量的区别</p>
+<h2 id="十一、测试软件加服务-Software-plus-service"><a href="#十一、测试软件加服务-Software-plus-service" class="headerlink" title="十一、测试软件加服务  Software plus service"></a>十一、测试软件加服务  Software plus service</h2><h3 id="设计合适的软件加服务测试方法"><a href="#设计合适的软件加服务测试方法" class="headerlink" title="设计合适的软件加服务测试方法"></a>设计合适的软件加服务测试方法</h3><ul>
+<li><p>客户端支持</p>
+</li>
+<li><p>建造于服务器上</p>
+</li>
+<li><p>服务平台与顶级服务</p>
+</li>
+<li><p>松散耦合（Loosely Coupled） 与紧密耦合（Tightly Coupled） 的服务</p>
+<p>在计算机科学中， 耦合（coupling） 或依赖（dependency） 是指每一个程序对另一个程序的依赖程度。在源程序或目标程序频繁更改的情况下，松散耦合的系统是最好的。</p>
+<p>理想情况下，服务应是松散耦合的。松散耦合是软件设计中经常使用的一个术语，来描述接口，组件或系统，对所依赖的系统做最小的假设。服务之间的依赖越少，每个服务就可以更加独立地创新和发布。在这个意义上说，耦合对软件项目的影响是一种依赖性管理挑战。软件项目耦合程度越高，所需要的项目管理的开销就越大，以确保高质量、高价值的用户体验。</p>
+</li>
+<li><p>无状态至有状态（Stateless to Stateful）</p>
+</li>
+<li><p>无状态服务（Stateless Services）</p>
+</li>
+<li><p>状态服务（Stateful Services）</p>
+</li>
+</ul>
+<h3 id="发布时间还是功能和质量"><a href="#发布时间还是功能和质量" class="headerlink" title="发布时间还是功能和质量"></a>发布时间还是功能和质量</h3><p>对于任何软件产品或 IT 项目，必须在发布时间与质量和功能之间取得平衡。</p>
+<p>制定测试策略时需要考虑市场的状况以及明确推出的质量标准（quality bar）。如果可能的话，我会尽可能，在推出更多功能的同时尽量把服务更快推向市场。</p>
+<h3 id="软件加服务测试技术"><a href="#软件加服务测试技术" class="headerlink" title="软件加服务测试技术"></a>软件加服务测试技术</h3><h3 id="全自动化的安装部署（Deployment）"><a href="#全自动化的安装部署（Deployment）" class="headerlink" title="全自动化的安装部署（Deployment）"></a>全自动化的安装部署（Deployment）</h3><p>安装部署行话： 一个好的安装程序的关键特征是：零停工期、零数据损失、部份成品更新（或混合模式）、滚动式更新和快速反转机能。</p>
+<ul>
+<li><p>零停工期：早期的在线服务在更新时，经常会有一段时间甚至一个星期以上停止服务。<br>今天大多数的在线服务在软件更新时仍然继续提供服务。</p>
+</li>
+<li><p>零数据损失：是针对那些拥有很多用户数据的状态服务（stateful service） 来说的。当需要进行大规模的数据模式变换时，更新状态服务面临着巨大的挑战。</p>
+</li>
+<li><p>部份成品更新：是对那些只针对部分运营服务器更新的模式来说的。也许只更新 50%，甚至 10%或 5%的运营服务器。</p>
+</li>
+<li><p>混合模式：有些在线服务只更新一部分的运营服务器，但对用户来说，他们能得到同样的高质量的服务不管是用旧的还是新的服务版本。虽然混合模式也许只在更新时才出现，但其实这正是软件服务设计的要点。当用户界面发生很大变化时，混合模式确保那些得以使用新的服务的用户每次访问服务时都能继续体验新服务。</p>
+</li>
+<li><p>滚动式更新：是指软件服务能够自动更新一部分在线运营服务器，而没有任何的停止服务期。说白一点， 这种更新是按计划进行的，可以是每隔几个小时一次，或是每隔几天一次，但全部都自动完成任务。</p>
+</li>
+<li><p>快速反转机能：当更新服务出现问题时快速反转机能是我们的安全网，比如在更新进行到中途时，发现了一个不能接受的缺陷，不管是完成了 10%，还是 90%，都需要快速返回到上一个好的服务版本。</p>
+</li>
+</ul>
+<h3 id="服务的性能测试度量（test-metrics）"><a href="#服务的性能测试度量（test-metrics）" class="headerlink" title="服务的性能测试度量（test metrics）"></a>服务的性能测试度量（test metrics）</h3><ul>
+<li><p>网页加载时间 1（Page Load Time 1） 和网页加载时间 2（Page Load Time 2）</p>
+</li>
+<li><p>网页重量（Page Weight）</p>
+</li>
+<li><p>可压缩性</p>
+</li>
+<li><p>失效日期</p>
+</li>
+<li><p>往返程分析</p>
+</li>
+</ul>
+<h3 id="持续质量提高计划"><a href="#持续质量提高计划" class="headerlink" title="持续质量提高计划"></a>持续质量提高计划</h3><p>一个成功的 QoS（服务质量 QoS-Quality of Service） 计划必须从三大领域摄取数据，。这三大领域是客户意见、产品质量以及运营质量。</p>
+<p>客户的意见可以从多个渠道来收集，最常见的做法是对客户满意度进行直接调查，许多服务团队已不沿用此策，而是用净推荐值（Net Promoter Score）。</p>
+<h2 id="十二、测试的未来"><a href="#十二、测试的未来" class="headerlink" title="十二、测试的未来"></a>十二、测试的未来</h2><h3 id="自动失败分析-Automatic-Failure-Analysis"><a href="#自动失败分析-Automatic-Failure-Analysis" class="headerlink" title="自动失败分析(Automatic Failure Analysis)"></a>自动失败分析(Automatic Failure Analysis)</h3><p>测试日志记录 - 自动分析 - 缺陷提交</p>
+<p>日志在成功时要简短，失败时要极其详细</p>
+<p>集成AFA，集成自动化的每一个阶段，检入系统，和缺陷跟踪系统，减少手动干涉分析测试结果和失败</p>
+<h3 id="机器虚拟技术"><a href="#机器虚拟技术" class="headerlink" title="机器虚拟技术"></a>机器虚拟技术</h3><p>主要应用场景：每天构建测试、网络拓扑测试，镜像导入导出</p>
+<h3 id="代码提炼、重用、回收"><a href="#代码提炼、重用、回收" class="headerlink" title="代码提炼、重用、回收"></a>代码提炼、重用、回收</h3><h3 id="测试预防"><a href="#测试预防" class="headerlink" title="测试预防"></a>测试预防</h3><p>努力培养质量文化</p>
+<h3 id="质量成本"><a href="#质量成本" class="headerlink" title="质量成本"></a>质量成本</h3><p>“质量成本”不是生产优质产品或服务的花费，而是“未能”生产优质产品或服务的代价。</p>
+<p>在一个每个人都把质量当成习惯的组织中，测试角色的着重点就从找到一大堆缺陷转移到了集中模拟用户场景、同事评审和校验方面。将会分析和实施过程改进、缺陷预防技术及基础设施，以及在他们的机构中担任质量思考和质量文化的大使。</p>
+<h3 id="测试领域的领导力"><a href="#测试领域的领导力" class="headerlink" title="测试领域的领导力"></a>测试领域的领导力</h3><p>微软测试领导团队愿景（MSTLT，全称是Microsoft Test Leadership Team）</p>
+<p>创建一个跨事业部门的论坛，来提交和解决测试专业普遍面临的挑战和问题。微软测试领导团队将会推进培训教育，并推动事业部门测试团队采纳最佳实践以解决常见的挑战。微软测试领导团队将区分并尊重事业部门的不同，据此进行本地最佳实践的优化或差异化。</p>
+<h3 id="卓越测试"><a href="#卓越测试" class="headerlink" title="卓越测试"></a>卓越测试</h3><p>微软在 2003 年创造了卓越工程（EE）团队。图队的宗旨除了技术培训（团队的核心是之前的技术教育小组）外 ，是发现和分享整个公司的工程最佳做法。卓越测试团队的主要任务可以概括为共享、帮助、和交流。</p>
+<h3 id="共享"><a href="#共享" class="headerlink" title="共享"></a>共享</h3><p>共享与卓越工程共享最佳做法的目标相配合。就卓越测试而言， 共享包括了共享做法，工具和经验。</p>
+<h3 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h3><p>卓越测试团队在整个测试社团担任着促进者和专家的角色。这个团队帮助测试工程师的一些方式包括促进，提供答案，和关系。</p>
+<h3 id="沟通"><a href="#沟通" class="headerlink" title="沟通"></a>沟通</h3><p>另一个卓越测试团队的关键价值是交流沟通他们所知道的和所发现的。在一个大型社区分享有关信息有着巨大的价值。</p>
+<h3 id="关注未来"><a href="#关注未来" class="headerlink" title="关注未来"></a>关注未来</h3><p>也许卓越测试团队最关键的角色是预计微软测试工程师未来的需求，并积极主动地确定关于未来软件测试的长远规划。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#微软" >
+    <span class="tag-code">微软</span>
+  </a>
+
+  <a href="/tags#软件测试" >
+    <span class="tag-code">软件测试</span>
+  </a>
+
+  <a href="/tags#管理" >
+    <span class="tag-code">管理</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2021/06/17/python-oci-create-oracle-cloud-vm-instance/">
+        <span class="nav-arrow">← </span>
+        
+          Python OCI SDK创建Oracle Cloud VM实例
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%B8%80%E3%80%81%E5%BE%AE%E8%BD%AF%E6%B5%8B%E8%AF%95%E4%BB%8B%E7%BB%8D"><span class="toc-nav-text">一、微软测试介绍</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%8D%81%E5%A4%A7%E5%B7%A5%E7%A8%8B%E8%83%9C%E4%BB%BB%E7%89%B9%E5%BE%81"><span class="toc-nav-text">十大工程胜任特征</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%B7%A5%E7%A8%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-nav-text">工程生命周期</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BA%8C%E3%80%81%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E8%AE%BE%E8%AE%A1"><span class="toc-nav-text">二、测试用例设计</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%B5%8B%E8%AF%95%E8%AE%BE%E8%AE%A1%E8%A7%84%E6%A0%BC%E8%AF%B4%E6%98%8E%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0%E7%A4%BA%E4%BE%8B"><span class="toc-nav-text">测试设计规格说明的基本元素示例</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%B8%89%E3%80%81%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E7%9A%84%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF"><span class="toc-nav-text">三、功能测试的相关技术</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%92%E5%88%86%EF%BC%88equivalenceclass-partitioning%EF%BC%8C-ECP%EF%BC%89"><span class="toc-nav-text">等价类划分（equivalenceclass partitioning， ECP）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%BE%B9%E7%95%8C%E5%80%BC%E5%88%86%E6%9E%90%EF%BC%88boundary-value-analysis%EF%BC%8C-BVA%EF%BC%89"><span class="toc-nav-text">边界值分析（boundary value analysis， BVA）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%BB%84%E5%90%88%E5%88%86%E6%9E%90"><span class="toc-nav-text">组合分析</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E6%B5%8B%E8%AF%95"><span class="toc-nav-text">状态转换测试</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%9B%9B%E3%80%81%E7%BB%93%E6%9E%84%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF"><span class="toc-nav-text">四、结构测试技术</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9D%97%E6%B5%8B%E8%AF%95%EF%BC%88Block-Testing%EF%BC%89"><span class="toc-nav-text">块测试（Block Testing）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%86%B3%E7%AD%96%E6%B5%8B%E8%AF%95%EF%BC%88Decision-Testing%EF%BC%89"><span class="toc-nav-text">决策测试（Decision Testing）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95-%EF%BC%88Condition-Testing%EF%BC%89"><span class="toc-nav-text">条件测试 （Condition Testing）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9F%BA%E7%A1%80%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95-%EF%BC%88Basis-Path-Testing%EF%BC%89"><span class="toc-nav-text">基础路径测试 （Basis Path Testing）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%94%A8%E4%BB%A3%E7%A0%81%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90%E9%A3%8E%E9%99%A9"><span class="toc-nav-text">用代码复杂度分析风险</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9B%9E%E8%B7%AF%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-nav-text">回路复杂度</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Halstead-%E5%BA%A6%E9%87%8F"><span class="toc-nav-text">Halstead 度量</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%A6%E9%87%8F"><span class="toc-nav-text">面向对象的度量</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BA%94%E3%80%81%E5%9F%BA%E4%BA%8E%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%B5%8B%E8%AF%95"><span class="toc-nav-text">五、基于模型的测试</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%BB%BA%E7%AB%8B%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%A8%A1%E5%9E%8B"><span class="toc-nav-text">建立有限状态模型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%A8%A1%E5%9E%8B%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="toc-nav-text">模型自动化</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9B%BE%E8%AE%BA%E5%92%8C-MBT"><span class="toc-nav-text">图论和 MBT</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%9B%BE%E8%A7%A3%E6%A8%A1%E5%9E%8B-%EF%BC%88Bayesian-Graphical-Modeling%EF%BC%89"><span class="toc-nav-text">贝叶斯图解模型 （Bayesian Graphical Modeling）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Petri-%E7%BD%91"><span class="toc-nav-text">Petri 网</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%BB%BA%E6%A8%A1%E6%8F%90%E7%A4%BA"><span class="toc-nav-text">建模提示</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%85%AD%E3%80%81%E7%BC%BA%E9%99%B7%E5%92%8C%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E7%AE%A1%E7%90%86"><span class="toc-nav-text">六、缺陷和测试用例管理</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%BC%BA%E9%99%B7%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-nav-text">缺陷的工作流程</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%BC%BA%E9%99%B7%E4%BC%9A%E5%AE%A1"><span class="toc-nav-text">缺陷会审</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%BC%BA%E9%99%B7%E5%BA%A6%E9%87%8F"><span class="toc-nav-text">缺陷度量</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%BC%BA%E9%99%B7%E9%97%A8%E6%A7%9B"><span class="toc-nav-text">缺陷门槛</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E7%AE%A1%E7%90%86"><span class="toc-nav-text">测试用例管理</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E5%92%8C%E6%B5%8B%E8%AF%95%E7%82%B9%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B"><span class="toc-nav-text">测试用例和测试点：计算测试用例</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%BF%BD%E8%B8%AA%E5%92%8C%E8%A7%A3%E9%87%8A%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="toc-nav-text">追踪和解释测试结果</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%B8%83%E3%80%81%E6%B5%8B%E8%AF%95%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="toc-nav-text">七、测试自动化</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="toc-nav-text">用户界面自动化</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E4%B8%AD%E5%8C%85%E6%8B%AC%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-nav-text">自动化测试中包括什么？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%B5%8B%E8%AF%95%E8%87%AA%E5%8A%A8%E5%8C%96%E4%B8%AD%E7%9A%84%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF"><span class="toc-nav-text">测试自动化中的常见错误</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%85%AB%E3%80%81%E9%9D%9E%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-nav-text">八、非功能测试</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E9%9D%9E%E5%8A%9F%E8%83%BD%E5%B1%9E%E6%80%A7"><span class="toc-nav-text">非功能属性</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-nav-text">性能测试</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E6%8A%80%E5%B7%A7%EF%BC%9A"><span class="toc-nav-text">性能测试技巧：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95"><span class="toc-nav-text">压力测试</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-nav-text">兼容性测试</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%8F%AF%E8%BE%BE%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-nav-text">可达性测试</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%8F%AF%E8%BE%BE%E6%80%A7%E8%A7%92%E8%89%B2"><span class="toc-nav-text">可达性角色</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%8F%AF%E7%94%A8%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-nav-text">可用性测试</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95"><span class="toc-nav-text">安全测试</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%B9%9D%E3%80%81%E5%85%B6%E4%BB%96%E5%B7%A5%E5%85%B7"><span class="toc-nav-text">九、其他工具</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%8D%81%E3%80%81%E7%94%A8%E6%88%B7%E5%8F%8D%E9%A6%88%E7%B3%BB%E7%BB%9F"><span class="toc-nav-text">十、用户反馈系统</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E6%B5%8B%E8%AF%95%E8%BD%AF%E4%BB%B6%E5%8A%A0%E6%9C%8D%E5%8A%A1-Software-plus-service"><span class="toc-nav-text">十一、测试软件加服务  Software plus service</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%AE%BE%E8%AE%A1%E5%90%88%E9%80%82%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8A%A0%E6%9C%8D%E5%8A%A1%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="toc-nav-text">设计合适的软件加服务测试方法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%8F%91%E5%B8%83%E6%97%B6%E9%97%B4%E8%BF%98%E6%98%AF%E5%8A%9F%E8%83%BD%E5%92%8C%E8%B4%A8%E9%87%8F"><span class="toc-nav-text">发布时间还是功能和质量</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%8A%A0%E6%9C%8D%E5%8A%A1%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF"><span class="toc-nav-text">软件加服务测试技术</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%85%A8%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9A%84%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%EF%BC%88Deployment%EF%BC%89"><span class="toc-nav-text">全自动化的安装部署（Deployment）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%BA%A6%E9%87%8F%EF%BC%88test-metrics%EF%BC%89"><span class="toc-nav-text">服务的性能测试度量（test metrics）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%8C%81%E7%BB%AD%E8%B4%A8%E9%87%8F%E6%8F%90%E9%AB%98%E8%AE%A1%E5%88%92"><span class="toc-nav-text">持续质量提高计划</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E6%B5%8B%E8%AF%95%E7%9A%84%E6%9C%AA%E6%9D%A5"><span class="toc-nav-text">十二、测试的未来</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%87%AA%E5%8A%A8%E5%A4%B1%E8%B4%A5%E5%88%86%E6%9E%90-Automatic-Failure-Analysis"><span class="toc-nav-text">自动失败分析(Automatic Failure Analysis)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%9C%BA%E5%99%A8%E8%99%9A%E6%8B%9F%E6%8A%80%E6%9C%AF"><span class="toc-nav-text">机器虚拟技术</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%BB%A3%E7%A0%81%E6%8F%90%E7%82%BC%E3%80%81%E9%87%8D%E7%94%A8%E3%80%81%E5%9B%9E%E6%94%B6"><span class="toc-nav-text">代码提炼、重用、回收</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%B5%8B%E8%AF%95%E9%A2%84%E9%98%B2"><span class="toc-nav-text">测试预防</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%B4%A8%E9%87%8F%E6%88%90%E6%9C%AC"><span class="toc-nav-text">质量成本</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%B5%8B%E8%AF%95%E9%A2%86%E5%9F%9F%E7%9A%84%E9%A2%86%E5%AF%BC%E5%8A%9B"><span class="toc-nav-text">测试领域的领导力</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%8D%93%E8%B6%8A%E6%B5%8B%E8%AF%95"><span class="toc-nav-text">卓越测试</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%85%B1%E4%BA%AB"><span class="toc-nav-text">共享</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%B8%AE%E5%8A%A9"><span class="toc-nav-text">帮助</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%B2%9F%E9%80%9A"><span class="toc-nav-text">沟通</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%85%B3%E6%B3%A8%E6%9C%AA%E6%9D%A5"><span class="toc-nav-text">关注未来</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://lovesoo.org/2024/05/31/how-we-test-software-at-microsoft-reading-notes/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
+    | All Rights Reserved.
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>
