@@ -1,5 +1,5 @@
 (function ($) {
-  console.log('© Theme-Vexo | https://github.com/yanm1ng/hexo-theme-vexo')
+  console.log('© Lovesoo | https://github.com/lovesoo')
   var app = $('.app-body')
   var header = $('.header')
   var banner = document.getElementById('article-banner') || false
@@ -66,7 +66,10 @@
   $('.toc-nav a').on('click', function (e) {
     e.preventDefault()
     var catalogTarget = e.currentTarget
-    var scrollTarget = $(catalogTarget.getAttribute('href'))
+    var href = catalogTarget.getAttribute('href');
+    var decodedHref = decodeURIComponent(href); // 解码URL编码的字符串
+    var scrollTarget = $(decodedHref); // 使用解码后的字符串作为选择器
+
     var top = scrollTarget.offset().top
     if (top > 0) {
       $('html,body').animate({
