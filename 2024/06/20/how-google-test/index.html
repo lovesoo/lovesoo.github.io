@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="大爱 | 眼前一切都很美丽">
+  <meta name="keyword" content="软件测试|自动化测试|Python|Linux|Taffy|Java|Android|Software Testing">
+  
+    <link rel="shortcut icon" type="image/ico" href="css/images/favicon.ico"/>
+  
+  <title>
+    
+      《Google软件测试之道》读书笔记 | 大爱
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>大爱</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>《Google软件测试之道》读书笔记</h2>
+  <p class="post-date">2024-06-20</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>本文主要为《Google软件测试之道》读书笔记。</p>
+<h2 id="一、Google软件测试介绍"><a href="#一、Google软件测试介绍" class="headerlink" title="一、Google软件测试介绍"></a>一、Google软件测试介绍</h2><p>Google只有非常少的专职测试人员</p>
+<p>Larry Page “少则清晰”</p>
+<p>Google 成功的关键是不要招聘太多的测试人员</p>
+<p>质量不等于测试，质量不是测试出来的</p>
+<p>当把开发过程和测试放在一起，就像在搅拌机里混合搅拌那样，直到不能区分彼此的时候，你就得到了质量。</p>
+<p>开发测试融合在一起，开发测试必须同时开展。</p>
+<p>质量更像是一种预防行为，而不是检测。质量是开发过程的问题，而不是测试问题。</p>
+<p>软件测试开发工程师 SET （software engineer in test）开发角色，重点在可测试性和通用基础框架上。</p>
+<p>测试工程师 TE (test engineer) 把用户放在首位思考，组织整体质量实践，分析解释测试运行结果，驱动测试执行，构建端到端自动化测试。</p>
+<h3 id="组织架构"><a href="#组织架构" class="headerlink" title="组织架构"></a>组织架构</h3><p>测试是独立存在的部门，工程生产力部门，有权自己选择决定的优先级，在可靠性，安全性等问题上不会妥协。</p>
+<h3 id="爬、走、跑"><a href="#爬、走、跑" class="headerlink" title="爬、走、跑"></a>爬、走、跑</h3><p>Google最初发布版本只包含基本的可用功能，后续快速迭代。一般会经历金丝雀版本，开发版本，测试版本，beta或正式发布版本。</p>
+<ol>
+<li>金丝雀版本：每日构建版本，用来排除过滤一些明显不适宜的版本</li>
+<li>开发版本：开发日常使用版本，每周发布一个</li>
+<li>测试版本：通过持续测试的版本，最近一个月的最佳版本，测试版本可被挑选为内部尝鲜（dogfood）版本，比较优秀也可以作为beta测试的候选版本</li>
+<li>beta或发布版本：非常稳定的测试版本演变而来，经历内部使用和通过所有质量考核，对外发布的第一个版本</li>
+</ol>
+<h3 id="测试类型"><a href="#测试类型" class="headerlink" title="测试类型"></a>测试类型</h3><ol>
+<li>小型测试：一般来说都是自动化实现的，用于验证一个单独函数或者模块代码，主要由SWE实现</li>
+<li>中型测试：通常也是自动化实现，一般设计两个或两个以上，甚至更多模块的交互，验证功能近邻区交互及功能，开发早期由SET驱动测试实现及运行，后期由TE执行</li>
+<li>大型测试：涵盖三个及以上的功能模块，使用真实用户场景及数据，验证软件是否满足最终用户需求，三种工程师均会参与</li>
+</ol>
+<p>如果能够自动化，并不需要人脑的智睿和直觉来判断，那就应该以自动化的方式实现。</p>
+<h2 id="二、软件测试开发工程师"><a href="#二、软件测试开发工程师" class="headerlink" title="二、软件测试开发工程师"></a>二、软件测试开发工程师</h2><ul>
+<li>SWE	功能开发人员</li>
+<li>STE		测试开发人员</li>
+<li>TE		用户开发人员</li>
+</ul>
+<p>工程师团队的交付物就是即将要发布的代码。代码的组织形式，开发过程，维护是日常的工作重点。</p>
+<p>公开的代码库，和谐的工程工具，公司范围内的资源共享，成就了丰富的Google内部共享代码库与公共服务。</p>
+<p>Google在平台方面有特定的目标，就是保持简单且统一。</p>
+<p>一个经过良好测试的独立库，一个在可读性和可复用性都不错的公共服务库，一套覆盖所有重要构建目标的单元测试套件。</p>
+<p>测试是应用产品的另外一种功能，SET就是这个功能的负责人。</p>
+<p>只在软件产品变的重要的时候，质量才显得更重要。</p>
+<p>审阅设计文档的要点：完整性，正确性，一致性，设计，接口与协议，测试性。</p>
+<p>为了能够尽早的运行集成测试，针对依赖服务，SET提供了mock和fake。</p>
+<p>在端到端自动化测试上过度投入，常常会把你与产品的特定功能设计绑定在一起。</p>
+<p>小型测试带来优秀的代码质量、良好的异常处理、优雅的错误报告;大中型测试会带来整体产品质量和数据验证。</p>
+<p>SET 的面试重点在考察候选人如何思索问题的解决方案，而不是解决方案本身的实现上有多么高雅。</p>
+<h2 id="三、测试工程师"><a href="#三、测试工程师" class="headerlink" title="三、测试工程师"></a>三、测试工程师</h2><p>一种面向用户的测试角色。给项目配备多少测试人员，取决于项目风险和投资回报率。</p>
+<p>TE在测试计划及测试完整性上必须更加系统和周密，重点在真实用户的使用方式和系统级别的体验。TE擅长发现需求中的模糊之处，分析沟通不明确的问题。</p>
+<p>TE主要职责：</p>
+<ul>
+<li>测试计划和风险分析</li>
+<li>评审需求、设计、代码和测试</li>
+<li>探索式测试</li>
+<li>用户场景</li>
+<li>编写测试用例</li>
+<li>执行测试用例</li>
+<li>众包</li>
+<li>使用统计</li>
+<li>用户反馈</li>
+</ul>
+<p>测试计划是最早出现、最先被遗忘的测试产物。</p>
+<p>测试计划具有的特性：</p>
+<ul>
+<li>及时地更新</li>
+<li>描述了软件的目标和卖点</li>
+<li>描述了软件的结构、各种组件和功能特性的名称</li>
+<li>描述了软件的功能和操作简介。从纯粹测试的角度看，我们担心的是测试计划的投入和价值产出是否匹配</li>
+<li>不必花过多的时间去撰写，必须随时可以被修改</li>
+<li>应该描述必测点</li>
+<li>应该能在测试中提供有用的信息，从而帮助确定进展以及覆盖率上的不足</li>
+</ul>
+<h3 id="ACC-Attribute-Component-Capability-，即特质、组件、能力"><a href="#ACC-Attribute-Component-Capability-，即特质、组件、能力" class="headerlink" title="ACC(Attribute Component Capability)，即特质、组件、能力"></a>ACC(Attribute Component Capability)，即特质、组件、能力</h3><p>这是一种测试计划的替代方法。</p>
+<p>ACC的指导原则：</p>
+<ul>
+<li>避免散漫的文字，推荐使用简明的列表。</li>
+<li>不必推销。测试计划不是给客户或分析师看的，它的受众人群是工程师。</li>
+<li>简洁。测试计划并没有长度的要求。计划的大小与测试问题的规模有关，与作者的写作欲望无关。</li>
+<li>不要把不重要的、无法执行的东西放进测试计划。相关人员毫不关心的东西，就一个词也不要出现。</li>
+<li>渐进式的描述(Makeitfow)。测试计划的每个部分应该是前面部分的延伸，以便读者可以随时停止阅读并且对产品的功能有一个初步的印象。如果读者希望了解更多的细节，那么他可以继续读下去。<br>指导计划者的思路。一个好的计划过程能帮助计划者思考产品功能及其测试需求从而有条不紊地从高层概念过渡到可以被直接实现的低层细节。</li>
+<li>最终结果应该是测试用例。在计划完成的时候，它不仅要清楚地描述要做什么样的测试，并且还可以清楚地指导测试用例的编写。做出一个不直接指导测试的计划纯粹是在浪费时间。</li>
+</ul>
+<p>ACC通过指导计划者依次考察产品的三个维度达成这个目标：描述产品目标的形容词和副词;确定产品各部分、各特性的名词;描述产品实际做什么的动词。这样，我们通过测试完成的就是验证这些能力(capabilities)能正常运作、产品各组件(component)能满足应用的目标。</p>
+<h4 id="A代表特质-Attribute"><a href="#A代表特质-Attribute" class="headerlink" title="A代表特质(Attribute)"></a>A代表特质(Attribute)</h4><p>在开始测试计划或做ACC分析的时候，必须先确定该产品对用户、对业务的意义。我们为什么要开发这个东西呢?它能带来什么核心价值?它又靠什么来吸引用户?</p>
+<p>我们通过一个称为特质、组件、能力分析的过程来记录这些核心价值。在某种程度上，是人们选择你的产品而不是竞争对手的产品的原因。</p>
+<h4 id="C代表组件-component"><a href="#C代表组件-component" class="headerlink" title="C代表组件(component)"></a>C代表组件(component)</h4><p>组件是系统的名词，在特质被识别之后确定。组件是构成待建系统的模块。</p>
+<h4 id="C代表能力-capability"><a href="#C代表能力-capability" class="headerlink" title="C代表能力(capability)"></a>C代表能力(capability)</h4><p>能力是系统的动词，代表着系统在用户指令之下完成的动作。它们是对输入的响应、对查询的应答，以及代表用户完成的活动。</p>
+<p>能力处于特质和组件的交点。组件(component)执行某种功能(function)来满足产品的一个特质(attribute)，这个活动的结果是向用户提供某种能力(capability)。</p>
+<p>ACC的精髓，就是快速简明的列出保证待验证系统能正常运转的那些最重要的能力。</p>
+<p>能力一般是面向用户的，表达的是用户眼里系统的行为，往往比特质和组件都要多很多。ACC的前两步遵循简洁法则，而能力则应当描述系统的完整功能，因此基于应用的功能丰富性和复杂性，能力在数量上可以很大。</p>
+<p>能力最重要的一个特点是它的可测试性。我们不得不编写测试用例去验证这个能力得到了正确的实现。</p>
+<p>下面是一些能力应该满足的特性：</p>
+<ul>
+<li>一个能力点应当被表达为一个动作，反映了用户使用被测应用完成一定的活动。</li>
+<li>一个能力点应当为测试人员提供足够的指导，用以理解在编写测试用例时涉及的变量。</li>
+<li>一个能力应当与其他能力组合。实际上，一个用户故事或用例可以用一系列能力来描述。</li>
+<li>每个能力都应该链接到至少一个测试用例。如果能力有足够的重要性被记录下来，也应该有足够的重要性被测试。</li>
+<li>很多能力需要多个测试用例。每当输入、输入顺序、系统变量、使用的数据等存在变化的时候，就需要编写多个测试用例。</li>
+<li>并非所有的能力都是同等重要的。</li>
+</ul>
+<h3 id="风险"><a href="#风险" class="headerlink" title="风险"></a>风险</h3><h4 id="风险分析"><a href="#风险分析" class="headerlink" title="风险分析"></a>风险分析</h4><p>Google 确定了两个要素:失败频率(frequency of failure)和影响(impact)。</p>
+<p>测试人员用这两个要素给每项能力打分，风险实际上是一个定性的相对值，而非一个定量的绝对值。</p>
+<p>风险分析的目标不是要给出一个精确的值，而是要识别一个能力与另一个相比风险是大是小。</p>
+<p>风险发生频率有4个预定义值：</p>
+<ul>
+<li>罕见(rarely):发生故障的可能性很小，发生问题后的恢复也很容易。</li>
+<li>少见(seldom):在少数情况下会发生故障，但是在使用场景复杂度不高的情况下或使用率较低的情况下，发生的可能性非常小。</li>
+<li>偶尔(occasionally):故障的情形容易想象、场景有点复杂，而该能力是比较常用的。</li>
+<li>常见(often):此能力所属的特性使用量大、复杂度高、问题频发。</li>
+</ul>
+<p>估计风险影响的方法大致相同，也是从几种偶数取值中选择一个。</p>
+<ul>
+<li>最小(minimal):用户甚至不会注意到的问题。</li>
+<li>一些(some):可能会打扰到用户的问题。一旦发生，重试或恢复机制即可解决问题。</li>
+<li>较大(considerable):故障导致使用受阻。</li>
+<li>最大(maximal):发生的故障会永久性的损害产品的声誉，并导致用户不再使用它。</li>
+</ul>
+<h4 id="风险缓解"><a href="#风险缓解" class="headerlink" title="风险缓解"></a>风险缓解</h4><ul>
+<li>我们可以围绕风险大的能力点编写用户故事，并从中确定低风险的使用场景，然后反馈到开发团队，请他们有针对性地增加约束。</li>
+<li>我们可以编写回归测试用例，以确保问题在重现时可以被捕捉到。</li>
+<li>我们可以编写和运行引发故障的测试用例，来推动开发实现恢复和回滚的特性。</li>
+<li>我们可以插入监听代码(instrumentation and watchdog code)，以便更早地检测到故障。</li>
+<li>我们可以插入代码监听软件，发现新旧版本间的行为变化以发现回归问题。</li>
+</ul>
+<p>ACC 的真正威力在于它能用来确定一系列的能力点，按风险排序，然后分配给所有的质量伙伴。</p>
+<h3 id="测试用例管理"><a href="#测试用例管理" class="headerlink" title="测试用例管理"></a>测试用例管理</h3><p>Google测试用例管家GTCM (Google Test Case Manager)。</p>
+<p>GTCM的设计思想是简化测试用例的编写。它提供了一种灵活的标签格式，任何项目可以自行定制，这使得测试用例便于查找和复用。GTCM可以支持一切测试，从经典的测试和验证步骤，到探索式的漫游、cukes(行为驱动的测试用例描述)、用户故事描述等，甚至有一些团队在 GTCM 测试用例中存储代码或数据片段。</p>
+<h3 id="BUG生命周期"><a href="#BUG生命周期" class="headerlink" title="BUG生命周期"></a>BUG生命周期</h3><p>许多团队在 bug到达的速度超过了其修复能力的时候，干脆不再进行新功能特性的开发。集中精力于少量测试过的代码、增量式的测试以及内部试用，这些有助于将 bug 率置于有效控制之下。</p>
+<p>Google 的 bug管理与其他公司有几个关键的不同之处：</p>
+<ul>
+<li>bug 数据库是完全开放的，任意一名Googler都能看到任一项目的任一bug</li>
+<li>所有人都提交bug，包括工程总监和高级副总裁(SVP)。即使不属于一个产品团队，Googler 也可以提交该产品的 bug</li>
+<li>不存在正式的自顶向下的确定bug 优先级的流程</li>
+</ul>
+<p>Google Feedback团队实现了非常强大的功能，使用了聚类算法来自动识别重复记录并确定最频繁的问题。Google Feedback有一个dashboard 用于显示经过处理的数据，新应用上线之后，成千上万的问题汹涌而来需要精简到10个左右的主要的、共性的问题。</p>
+<h3 id="TE招聘"><a href="#TE招聘" class="headerlink" title="TE招聘"></a>TE招聘</h3><p>混合模型：既要考察一般的计算机科学和技术技能，也要考察候选人的测试潜力。编程知识是必需的，但只限于那些完成前述 TE 工作需要的水平：修改而非创建代码、设计端到端的用户使用场景的能力等。再加上TE 工作本身需要的一些特定的能力，如沟通、系统级别的理解以及用户同理心。</p>
+<p>TE 面试的最后一环是看候选人是否具有“Google 味儿”。我们需要的是有好奇心、充满热情的工程师，他们不会满足于简单完成被分派的工作，而是会进一步探索各种可能性，尝试工作描述之外的东西。工作职责自然要完成，但是生活和工作的意义在于最大限度地对外部世界产生影响。我们需要的是那些与现实世界和计算机科学团体紧密联系的人。我们需要的是能够与其他人和睦相处、合作愉快的人，是能够影响Google 文化的人。我们需要的是愿意持续学习和成长的人。我们也需要那些带来新鲜思想和经验的人，他们丰富了Google 的人才库。Google的座右铭是“不作恶”，我们希望他们在看到问题时能直言不讳。</p>
+<p>Google的原则是宁缺勿滥。我们希望 Google 成为大家愿意为之工作多年的一个公司。</p>
+<p>在Google管理TE在于如何激励，而非指令;在于保持凝聚力和一致性，同时又要鼓励创新和实验，信任大家尽可能自己做出正确的决定。</p>
+<p>Google的测试管理更多的是激励，而非强悍的管理;更多的是战略指引，而非频繁的督促检查(每天、每周等)。</p>
+<p>Google管理的核心是领导力和洞察力、协商、外部沟通、技术水平、战略规划、招聘和面试、完成团队绩效考核。</p>
+<p>Google的测试总监、经理和其他领导者都必须在充分信任工程师和确保他们不会发生重大事故或浪费时间之间寻找平衡。Google专注于投资大型的、战略性的方案去解决大问题，避免开发重复的测试框架、或是过多的投入在小型测试上，而应该鼓励宝贵的工程师资源用于更大型的测试执行和基础平台的建设。</p>
+<p>Google管理测试工程团队的方式，可以用海盗船来做类比。测试工程师的天性就是质疑、要求确定性的数据、不断评估主管或经理的指令。要靠技术洞察力、令人兴奋的技术冒险、有趣的停靠港口来带领团队。</p>
+<p>Google有几种不同类型的主管和经理:技术负责人(tech lead)、技术主管(tech lead manager)、工程经理(engineering manager)和总监 (director)。</p>
+<ul>
+<li>技术负责人(tech lead)：测试技术负责人出现在大型项目的大型团队里，里面有大量的 SET 和 TE，他们参与解决共同的技术问题或是共享相同的基础平台。他们一般不会管人。他们是当你遇到技术或测试问题时要求助的人。</li>
+<li>技术主管(tech lead manager, TLM):当技术负责人同时也被正式任命为相关工程师的经理时，就被称为技术主管。这些人一般德高望重、能力卓著。他们通常在同一时间只关注一个项目。</li>
+<li>测试工程经理 (test engineering manager):工程经理监督跨团队的技术工作，几乎没有例外，都是一级一级晋升上来的。工程经理通常管理12~35人，具体数量取决于工作的复杂性。他们负责共享跨团队的工具和流程，根据风险评估安排资源，并指导招聘和面试。</li>
+<li>测试总监 (test director):测试总监数量很少，他们会带若干测试工程经理、跨几个产品线，负责整体的测试工作，推动战略性的、有时是转型性的技术架构或测试方法的实施。他们的关注点在于怎样通过质量和测试去帮助业务(粗略的成本分析、收益分析等),并经常抛头露面参与业界同行的交流和分享。测试总监一般有40~70名下属。</li>
+<li>资深测试总监(senior test director):只有一个，他负责保证公司层面的统一的职责描述、招聘、外部沟通和总的测试战略。他日常的工作包括分享最佳实践，建立和推动新的大动作如全局构建、测试基础平台、静态分析，以及跨越不同产品、用户问题和代码库的测试活动。</li>
+</ul>
+<ol>
+<li><p>技术型:测试经理、尤其是测试主管的定位是技术型人才。他们应该会编写代码、评审代码，并且总应该比团队的其他人更懂产品和客户。</p>
+</li>
+<li><p>协商:不可能什么都测，测试无止境。面对经常性的资源申请和其他要求，工程经理和总监需要掌握拒绝的艺术、以理服人(politely say no with great reasoning)。</p>
+</li>
+<li><p>外部沟通:测试管理层还要经常安排外包测试事宜，组织与外部同行的交流，以及面向更大的社区建立论坛，用于测试工程问题的讨论和分享等。</p>
+</li>
+<li><p>战略性举措:测试主管和经理经常会问自己，有哪些事情别人做不了但我们能做?如何扩展和共享我们的测试架构来帮助大家，携手共创更美好的互联网?如果合并资源，投资长期的赌注会怎么样?支持这些战略性举措需要业务和技术上的洞察力、需要经费预算、需要顶住其他工作对测试资源的竞争，这确实得是一份全职的工作。</p>
+</li>
+<li><p>绩效考评:Google的绩效考评综合了同事反馈和由主管、经理推动的跨团队比照，每季度一次。重点是你最近做了什么事情?在质量和效率上、对用户而言产生了什么影响?</p>
+</li>
+</ol>
+<p>经理还会帮助团队成员设定季度和年度的OKRs (OKR 代表 Objectives and Key Results，即目标和关键结果。在Google，关注可衡量的指标。达到70%意味着你可能设定了较高的目标，然后努力工作去实现它。达到100%意味着你可能在设定目标时不够有进取心)。他们要保证有一些高目标的OKR，即使不必或可能不会达成，这些目标仍能起到促进在做计划时力争上游的作用。</p>
+<p>作为测试领导层，经常需要妥协，并能尊重个体 SET 和 TE 的聪明才智。Google领导和管理的一个标志是辅导和指导(mentoring and guiding) 下属工作，而不是直接下命令(dictating)。</p>
+<h3 id="维护模式的测试-Maintenance-Mode-Testing"><a href="#维护模式的测试-Maintenance-Mode-Testing" class="headerlink" title="维护模式的测试(Maintenance Mode Testing )"></a>维护模式的测试(Maintenance Mode Testing )</h3><p>Google 一向以尽早交付、经常交付、尽快失败(shipping early and often, and failing fast)闻名于世。资源也会冲向那些最高风险的项目。</p>
+<p>在把一个项目置于质量维护模式的时候，我们需要减少保持质量所需的人工干预的比重。代码会随着时间的流逝而变坏、出错。这同时适用于产品代码和测试代码。维护模式下，大部分工作是监控质量，而不是寻找新问题。后来的测试人员有必要给测试瘦身。</p>
+<ul>
+<li>总是通过的测试，淘汰!在高优先级的测试都来不及做的时候，低优先级的测试，淘汰!</li>
+<li>确保正确理解即将被淘汰的测试用例。从即将淘汰的领域里，挑选几个有代表性的测试。如果可能就与原作者聊一聊，理解其意图，避免失误。</li>
+<li>我们把释放出来的时间用于测试自动化、高优先级的测试或探索式测试。</li>
+<li>我们还会抛弃之前可能发生过误报或者行为反常的自动化测试一它们只会发出错误警报，浪费工程师的时间。</li>
+</ul>
+<p>进入维护模式前要考虑的要点：</p>
+<ul>
+<li>撤离之前，把困难的问题解决掉，而不是轻易放过。</li>
+<li>即使一个小型的、负责端到端测试的自动化测试集，也会以近乎为零的成本提供长期的质量保证。如果没有，一定要建立一个这样的自动化测试集。</li>
+<li>留下一份how-to 文档，以便公司的任何人都可以运行你的测试集，这也会减少你在将来繁忙时还被突然打扰的可能性。</li>
+<li>确保有一个问题解决通道 (escalation path)，愿意承担一些责任。</li>
+<li>时刻准备着返回到你曾经工作的项目里帮忙，这对产品、团队和用户都有益。</li>
+</ul>
+<h3 id="BITE-实验"><a href="#BITE-实验" class="headerlink" title="BITE 实验"></a>BITE 实验</h3><p>BITE 代表 Browser Integrated Test Environment (浏览器集成测试环境)，目标是把尽可能多的测试活动、测试工具和测试数据集中到浏览器和云里，并在上下文中呈现相关信息，从而减少分散操作的麻烦，使得测试工作更高效。</p>
+<h3 id="零成本测试"><a href="#零成本测试" class="headerlink" title="零成本测试"></a>零成本测试</h3><ul>
+<li>成本几乎为零。</li>
+<li>瞬间可得的测试结果。</li>
+<li>极少或者无需人工干预。</li>
+<li>非常灵活，因为没有万灵丹。</li>
+</ul>
+<p>现有免费模型测试流程要点：</p>
+<ul>
+<li>通过GTA 进行测试计划:基于风险的、快速的、可以自动化更新的。</li>
+<li>测试覆盖度:每当一个产品部署了新版本，bot 就会连续抓取网站、索引内容、扫描差异。</li>
+<li>Bug评审:当产品的差别被发现时，它们会被自动的转给人工去做快速判断。</li>
+<li>探索式测试:频繁的探索式测试由外包测试人员和早期用户执行。</li>
+<li>Bug提交:只需要点击几次鼠标就可以提交 bug,并且大量相关数据被自动附上，包括问题的精确位置、截屏和调试信息。</li>
+<li>Bug triage 和调试:开发或者测试经理能看到近乎端到端的免费测试流程实时的bug趋势图、需要用来分析失败原因的丰富的bug 数据，甚至是bug 发现过程的一键重放。</li>
+<li>部署新的版本并回到第一步。重复上述步骤。</li>
+</ul>
+<h2 id="四、测试工程经理"><a href="#四、测试工程经理" class="headerlink" title="四、测试工程经理"></a>四、测试工程经理</h2><p>测试工程经理是作为独立贡献者的一个技术岗位，负责所有的支持团队(开发、产品管理、产品发布、文档等)之间的联络。</p>
+<p>测试工程经理需要拥有技术能力、领导能力和协调能力。他们通常都是成长于Google的内部团队，空降的员工通常(但不是全部)都作为独立贡献者。</p>
+<p>想成为优秀的测试工程经理：</p>
+<ul>
+<li><p>第一条建议就是去了解你的产品。对于与被测产品相关的任何使用问题，测试工程经理都应该是专家。</p>
+</li>
+<li><p>第二条建议是知人善用。</p>
+</li>
+</ul>
+<p>在 Google的软件测试项目中，问题不能简单地通过增加人手来解决，需要使用工具并使其流水线化。不允许不必要的工作存在，也不需要不产生价值的改进。</p>
+<p>测试工程经理有职责优化整个过程。测试工程经理如果对产品有深入的理解，就能清楚地找到最高优先级的工作，对相关模块进行合理的覆盖。测试工程经理如果对他的团队成员足够了解，就能根据具体的测试问题安排具有最适合测试技能的员工。</p>
+<h3 id="影响力"><a href="#影响力" class="headerlink" title="影响力"></a>影响力</h3><p>每位工程师的个人目标都应该是建立影响力。测试团队的目标也应该是建立影响力。有责任确保测试团队影响力的那个人就是测试工程经理。</p>
+<p>测试工程经理还有一项工作就是处理跨团队的沟通。</p>
+<p>选用不合适的人来填充名额永远要比等待合适的人员要糟糕。只选用最好的人，不能动摇。从技能分配的角度来说，</p>
+<h3 id="Gmail项目人员配备："><a href="#Gmail项目人员配备：" class="headerlink" title="Gmail项目人员配备："></a>Gmail项目人员配备：</h3><ul>
+<li>20%的测试人员进行探索式测试。任何关注用户体验的产品都需要探索式测试。</li>
+<li>30%的测试工程师关注于产品的整体性测试，他们和测试开发工程师一起来保证测试的效果</li>
+<li>50%的工作，是测试开发工程师开发相关的自动化测试和工具，以保持代码库的健壮和提高开发人员的工作效率。</li>
+</ul>
+<h3 id="Gmail项目测试经验："><a href="#Gmail项目测试经验：" class="headerlink" title="Gmail项目测试经验："></a>Gmail项目测试经验：</h3><ul>
+<li>使用与应用程序开发语言相同的编程语言来编写测试。</li>
+<li>让负责开发新特性的人同时负责相应测试的执行，他需要对漏掉的测试负责。</li>
+<li>关注测试基础设施的建设，让测试的编写和执行非常容易，甚至比忽略它们还要容易。</li>
+<li>20%的用例覆盖了80%的使用场景。把这20%自动化而别管剩下的。把那些测试通过手工完成。</li>
+<li>这里是Google，速度才是王道。确保我们的产品足够快。进行性能分析以便于可以证明给所有人看。</li>
+<li>与开发团队的沟通至关重要。</li>
+<li>Google的DNA里富含着创新精神。测试团队也应该被看做创新者。发现重要的问题并能创造性地提出解决方案。</li>
+</ul>
+<p>测试本身就是一种平衡的艺术。</p>
+<ul>
+<li>一方面，我们必须能让产品发布，对每个发布版本做所需的检查以保证没有问题。</li>
+<li>另一方面，我们必须开发优秀的自动化测试，并为自动化投入开发自己的框架和基础设施。</li>
+<li>再有，我们需要围绕“开发一构建一测试一发布”的流程模式计划和安排我们的工作。</li>
+<li>还有，测试专家们不断向世界展示他们进行测试的最新方法。</li>
+</ul>
+<h2 id="五、Google软件测试改进"><a href="#五、Google软件测试改进" class="headerlink" title="五、Google软件测试改进"></a>五、Google软件测试改进</h2><p>Google的测试流程可以非常简练地概括为：让每个工程师都注重质量。</p>
+<p>质量是内建的，而不是外加的。</p>
+<ul>
+<li><p>这就带来了第一个致命的缺陷：测试成了开发的拐杖。我们越不让开发考虑测试的问题，把测试变得越简单，开发就越来越不会去做测试。</p>
+</li>
+<li><p>第二个致命缺陷，还是与开发和测试的组织结构分离有关。测试人员更关注自己的角色，而不是他们的产品。用户爱上的是产品，而不是开发产品的流程。</p>
+</li>
+<li><p>第三个致命的缺陷，是测试人员往往崇拜测试产物(test artifact)胜过软件本身。测试的价值是在于测试的动作，而不是测试产物。测试人员必须把产品放在第一位。</p>
+</li>
+<li><p>最后一个致命缺陷也许是最深刻的。产品经过最严格的测试发布以后，用户有多大可能仍然发现测试中遗漏的问题?答案是:几乎必然发现。</p>
+</li>
+</ul>
+<p>是谁在做测试并不重要，关键是进行了测试。</p>
+<p>内部试用者、可信赖的测试者、众包测试者，以及早期用户都可能比测试工程师更容易发现 bug。实际上，让TE做的测试越少，支持其他人做的测试越多，效果就越好。</p>
+<p>在Google，SET的角色越来越像开发，而TE的角色向着相反的方向越来越像用户。</p>
+<p>SET 没有未来。SET 就是开发。SET 直接负责很多功能特性，如可测试性、可靠性、可调试性等。SET 就是负责这些功能特性的开发工程师。测试特性应该由团队的新成员负责，特别是那些资历尚浅的员工。</p>
+<p>对优秀测试工程师TE的需求之大前所未有。然而，这种需求即将达到顶峰并会迅速下降。传统意义上进行测试用例的撰写、执行、回归等工作，它们实际上已经有了更为全面而且低成本的形式。</p>
+<p>测试工程会转型成测试设计。快速规划出测试范围、风险热图和应用程序的漫游路线。然后，内部试用者、可信赖的测试者、早期用户或者众包测试者提交反馈，由测试设计师来评估覆盖率，计算风险影响，确保发现的问题不断减少，并相应地对测试活动进行调整。这些测试设计师还可以识别需要专业技能的地方，比如安全性、隐私、性能和探索式测试，并安排具有这些技能的人通过众包的形式完成工作。还会需要开发或购买工具来收集、分析这些提交上来的数据，但他们的工作中没有测试用例编写，没有测试执行，没有实际的测试行为。这个工作需要的是规划、组织和管理近于免费的测试资源。</p>
+<p>测试工程师会转变成像安全工程师这样的专家型角色，或者变成测试活动的管理者，而那些具体的测试活动则由其他人来完成。</p>
+<p>测试总监和经理这些技术型的主管，将会更多地转向成为诸如杰出工程师这样的个人角色。他们将作为思想领袖，为维系松散的测试工程师和负责质量的软件工程师的关系而存在，但不会最终为某个特别项目的质量或管理负责。</p>
+<p>测试基础设施会最终整体迁移到云端。测试用例库，测试代码的编辑、录制和执行都将在一个网站或通过浏览器插件完成。测试编写、执行和调试需要使用与被测的应用程序本身相同的语言和环境才最为高效。“Web端优先 - 本地端从属”策略。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#软件测试" >
+    <span class="tag-code">软件测试</span>
+  </a>
+
+  <a href="/tags#管理" >
+    <span class="tag-code">管理</span>
+  </a>
+
+  <a href="/tags#Google" >
+    <span class="tag-code">Google</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2024/05/31/how-we-test-software-at-microsoft-reading-notes/">
+        <span class="nav-arrow">← </span>
+        
+          《微软的软件测试之道》读书笔记
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%B8%80%E3%80%81Google%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E4%BB%8B%E7%BB%8D"><span class="toc-nav-text">一、Google软件测试介绍</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%BB%84%E7%BB%87%E6%9E%B6%E6%9E%84"><span class="toc-nav-text">组织架构</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%88%AC%E3%80%81%E8%B5%B0%E3%80%81%E8%B7%91"><span class="toc-nav-text">爬、走、跑</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%B5%8B%E8%AF%95%E7%B1%BB%E5%9E%8B"><span class="toc-nav-text">测试类型</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BA%8C%E3%80%81%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88"><span class="toc-nav-text">二、软件测试开发工程师</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%B8%89%E3%80%81%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%B8%88"><span class="toc-nav-text">三、测试工程师</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ACC-Attribute-Component-Capability-%EF%BC%8C%E5%8D%B3%E7%89%B9%E8%B4%A8%E3%80%81%E7%BB%84%E4%BB%B6%E3%80%81%E8%83%BD%E5%8A%9B"><span class="toc-nav-text">ACC(Attribute Component Capability)，即特质、组件、能力</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#A%E4%BB%A3%E8%A1%A8%E7%89%B9%E8%B4%A8-Attribute"><span class="toc-nav-text">A代表特质(Attribute)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#C%E4%BB%A3%E8%A1%A8%E7%BB%84%E4%BB%B6-component"><span class="toc-nav-text">C代表组件(component)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#C%E4%BB%A3%E8%A1%A8%E8%83%BD%E5%8A%9B-capability"><span class="toc-nav-text">C代表能力(capability)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E9%A3%8E%E9%99%A9"><span class="toc-nav-text">风险</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E9%A3%8E%E9%99%A9%E5%88%86%E6%9E%90"><span class="toc-nav-text">风险分析</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E9%A3%8E%E9%99%A9%E7%BC%93%E8%A7%A3"><span class="toc-nav-text">风险缓解</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E7%AE%A1%E7%90%86"><span class="toc-nav-text">测试用例管理</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#BUG%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-nav-text">BUG生命周期</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#TE%E6%8B%9B%E8%81%98"><span class="toc-nav-text">TE招聘</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%BB%B4%E6%8A%A4%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%B5%8B%E8%AF%95-Maintenance-Mode-Testing"><span class="toc-nav-text">维护模式的测试(Maintenance Mode Testing )</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#BITE-%E5%AE%9E%E9%AA%8C"><span class="toc-nav-text">BITE 实验</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E9%9B%B6%E6%88%90%E6%9C%AC%E6%B5%8B%E8%AF%95"><span class="toc-nav-text">零成本测试</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%9B%9B%E3%80%81%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B%E7%BB%8F%E7%90%86"><span class="toc-nav-text">四、测试工程经理</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%BD%B1%E5%93%8D%E5%8A%9B"><span class="toc-nav-text">影响力</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Gmail%E9%A1%B9%E7%9B%AE%E4%BA%BA%E5%91%98%E9%85%8D%E5%A4%87%EF%BC%9A"><span class="toc-nav-text">Gmail项目人员配备：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Gmail%E9%A1%B9%E7%9B%AE%E6%B5%8B%E8%AF%95%E7%BB%8F%E9%AA%8C%EF%BC%9A"><span class="toc-nav-text">Gmail项目测试经验：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BA%94%E3%80%81Google%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E6%94%B9%E8%BF%9B"><span class="toc-nav-text">五、Google软件测试改进</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://lovesoo.org/2024/06/20/how-google-test/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2024 <a href="http://lovesoo.org">lovesoo.org</a>
+    | All Rights Reserved.
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>
